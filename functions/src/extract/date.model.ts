@@ -16,9 +16,9 @@ function buildRegex(entry: DateModelEntry): RegExp {
     entry.format
       .replace(/\\/g, '\\\\') // escape backslash
       .replace(/\./g, '\\s?\\.\\s?') // escape dot and lazy match optional spaces around the dot
-      .replace('DD', matchers.day.source)
+      .replace('dd', matchers.day.source)
       .replace('MM', matchers.month.source)
-      .replace('YYYY', matchers.year.source),
+      .replace('yyyy', matchers.year.source),
     entry.flags
   );
 }
@@ -29,7 +29,7 @@ export interface DateExtractionDef {
 }
 
 export function loadModel(model: DateModel): DateExtractionDef[] {
-  return model.map(e => ({
+  return model.map((e) => ({
     format: e.format,
     regex: buildRegex(e),
   }));

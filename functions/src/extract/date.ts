@@ -2,7 +2,7 @@ import { Extractor } from './extractor';
 import { Receipt } from './receipt';
 import { loadModel, DateExtractionDef } from './date.model';
 import model from './date.model.de';
-import * as fecha from 'fecha';
+import { DateTime } from 'luxon';
 import { DependsOn } from './DependsOn';
 import { HeaderExtractor, cleanHeaders } from './header';
 
@@ -19,9 +19,11 @@ export class DateExtractor extends Extractor {
     for (const def of this.model) {
       const m = text.match(def.regex);
       if (m) {
-        const fullDate = m[0];
+        const fullDate = m[0].replace(/\s*/g, '');
         cleanHeaders(extracted, fullDate);
-        return fecha.parse(fullDate, def.format);
+        return DateTime.fromFormat(fullDate, def.format, {
+          zone: 'Europe/Berlin',
+        });
       }
     }
     return null;

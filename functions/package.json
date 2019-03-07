@@ -8,19 +8,21 @@
     "start": "npm run shell",
     "deploy": "firebase deploy --only functions",
     "logs": "firebase functions:log",
-    "test": "mocha -r ts-node/register --require chai-autoload-plugins --recursive \"src/**/*.spec.ts\""
+    "test": "mocha -r ts-node/register --require chai-autoload-plugins --recursive \"src/**/*.spec.ts\"",
+    "test:single": "mocha -r ts-node/register --require chai-autoload-plugins"
   },
   "main": "lib/index.js",
   "dependencies": {
     "@google-cloud/storage": "^2.4.2",
     "@google-cloud/vision": "^0.24.0",
-    "fecha": "^2.3.3",
     "firebase-admin": "~7.0.0",
-    "firebase-functions": "^2.2.0"
+    "firebase-functions": "^2.2.0",
+    "luxon": "^1.11.4"
   },
   "devDependencies": {
     "@types/chai": "^4.1.7",
     "@types/chai-datetime": "0.0.32",
+    "@types/luxon": "^1.11.1",
     "@types/mocha": "^5.2.6",
     "chai": "^4.2.0",
     "chai-autoload-plugins": "^0.1.0",

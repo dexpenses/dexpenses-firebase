@@ -12,7 +12,7 @@ describe('Date extractor', () => {
     const date = extractor.extract(text, text.split('\n'), {});
     expect(date).to.exist;
     if (date) {
-      expect(date).to.equalDate(new Date(2019, 0, 22));
+      expect(date.toFormat('dd.MM.yyyy')).to.equal('22.01.2019');
     }
   });
 });
