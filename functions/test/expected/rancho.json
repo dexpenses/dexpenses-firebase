@@ -1,0 +1,23 @@
+{
+  "state": "ready",
+  "data": {
+    "header": ["RANCHO", "STEAKHOUSE"],
+    "address": {
+      "street": "Niederwalle 37",
+      "city": "33602 Bielefed"
+    },
+    "phone": "0521-96 79 79 79",
+    "date": "2019-02-24T23:00:00.000Z",
+    "time": {
+      "hour": 20,
+      "minute": 1,
+      "second": null
+    },
+    "amount": {
+      "value": 61.9,
+      "currency": "EUR"
+    },
+    "paymentMethod": null,
+    "timestamp": "2019-02-25T19:01:00.000Z"
+  }
+}
