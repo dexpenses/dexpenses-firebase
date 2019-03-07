@@ -1,0 +1,14 @@
+sudo: false
+language: node_js
+node_js:
+  - '11'
+cache: npm
+
+before_install:
+  - cd functions
+install:
+  - npm install
+script:
+  - npm run lint
+  - npm run test
+  - npm run build
