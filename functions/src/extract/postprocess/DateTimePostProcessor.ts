@@ -7,6 +7,7 @@ export default class DateTimePostProcessor extends PostProcessor {
     if (extracted.date && extracted.time) {
       const { hour, minute, second } = extracted.time;
       extracted.timestamp = DateTime.fromJSDate(extracted.date)
+        .setZone('Europe/Berlin')
         .set({
           hour,
           minute,

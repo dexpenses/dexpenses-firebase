@@ -4,6 +4,10 @@ node_js:
   - '11'
 cache: npm
 
+env:
+  - TZ=UTC
+  - TZ=CET
+
 before_install:
   - cd functions
 install:
