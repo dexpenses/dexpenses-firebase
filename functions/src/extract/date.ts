@@ -23,7 +23,7 @@ export class DateExtractor extends Extractor {
         cleanHeaders(extracted, fullDate);
         return DateTime.fromFormat(fullDate, def.format, {
           zone: 'Europe/Berlin',
-        });
+        }).toJSDate();
       }
     }
     return null;

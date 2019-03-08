@@ -6,11 +6,13 @@ export default class DateTimePostProcessor extends PostProcessor {
   touch(extracted: Receipt) {
     if (extracted.date && extracted.time) {
       const { hour, minute, second } = extracted.time;
-      extracted.timestamp = (extracted.date as DateTime).set({
-        hour,
-        minute,
-        second,
-      });
+      extracted.timestamp = DateTime.fromJSDate(extracted.date)
+        .set({
+          hour,
+          minute,
+          second,
+        })
+        .toJSDate();
     }
   }
 }

@@ -10,7 +10,7 @@ describe('Date time postprocessor', () => {
     const extracted: any = {
       date: DateTime.fromFormat('22.02.2019', 'dd.MM.yyyy', {
         zone: 'Europe/Berlin',
-      }),
+      }).toJSDate(),
       time: {
         hour: 11,
         minute: 12,
@@ -19,8 +19,8 @@ describe('Date time postprocessor', () => {
     };
     postprocessor.touch(extracted);
     expect(extracted).to.have.property('timestamp');
-    expect(extracted.timestamp.toFormat('dd.MM.yyyy HH:mm:ss')).to.equal(
-      '22.02.2019 11:12:13'
+    expect(extracted.timestamp).to.equalDate(
+      DateTime.fromISO('2019-02-22T11:12:13.000+01:00').toJSDate()
     );
   });
 });
