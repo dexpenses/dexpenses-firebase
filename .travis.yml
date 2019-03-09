@@ -1,25 +1,24 @@
-dist: trusty
+sudo: false
 language: node_js
 node_js:
-- '11'
+  - '11'
 cache: npm
-
-addons:
-  sonarcloud:
-    organization: "dexmo007-github"
-    token:
-      secure: secure: KvkP9lz9SmZeYiM+O+KzJyn48M7yyl88+E4lWNHxlgjVtdy4lTNmjNPItjJ/0rm1bIaPQoHxPULUlfO+FY58giuTB07AFhLpAEpMT1rKjZ1EPfEgYB0XyJaSir1EQ4doPvR+OMlTHOWdvLbwD9XyiBa5UXVgXdeS8Uux33i4HPlehh3VxqUQQQ2LITuzwAN4PdF/ms0bknRLlwM7eu8fAoSGfdJ8WdUrppdHZfySKISDnkWFsPY/nudRxM/OftEyIJYZYD2udIPiGkTt1ER61j5DxZxIBTHd6S/W5e74lGOTMEjALfd+qPwCQtmEEOWXAV2+DkchiTlXIHpeQr3BMu3JFy7fn8pnPno7uAXYY4U8pxCgFjZKEF/YwF3Ol2FXXOHKbXj7sIAAgBCiAtvT1cleAb/jbJJ5qZL5iSIoANmMpI7i88gZjESyUi2d5NxEPTcXZBk3eAqS6uQ1W938VE0+/HpiNXtN3HNmNkIXsL1pjMr0eTIbH6MndoaLsmA99s+roOdFpkBhFADfxvnTbhXBdqhTLyzCl430NxvXaYJWmoeMlFw68zhM/UkuWVd5ypwJEnam6OdQxDSEL7IDE/X7vimwS79HjHEPfgYrBxG8oQi6bgo3Ua1NJRI9OTyYkjx2400cw0Sfik3V5r7/qgnBxERZsEX8Yi7OOsqmTWA=
-
 env:
   matrix:
-  - TZ=UTC
-  - TZ=CET
-
+    - TZ=UTC
+    - TZ=CET
+  global:
+    secure: Ss7LvdcA6eleZQPeS3iXy8DDPp1gFybHmFzHFrDDFg8m63ifZDfNJdtH1He8lpLopfQI3EA/Q0irkwUU9OSGBuskP3R2P63WRt+UQFsVC+AA7v5MhYiKjldEyil10Gs69/43urejRhrL0uIvxt/l7ux3SVK086PZtnVWWe4tIdO1sIZTcCOCkIv1B1mHMKNttCVupoTPdcLGANATucF9Jsp+ij5n6p/eZOqDi/hoteKVXGCGMi06JtBJ0KMsi1wZ2BFSR8DSn5veqH67zSeb1OxHYCr33PNe2Hw23cFj+wS5fJWtQPN6EGxXhRKsDgMUQ+elD5CcfHZoC+kfEykJFrptmTyuPrTgmJ0azrYdsRoEjzSqovY0/lYuWilgK28pR9TDi1a1zjEqCs9WRdLPMyrk9NW+kkj8HAfp0tBIL+vLfAuGtmjQtkrcWXQiFFAZhVcG5H57ZZnZr/cj5M7rJiHWo/ZXgiq97fkQA9VU2gGcsr/4SEpMLvC/YIw+rtj3t4wd8HFoJc26MPdAFWkMgHjLfyXdPisbkCEij2ky2ml5CIcj6VW2jigzvo6tAIL/CHAXKVW+eA1PAETBIzuI2/prLAoR7jYtl1dMmgj0OV69psGQkJtnhmgmj7bOTt3KtKmQsm/6Mgjl8ukn1TQ8bp+EyEaOddjYErOBh1oYuFI=
 before_install:
-- cd functions
+  - cd functions
 install:
-- npm install
+  - npm install
+  - npm i -g sonarqube-scanner
 script:
-- npm run lint
-- npm run test
-- npm run build
+  - npm run test
+  - npm run build
+after_success:
+  - sonar-scanner -Dsonar.host.url=https://sonarcloud.io \
+    -Dsonar.login=$SONAR_TOKEN \
+    -Dsonar.organization=dexmo007-github \
+    -Dsonar.sources=src/
