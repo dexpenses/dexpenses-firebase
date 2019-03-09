@@ -1,17 +1,17 @@
-import { Extractor } from './extractor';
-import { Receipt } from './receipt';
-import { DependsOn } from './DependsOn';
-import { HeaderExtractor } from './header';
+import { DependsOn } from "./DependsOn";
+import { Extractor } from "./extractor";
+import { HeaderExtractor } from "./header";
+import { Receipt } from "./receipt";
 
 const phoneRegex = /(\(?([\d \-\)\–\+\/\(]+){6,}\)?([ .-–\/]?)([\d]+))/;
 
 @DependsOn(HeaderExtractor)
 export class PhoneNumberExtractor extends Extractor {
   constructor() {
-    super('phone');
+    super("phone");
   }
 
-  extract(text: string, lines: string[], extracted: Receipt) {
+  public extract(text: string, lines: string[], extracted: Receipt) {
     for (const [i, line] of extracted.header!.entries()) {
       const m = line.match(phoneRegex);
       if (m) {

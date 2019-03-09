@@ -1,9 +1,9 @@
-import { Extractor } from './extractor';
-import { Receipt } from './receipt';
-import { DependsOn } from './DependsOn';
-import { HeaderExtractor } from './header';
-import * as fs from 'fs';
-import * as path from 'path';
+import * as fs from "fs";
+import * as path from "path";
+import { DependsOn } from "./DependsOn";
+import { Extractor } from "./extractor";
+import { HeaderExtractor } from "./header";
+import { Receipt } from "./receipt";
 
 export interface Address {
   city?: string;
@@ -11,14 +11,14 @@ export interface Address {
 }
 
 type CityName = string;
-type ZipCodeMapping = { [zipCode: string]: CityName };
+interface ZipCodeMapping { [zipCode: string]: CityName }
 
 function loadZipCodeMapping(filePath: string): ZipCodeMapping {
   return fs
-    .readFileSync(filePath, 'utf8')
-    .split('\n')
+    .readFileSync(filePath, "utf8")
+    .split("\n")
     .filter((line) => !!line)
-    .map((line) => line.split(';'))
+    .map((line) => line.split(";"))
     .reduce((mapping, [city, zip]) => {
       mapping[zip.trim()] = city.trim();
       return mapping;
@@ -35,7 +35,7 @@ export class AddressExtractor extends Extractor {
     zipCodeRegex = /(?!01000|99999)(0[1-9]\d{3}|[1-9]\d{4})/,
     cityNameRegex = /([a-z\u00e0-\u00ff]+)/
   ) {
-    super('address');
+    super("address");
     if (zipCodeMappingPath) {
       this.zipCodeMapping = loadZipCodeMapping(
         path.resolve(__dirname, zipCodeMappingPath)
@@ -43,11 +43,11 @@ export class AddressExtractor extends Extractor {
     }
     this.cityRegex = new RegExp(
       `${zipCodeRegex.source}\\s+${cityNameRegex.source}`,
-      'i'
+      "i"
     );
   }
 
-  extract(text: string, lines: string[], extracted: Receipt) {
+  public extract(text: string, lines: string[], extracted: Receipt) {
     if (!extracted.header || extracted.header.length === 0) {
       return null;
     }
@@ -60,8 +60,8 @@ export class AddressExtractor extends Extractor {
           /([a-z\u00e0-\u00ff]+\s+)*[a-z\u00e0-\u00ff]+([,\.]\s*|\s+)\d{1,4}\s?[a-z]?/i
         );
         if (street) {
-          address.street = street[0].replace(/[,\.]\s*/, '. '); // fix Bspstr.5 and Bspstr, 5
-          this.addMetadata('relevantHeaderLines', newHeaders.length, false);
+          address.street = street[0].replace(/[,\.]\s*/, ". "); // fix Bspstr.5 and Bspstr, 5
+          this.addMetadata("relevantHeaderLines", newHeaders.length, false);
           continue;
         }
       }
@@ -72,7 +72,7 @@ export class AddressExtractor extends Extractor {
           (!this.zipCodeMapping || this.zipCodeMapping[city[1]] === city[2])
         ) {
           address.city = city[0];
-          this.addMetadata('relevantHeaderLines', newHeaders.length, false);
+          this.addMetadata("relevantHeaderLines", newHeaders.length, false);
           continue;
         }
       }

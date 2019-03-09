@@ -1,5 +1,5 @@
-import { Extractor } from './extractor';
-import { Receipt } from './receipt';
+import { Extractor } from "./extractor";
+import { Receipt } from "./receipt";
 
 const irrelevantLines = [
   /^Datum:?/i,
@@ -18,18 +18,18 @@ export class HeaderExtractor extends Extractor {
       maxHeaderLines: 8,
     }
   ) {
-    super('header');
+    super("header");
   }
 
-  _isIrrelevantLine(line: string): boolean {
+  public _isIrrelevantLine(line: string): boolean {
     return irrelevantLines.some((r) => !!line.match(r));
   }
 
-  _isHeaderDelimiter(line: string): boolean {
+  public _isHeaderDelimiter(line: string): boolean {
     return !line.match(/[\d\w]/) || !!line.match(/^\s*Artikelname\s*$/i);
   }
 
-  extract(text: string, lines: string[], extracted: Receipt) {
+  public extract(text: string, lines: string[], extracted: Receipt) {
     const headerLines: string[] = [];
     // todo possibly jump to first non-empty line?
     for (let i = 0; i < this.options.maxHeaderLines && i < lines.length; i++) {
@@ -65,6 +65,6 @@ function _sanitize(line: string, value?: string): string {
   }
   return `${line.substring(0, i)}${line.substring(i + value.length)}`
     .trim()
-    .replace(/^[,.]/, '')
-    .replace(/[,.]$/, '');
+    .replace(/^[,.]/, "")
+    .replace(/[,.]$/, "");
 }
