@@ -19,6 +19,5 @@ script:
   - npm run build
 after_success:
   - sonar-scanner -Dsonar.host.url=https://sonarcloud.io \
-    -Dsonar.login=$SONAR_TOKEN \
     -Dsonar.organization=dexmo007-github \
     -Dsonar.sources=src/
