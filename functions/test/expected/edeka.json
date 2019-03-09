@@ -1,0 +1,23 @@
+{
+  "data": {
+    "address": {
+      "city": "38302 Wolfenbüttel",
+      "street": "Schweigerstr. 5"
+    },
+    "amount": {
+      "currency": "EUR",
+      "value": 44.13
+    },
+    "date": "2018-05-25T22:00:00.000Z",
+    "header": ["cente", "E CENTER Denis Brueggendick"],
+    "paymentMethod": "DEBIT",
+    "phone": "05331/90570",
+    "time": {
+      "hour": 12,
+      "minute": 5,
+      "second": 16
+    },
+    "timestamp": "2018-05-26T10:05:16.000Z"
+  },
+  "state": "ready"
+}

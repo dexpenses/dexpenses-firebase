@@ -16,7 +16,7 @@ export class PhoneNumberExtractor extends Extractor {
       const m = line.match(phoneRegex);
       if (m) {
         extracted.header!.splice(i, 1);
-        return m[0];
+        return m[0].trim();
       }
     }
     return null;

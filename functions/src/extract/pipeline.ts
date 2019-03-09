@@ -7,6 +7,7 @@ import { PaymentMethodExtractor } from './paymentMethod';
 import { ReceiptResult, Receipt } from './receipt';
 import DateTimePostProcessor from './postprocess/DateTimePostProcessor';
 import { PhoneNumberExtractor } from './phone';
+import HeaderSanitizer from './postprocess/HeaderSanitizer';
 
 const extractorPipeline = [
   new HeaderExtractor(),
@@ -20,7 +21,7 @@ const extractorPipeline = [
 
 // todo check dependencies of extractors or re-order pipeline (error only on circular)
 
-const postProcessors = [new DateTimePostProcessor()];
+const postProcessors = [new DateTimePostProcessor(), new HeaderSanitizer()];
 
 function isReady({ header, date, amount }: Receipt): boolean {
   return header && header.length > 0 && date && amount;
@@ -34,9 +35,11 @@ export default function(text: string): ReceiptResult {
   }
   const lines = text.split('\n');
   const extracted: Receipt = {};
+  const metadata = {};
   let anySuccess = false;
   for (const extractor of extractorPipeline) {
     try {
+      extractor.metadata = metadata;
       const value = extractor.extract(text, lines, extracted);
       extracted[extractor.field] = value;
       if (value) {
@@ -55,7 +58,7 @@ export default function(text: string): ReceiptResult {
     };
   }
   for (const postProcessor of postProcessors) {
-    postProcessor.touch(extracted);
+    postProcessor.touch(extracted, metadata);
   }
   return {
     state: isReady(extracted) ? 'ready' : 'partial',

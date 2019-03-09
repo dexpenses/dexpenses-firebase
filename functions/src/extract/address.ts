@@ -17,8 +17,8 @@ function loadZipCodeMapping(filePath: string): ZipCodeMapping {
   return fs
     .readFileSync(filePath, 'utf8')
     .split('\n')
-    .filter(line => !!line)
-    .map(line => line.split(';'))
+    .filter((line) => !!line)
+    .map((line) => line.split(';'))
     .reduce((mapping, [city, zip]) => {
       mapping[zip.trim()] = city.trim();
       return mapping;
@@ -37,9 +37,14 @@ export class AddressExtractor extends Extractor {
   ) {
     super('address');
     if (zipCodeMappingPath) {
-      this.zipCodeMapping = loadZipCodeMapping(path.resolve(__dirname, zipCodeMappingPath));
+      this.zipCodeMapping = loadZipCodeMapping(
+        path.resolve(__dirname, zipCodeMappingPath)
+      );
     }
-    this.cityRegex = new RegExp(`${zipCodeRegex.source}\\s+${cityNameRegex.source}`, 'i');
+    this.cityRegex = new RegExp(
+      `${zipCodeRegex.source}\\s+${cityNameRegex.source}`,
+      'i'
+    );
   }
 
   extract(text: string, lines: string[], extracted: Receipt) {
@@ -49,17 +54,25 @@ export class AddressExtractor extends Extractor {
     const address: Address = {};
     const newHeaders: string[] = [];
     for (const line of extracted.header) {
-      if (!address.city) {
-        const city = line.match(this.cityRegex);
-        if (city && (!this.zipCodeMapping || this.zipCodeMapping[city[1]] === city[2])) {
-          address.city = city[0];
+      if (!address.street) {
+        // todo account for dashes in the address
+        const street = line.match(
+          /([a-z\u00e0-\u00ff]+\s+)*[a-z\u00e0-\u00ff]+([,\.]\s*|\s+)\d{1,4}\s?[a-z]?/i
+        );
+        if (street) {
+          address.street = street[0].replace(/[,\.]\s*/, '. '); // fix Bspstr.5 and Bspstr, 5
+          this.addMetadata('relevantHeaderLines', newHeaders.length, false);
           continue;
         }
       }
-      if (!address.street) {
-        const street = line.match(/([a-z\u00e0-\u00ff]+\s+)*[a-z\u00e0-\u00ff]+\s+\d{1,4}[a-z]?/i);
-        if (street) {
-          address.street = street[0];
+      if (!address.city) {
+        const city = line.match(this.cityRegex);
+        if (
+          city &&
+          (!this.zipCodeMapping || this.zipCodeMapping[city[1]] === city[2])
+        ) {
+          address.city = city[0];
+          this.addMetadata('relevantHeaderLines', newHeaders.length, false);
           continue;
         }
       }

@@ -1,0 +1,18 @@
+{
+  "data": {
+    "address": {
+      "city": "38302 Wofenbuettel",
+      "street": "Breslauer Str 2 d"
+    },
+    "amount": {
+      "currency": "EUR",
+      "value": 15
+    },
+    "date": "2017-08-30T22:00:00.000Z",
+    "header": [],
+    "paymentMethod": "DEBIT",
+    "phone": "05331 33838",
+    "time": null
+  },
+  "state": "partial"
+}

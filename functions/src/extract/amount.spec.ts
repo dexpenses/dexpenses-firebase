@@ -6,16 +6,26 @@ describe('Amount extractor', () => {
   const extractor = new AmountExtractor();
 
   it('should be successfully extract the amount', () => {
-    const text = `EUR 11,10`
+    const text = `Gesamt 11,10`;
     const result = extractor.extract(text, text.split['\n'], {});
-    expect(result).not.to.be.null;
+    expect(result).to.exist;
     if (result) {
       expect(result.value).to.equal(11.1);
     }
   });
 
   it('should be successfully extract the amount', () => {
-    const text = `EUR 11,10`
+    const text = `Betrag 11,10`;
+    const result = extractor.extract(text, text.split('\n'), {});
+    expect(result).to.exist;
+    if (result) {
+      expect(result.value).to.equal(11.1);
+    }
+  });
+
+  it('should be successfully extract the amount multiline', () => {
+    const text = `betrag
+    11,10`;
     const result = extractor.extract(text, text.split('\n'), {});
     expect(result).not.to.be.null;
     if (result) {
@@ -24,10 +34,10 @@ describe('Amount extractor', () => {
   });
 
   it('should be successfully extract the amount multiline', () => {
-    const text = `betrag
-    11,10`
+    const text = `gesamt
+    11,10`;
     const result = extractor.extract(text, text.split('\n'), {});
-    expect(result).not.to.be.null;
+    expect(result).to.exist;
     if (result) {
       expect(result.value).to.equal(11.1);
     }
@@ -42,13 +52,15 @@ describe('Amount extractor', () => {
     0,00
     0,00
     61,90
-    61,90`
-    const result = extractor.extract(text, text.split('\n').map(l => l.trim()), {});
-    expect(result).not.to.be.null;
+    61,90`;
+    const result = extractor.extract(
+      text,
+      text.split('\n').map((l) => l.trim()),
+      {}
+    );
+    expect(result).to.exist;
     if (result) {
       expect(result.value).to.equal(61.9);
     }
   });
-
-
 });

@@ -1,5 +1,5 @@
-import { Extractor } from "./extractor";
-import { Receipt } from "./receipt";
+import { Extractor } from './extractor';
+import { Receipt } from './receipt';
 
 export interface Amount {
   value: number;
@@ -7,14 +7,20 @@ export interface Amount {
 }
 
 export class AmountExtractor extends Extractor {
-
   constructor() {
     super('amount');
   }
 
   extract(text: string, lines: string[], extracted: Receipt): Amount | null {
+    let m = text.match(/gesamt(?:\s+EUR)?(?:\s*|$)(\d+,\d\d).*$/im);
+    if (m) {
+      return {
+        value: parseFloat(m[1].replace(',', '.')),
+        currency: 'EUR',
+      } as Amount;
+    }
 
-    const m = text.match(/(?:betrag|EUR)(?:\s*|$)(\d+,\d\d).*$/im);
+    m = text.match(/betrag(?:\s+EUR)?(?:\s*|$)(\d+,\d\d).*$/im);
     if (m) {
       return {
         value: parseFloat(m[1].replace(',', '.')),
@@ -22,8 +28,8 @@ export class AmountExtractor extends Extractor {
       } as Amount;
     }
     const maxAmount = lines
-      .map<any>(line => line.match(/^\d+[,.]\d{2}$/))
-      .filter(line => !!line)
+      .map<any>((line) => line.match(/^\d+[,.]\d{2}$/))
+      .filter((line) => !!line)
       .map(([amount]) => parseFloat(amount.replace(',', '.')))
       .reduce((max: number | null, cur) => {
         return !max || cur > max ? cur : max;
@@ -32,9 +38,8 @@ export class AmountExtractor extends Extractor {
       return {
         value: maxAmount,
         currency: 'EUR',
-      }
-    };
+      };
+    }
     return null;
   }
-
 }

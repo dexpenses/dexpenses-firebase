@@ -1,10 +1,7 @@
-import { Receipt } from "./receipt";
+import { Receipt } from './receipt';
 
 export class Optional<T> {
-
-  constructor(private value?: T) {
-
-  }
+  constructor(private value?: T) {}
 
   then<U>(mapper: (value: T) => U): U | null {
     if (!this.value) {
@@ -26,14 +23,26 @@ export class Optional<T> {
 }
 
 export abstract class Extractor {
+  public metadata: { [key: string]: any } = {};
 
-  constructor(public readonly field: string) {
-
-  }
+  constructor(public readonly field: string) {}
 
   abstract extract(text: string, lines: string[], extracted: Receipt): any;
 
-  static anyLineMatches<T>(lines: string[], predicate: (line: string) => T): Optional<T> {
+  addMetadata(key: string, value: any, override = true): void {
+    if (
+      override ||
+      this.metadata[key] === null ||
+      this.metadata[key] === undefined
+    ) {
+      this.metadata[key] = value;
+    }
+  }
+
+  static anyLineMatches<T>(
+    lines: string[],
+    predicate: (line: string) => T
+  ): Optional<T> {
     for (const line of lines) {
       const value = predicate(line);
       if (value) {

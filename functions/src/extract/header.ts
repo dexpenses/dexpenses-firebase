@@ -5,8 +5,9 @@ const irrelevantLines = [
   /^Datum:?/i,
   /^Uhrzeit:?/i,
   /^Beleg\s?(\-?\s?Nr\.?|nummer)/i,
-  /^Trace(\-?Nr\.?|nummer)/i,
-  /kundenbeleg/i,
+  /^Trace(\s*\-?\s*Nr\.?|nummer)/i,
+  /kundenbele[gqa]/i,
+  /K-U-N-D-E-N-B-E-L-E-[gqa]/i,
   /h(ae|ä)ndlerbeleg/i,
   /zwischensumme/i,
 ];
@@ -21,7 +22,7 @@ export class HeaderExtractor extends Extractor {
   }
 
   _isIrrelevantLine(line: string): boolean {
-    return irrelevantLines.some(r => !!line.match(r));
+    return irrelevantLines.some((r) => !!line.match(r));
   }
 
   _isHeaderDelimiter(line: string): boolean {
@@ -49,7 +50,9 @@ export function cleanHeaders(extracted: Receipt, value: string) {
   if (!extracted.header) {
     return;
   }
-  extracted.header = extracted.header.map(line => _sanitize(line, value)).filter(line => !!line);
+  extracted.header = extracted.header
+    .map((line) => _sanitize(line, value))
+    .filter((line) => !!line);
 }
 
 function _sanitize(line: string, value?: string): string {

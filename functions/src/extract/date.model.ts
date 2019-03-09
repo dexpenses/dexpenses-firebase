@@ -1,7 +1,8 @@
 export const matchers = {
-  day: /(0[1-9]|[12]\d|3[01])/,
-  month: /(0[1-9]|1[0-2])/,
-  year: /([12]\d{3})/,
+  dd: /(0[1-9]|[12]\d|3[01])/,
+  MM: /(0[1-9]|1[0-2])/,
+  yyyy: /([12]\d{3})/,
+  yy: /([1-6][0-9])/,
 };
 
 export interface DateModelEntry {
@@ -16,9 +17,10 @@ function buildRegex(entry: DateModelEntry): RegExp {
     entry.format
       .replace(/\\/g, '\\\\') // escape backslash
       .replace(/\./g, '\\s?\\.\\s?') // escape dot and lazy match optional spaces around the dot
-      .replace('dd', matchers.day.source)
-      .replace('MM', matchers.month.source)
-      .replace('yyyy', matchers.year.source),
+      .replace('dd', matchers.dd.source)
+      .replace('MM', matchers.MM.source)
+      .replace('yyyy', matchers.yyyy.source)
+      .replace('yy', matchers.yy.source),
     entry.flags
   );
 }
