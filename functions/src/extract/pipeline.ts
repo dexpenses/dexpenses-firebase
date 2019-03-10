@@ -1,13 +1,13 @@
-import { AddressExtractor } from "./address";
-import { AmountExtractor } from "./amount";
-import { DateExtractor } from "./date";
-import { HeaderExtractor } from "./header";
-import { PaymentMethodExtractor } from "./paymentMethod";
-import { PhoneNumberExtractor } from "./phone";
-import DateTimePostProcessor from "./postprocess/DateTimePostProcessor";
-import HeaderSanitizer from "./postprocess/HeaderSanitizer";
-import { Receipt, ReceiptResult } from "./receipt";
-import { TimeExtractor } from "./time";
+import { AddressExtractor } from './address';
+import { AmountExtractor } from './amount';
+import { DateExtractor } from './date';
+import { HeaderExtractor } from './header';
+import { PaymentMethodExtractor } from './paymentMethod';
+import { PhoneNumberExtractor } from './phone';
+import DateTimePostProcessor from './postprocess/DateTimePostProcessor';
+import HeaderSanitizer from './postprocess/HeaderSanitizer';
+import { Receipt, ReceiptResult } from './receipt';
+import { TimeExtractor } from './time';
 
 const extractorPipeline = [
   new HeaderExtractor(),
@@ -24,16 +24,16 @@ const extractorPipeline = [
 const postProcessors = [new DateTimePostProcessor(), new HeaderSanitizer()];
 
 function isReady({ header, date, amount }: Receipt): boolean {
-  return header && header.length > 0 && date && amount;
+  return !!header && header.length > 0 && !!date && !!amount;
 }
 
 export default function(text: string): ReceiptResult {
   if (!text) {
     return {
-      state: "no-text",
+      state: 'no-text',
     };
   }
-  const lines = text.split("\n");
+  const lines = text.split('\n');
   const extracted: Receipt = {};
   const metadata = {};
   let anySuccess = false;
@@ -47,13 +47,13 @@ export default function(text: string): ReceiptResult {
       }
     } catch (e) {
       extracted[extractor.field] = {
-        error: e.message || (typeof e === "string" && e) || "unknown",
+        error: e.message || (typeof e === 'string' && e) || 'unknown',
       };
     }
   }
   if (!anySuccess) {
     return {
-      state: "unreadable",
+      state: 'unreadable',
       data: extracted, // could contains errors
     };
   }
@@ -61,7 +61,7 @@ export default function(text: string): ReceiptResult {
     postProcessor.touch(extracted, metadata);
   }
   return {
-    state: isReady(extracted) ? "ready" : "partial",
+    state: isReady(extracted) ? 'ready' : 'partial',
     data: extracted,
   };
 }
