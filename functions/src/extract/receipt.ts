@@ -1,6 +1,8 @@
 export type ReceiptResultState =
   | 'pending'
   | 'no-text'
+  | 'bad-image'
+  | 'error'
   | 'unreadable'
   | 'partial'
   | 'ready';
@@ -8,6 +10,7 @@ export type ReceiptResultState =
 export interface ReceiptResult {
   state: ReceiptResultState;
   data?: Receipt;
+  error?: any;
 }
 
 export type Time = { hour: number; minute: number; second: number };

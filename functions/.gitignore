@@ -15,3 +15,6 @@ node_modules/
 
 .scannerwork/
 .sonar/
+
+# Firebase
+firebase-debug.log
