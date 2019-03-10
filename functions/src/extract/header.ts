@@ -1,5 +1,5 @@
-import { Extractor } from "./extractor";
-import { Receipt } from "./receipt";
+import { Extractor } from './extractor';
+import { Receipt } from './receipt';
 
 const irrelevantLines = [
   /^Datum:?/i,
@@ -18,7 +18,7 @@ export class HeaderExtractor extends Extractor {
       maxHeaderLines: 8,
     }
   ) {
-    super("header");
+    super('header');
   }
 
   public _isIrrelevantLine(line: string): boolean {
@@ -65,6 +65,6 @@ function _sanitize(line: string, value?: string): string {
   }
   return `${line.substring(0, i)}${line.substring(i + value.length)}`
     .trim()
-    .replace(/^[,.]/, "")
-    .replace(/[,.]$/, "");
+    .replace(/^[,.]/, '')
+    .replace(/[,.]$/, '');
 }

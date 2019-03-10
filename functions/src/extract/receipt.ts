@@ -13,7 +13,7 @@ export interface ReceiptResult {
   error?: any;
 }
 
-export type Time = { hour: number; minute: number; second: number };
+export interface Time { hour: number; minute: number; second: number; }
 
 export interface Receipt {
   header?: string[];

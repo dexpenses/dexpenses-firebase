@@ -1,4 +1,4 @@
-import { Receipt } from "./receipt";
+import { Receipt } from './receipt';
 
 export class Optional<T> {
 

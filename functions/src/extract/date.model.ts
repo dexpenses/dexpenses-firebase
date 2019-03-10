@@ -15,12 +15,12 @@ export type DateModel = DateModelEntry[];
 function buildRegex(entry: DateModelEntry): RegExp {
   return new RegExp(
     entry.format
-      .replace(/\\/g, "\\\\") // escape backslash
-      .replace(/\./g, "\\s?\\.\\s?") // escape dot and lazy match optional spaces around the dot
-      .replace("dd", matchers.dd.source)
-      .replace("MM", matchers.MM.source)
-      .replace("yyyy", matchers.yyyy.source)
-      .replace("yy", matchers.yy.source),
+      .replace(/\\/g, '\\\\') // escape backslash
+      .replace(/\./g, '\\s?\\.\\s?') // escape dot and lazy match optional spaces around the dot
+      .replace('dd', matchers.dd.source)
+      .replace('MM', matchers.MM.source)
+      .replace('yyyy', matchers.yyyy.source)
+      .replace('yy', matchers.yy.source),
     entry.flags
   );
 }
