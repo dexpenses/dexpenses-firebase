@@ -2,7 +2,10 @@ sudo: false
 language: node_js
 node_js:
   - '11'
-cache: npm
+cache:
+  npm: true
+  directories:
+    - '$HOME/.sonar/cache'
 env:
   matrix:
     - TZ=UTC
@@ -17,4 +20,5 @@ script:
   - npm run test
   - npm run build
 after_success:
+  - npm run lint:sonar
   - node sonar.js
