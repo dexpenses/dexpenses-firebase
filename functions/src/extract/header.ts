@@ -31,7 +31,7 @@ export class HeaderExtractor extends Extractor {
 
   public extract(text: string, lines: string[], extracted: Receipt) {
     const headerLines: string[] = [];
-    // todo possibly jump to first non-empty line?
+    // todo: possibly jump to first non-empty line?
     for (let i = 0; i < this.options.maxHeaderLines && i < lines.length; i++) {
       const line = lines[i];
       if (this._isIrrelevantLine(line)) {

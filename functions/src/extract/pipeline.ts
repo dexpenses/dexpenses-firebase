@@ -19,7 +19,7 @@ const extractorPipeline = [
   new PaymentMethodExtractor(),
 ];
 
-// todo check dependencies of extractors or re-order pipeline (error only on circular)
+// todo: check dependencies of extractors or re-order pipeline (error only on circular)
 
 const postProcessors = [new DateTimePostProcessor(), new HeaderSanitizer()];
 

@@ -57,7 +57,7 @@ export class AddressExtractor extends Extractor {
     const newHeaders: string[] = [];
     for (const line of extracted.header) {
       if (!address.street) {
-        // todo account for dashes in the address
+        // todo: account for dashes in the address
         const street = line.match(
           /([a-z\u00e0-\u00ff]+\s+)*[a-z\u00e0-\u00ff]+([,\.]\s*|\s+)\d{1,4}\s?[a-z]?/i
         );
