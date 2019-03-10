@@ -17,13 +17,14 @@ before_install:
 install:
   - npm install
 script:
-  - npm run test:cov
+  - npm run test
   - npm run build
 
 jobs:
   include:
-    - stage: lint
+    - stage: sonar
       script:
+        - npm run test:cov
         - npm run lint:sonar
         - node sonar.js
       env: TZ=UTC
