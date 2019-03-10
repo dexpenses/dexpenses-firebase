@@ -13,11 +13,8 @@ before_install:
   - cd functions
 install:
   - npm install
-  - npm i -g sonarqube-scanner
 script:
   - npm run test
   - npm run build
 after_success:
-  - sonar-scanner -Dsonar.host.url=https://sonarcloud.io \
-    -Dsonar.organization=dexmo007-github \
-    -Dsonar.sources=src/
+  - node sonar.js

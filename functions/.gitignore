@@ -1,5 +1,6 @@
 ## Compiled JavaScript files
 **/*.js
+!sonar.js
 **/*.js.map
 lib/
 
@@ -7,3 +8,6 @@ lib/
 typings/
 
 node_modules/
+
+.scannerwork/
+.sonar/
