@@ -12,6 +12,7 @@ require('sonarqube-scanner')(
       'sonar.exclusions':
         'node_modules/**,sonar.js,test/generate.py,**/*.spec.ts',
       'sonar.typescript.tslint.reportPaths': '.sonar/tslint-report.json',
+      'sonar.typescript.lcov.reportPaths': 'coverage/lcov.info',
     },
   },
   () => {}

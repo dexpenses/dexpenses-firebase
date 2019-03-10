@@ -10,6 +10,7 @@
     "deploy": "firebase deploy --only functions",
     "logs": "firebase functions:log",
     "test": "mocha -r ts-node/register --require chai-autoload-plugins --recursive \"src/**/*.spec.ts\"",
+    "test:cov": "nyc mocha -r ts-node/register --require chai-autoload-plugins --recursive \"src/**/*.spec.ts\"",
     "test:single": "mocha -r ts-node/register --require chai-autoload-plugins"
   },
   "main": "lib/index.js",
@@ -29,11 +30,30 @@
     "chai-autoload-plugins": "^0.1.0",
     "chai-datetime": "^1.5.0",
     "mocha": "^6.0.1",
+    "nyc": "^13.3.0",
     "sonarqube-scanner": "^2.4.0",
+    "source-map-support": "^0.5.10",
     "ts-node": "^8.0.2",
     "tslint": "^5.12.0",
     "tslint-sonarts": "^1.9.0",
     "typescript": "^3.2.2"
   },
-  "private": true
+  "private": true,
+  "nyc": {
+    "extension": [
+      ".ts"
+    ],
+    "exclude": [
+      "**/*.d.ts",
+      "**/*.spec.ts"
+    ],
+    "include": [
+      "src/**"
+    ],
+    "reporter": [
+      "html",
+      "lcov"
+    ],
+    "all": true
+  }
 }

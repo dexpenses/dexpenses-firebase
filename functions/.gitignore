@@ -4,6 +4,10 @@
 **/*.js.map
 lib/
 
+# Test coverage
+.nyc_output/
+coverage/
+
 # Typescript v1 declaration files
 typings/
 

@@ -5,7 +5,7 @@ node_js:
 cache:
   npm: true
   directories:
-    - '$HOME/.sonar/cache'
+    - '$HOME/.sonar'
 env:
   matrix:
     - TZ=UTC
@@ -17,7 +17,7 @@ before_install:
 install:
   - npm install
 script:
-  - npm run test
+  - npm run test:cov
   - npm run build
 
 jobs:
