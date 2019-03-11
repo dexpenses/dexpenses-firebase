@@ -38,6 +38,7 @@ ImageAnnotatorClient.prototype.documentTextDetection = sinon
 sinon.stub(vision, 'ImageAnnotatorClient').get(() => ImageAnnotatorClient);
 
 const detectText$ = test.wrap(require('../src').detectText);
+(admin.initializeApp as any).restore();
 const detectText = (file: string) =>
   detectText$({
     name: `images/testUserId/${file}`,
@@ -45,6 +46,18 @@ const detectText = (file: string) =>
   });
 
 describe('Detect text Cloud Function (offline)', () => {
+  after(() => {
+    if ((admin.firestore as any).restore) {
+      (admin.firestore as any).restore();
+    }
+    if ((admin.storage as any).restore) {
+      (admin.storage as any).restore();
+    }
+    if ((vision.ImageAnnotatorClient as any).restore) {
+      (vision.ImageAnnotatorClient as any).restore();
+    }
+  });
+
   it('should write the text if text was detected', async () => {
     const res = await detectText('contains-text.jpg');
     expect(res).to.deep.equal({ text: 'Hello World' });

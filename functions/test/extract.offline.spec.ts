@@ -1,5 +1,5 @@
 import * as firebaseFunctionsTest from 'firebase-functions-test';
-import sinon from 'sinon';
+import * as sinon from 'sinon';
 import * as admin from 'firebase-admin';
 import { expect } from 'chai';
 import 'mocha';
@@ -12,12 +12,20 @@ const test = firebaseFunctionsTest();
 sinon.stub(admin, 'initializeApp');
 sinon.stub(admin, 'firestore').get(() => () => fakeFirestore);
 const analyzeReceiptText = test.wrap(require('../src').analyseReceiptText);
+(admin.initializeApp as any).restore();
+
 const userId = test.auth.exampleUserRecord().uid;
 
 describe('Analyze receipt text Cloud Function (offline)', () => {
   const testRoot = __dirname;
   const dir = path.resolve(testRoot, 'data');
   const testFiles = fs.readdirSync(dir);
+
+  after(() => {
+    if ((admin.firestore as any).restore) {
+      (admin.firestore as any).restore();
+    }
+  });
 
   for (const textFile of testFiles) {
     it(`should be successfully extract info from '${textFile}'`, () => {
