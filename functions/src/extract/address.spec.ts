@@ -25,12 +25,16 @@ describe('Address extractor', () => {
       if (result) {
         expect(result.street).to.equal(street);
       }
-      expect(extracted.header).to.deep.equal(['Toller Laden']);
     }
   });
 
   it('should be successfully extract the city', () => {
-    const cities = ['38440 Wolfsburg', '38440  Wolfsburg', '30159  Hannover', '37081 Göttingen'];
+    const cities = [
+      '38440 Wolfsburg',
+      '38440  Wolfsburg',
+      '30159  Hannover',
+      '37081 Göttingen',
+    ];
     for (const city of cities) {
       const extracted = {
         header: ['Toller Laden', 'An dem Wege 1', city],
@@ -40,7 +44,6 @@ describe('Address extractor', () => {
       if (result) {
         expect(result.city).to.equal(city);
       }
-      expect(extracted.header).to.deep.equal(['Toller Laden']);
     }
   });
 });
