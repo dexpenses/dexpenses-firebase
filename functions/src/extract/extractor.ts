@@ -24,11 +24,17 @@ export abstract class Extractor {
     extracted: Receipt
   ): any;
 
-  public addMetadata(key: string, value: any, override = true): void {
+  public addMetadata(
+    key: string,
+    value: any,
+    override = true,
+    overrideIf = (prev: any) => true
+  ): void {
     if (
       override ||
       this.metadata[key] === null ||
-      this.metadata[key] === undefined
+      this.metadata[key] === undefined ||
+      overrideIf(this.metadata[key])
     ) {
       this.metadata[key] = value;
     }

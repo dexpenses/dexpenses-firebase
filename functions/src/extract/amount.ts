@@ -11,8 +11,12 @@ export class AmountExtractor extends Extractor {
     super('amount');
   }
 
-  public extract(text: string, lines: string[], extracted: Receipt): Amount | null {
-    let m = text.match(/gesamt(?:\s+EUR)?(?:\s*|$)(\d+,\d\d).*$/im);
+  public extract(
+    text: string,
+    lines: string[],
+    extracted: Receipt
+  ): Amount | null {
+    let m = text.match(/(?:gesamt|summe)(?:\s+EUR)?(?:\s*|$)(\d+,\d\d).*$/im);
     if (m) {
       return {
         value: parseFloat(m[1].replace(',', '.')),

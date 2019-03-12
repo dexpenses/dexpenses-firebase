@@ -1,0 +1,27 @@
+{
+  "state": "ready",
+  "data": {
+    "header": [
+      "K t",
+      "Vielen Dank , dass Sie",
+      "sich entschieden haben",
+      "gesund & lecker zu essen",
+      "Wir freuen uns auf Ihren",
+      "nächsten Besuch!"
+    ],
+    "address": {},
+    "phone": null,
+    "date": "2018-05-22T22:00:00.000Z",
+    "time": {
+      "hour": 18,
+      "minute": 58,
+      "second": 48
+    },
+    "amount": {
+      "value": 18.58,
+      "currency": "EUR"
+    },
+    "paymentMethod": "DEBIT",
+    "timestamp": "2018-05-23T16:58:48.000Z"
+  }
+}

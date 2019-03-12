@@ -9,7 +9,8 @@
     "start": "npm run shell",
     "test": "mocha -r ts-node/register --require chai-autoload-plugins --recursive \"src/**/*.spec.ts\" \"test/**/*.spec.ts\"",
     "test:cov": "nyc npm run test",
-    "test:single": "mocha -r ts-node/register --require chai-autoload-plugins"
+    "test:single": "mocha -r ts-node/register --require chai-autoload-plugins",
+    "test:extract": "mocha -r ts-node/register --require chai-autoload-plugins test/extract.offline.spec.ts"
   },
   "main": "lib/index.js",
   "dependencies": {

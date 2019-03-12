@@ -1,0 +1,28 @@
+{
+  "data": {
+    "address": {
+      "city": "30159 Hannover"
+    },
+    "amount": {
+      "currency": "EUR",
+      "value": 17.99
+    },
+    "date": "2017-08-31T22:00:00.000Z",
+    "header": [
+      "AKIA HANDYSHOP",
+      "Hannover HBF",
+      "Ernst-August-Platz",
+      "Im Hauptbahnhof( Osthalle)",
+      "30159 Hannover"
+    ],
+    "paymentMethod": "DEBIT",
+    "phone": "0511/23523333",
+    "time": {
+      "hour": 15,
+      "minute": 23,
+      "second": null
+    },
+    "timestamp": "2017-09-01T13:23:00.000Z"
+  },
+  "state": "ready"
+}

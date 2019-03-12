@@ -28,6 +28,9 @@ describe('Analyze receipt text Cloud Function (offline)', () => {
   });
 
   for (const textFile of testFiles) {
+    if (!textFile.endsWith('.txt')) {
+      continue;
+    }
     it(`should be successfully extract info from '${textFile}'`, () => {
       const text = fs.readFileSync(path.resolve(dir, textFile), 'utf8');
       const result = analyzeReceiptText(
@@ -45,16 +48,17 @@ describe('Analyze receipt text Cloud Function (offline)', () => {
           },
         }
       );
-      const expected = JSON.parse(
-        fs.readFileSync(
-          path.resolve(
-            testRoot,
-            'expected',
-            textFile.replace(/\.txt$/, '.json')
-          ),
-          'utf8'
-        )
+      const specFile = path.resolve(
+        testRoot,
+        'expected',
+        textFile.replace(/\.txt$/, '.json')
       );
+      if (!fs.existsSync(specFile)) {
+        expect.fail(
+          'Spec file does not exist:\n' + JSON.stringify(result, undefined, 2)
+        );
+      }
+      const expected = JSON.parse(fs.readFileSync(specFile, 'utf8'));
       expect(JSON.parse(JSON.stringify(result))).to.deep.equal({
         result: expected,
       });
