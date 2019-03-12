@@ -1,5 +1,17 @@
 {
   "projects": {
     "default": "dexpenses-207219"
+  },
+  "targets": {
+    "dexpenses-207219": {
+      "storage": {
+        "default": [
+          "dexpenses-207219.appspot.com"
+        ],
+        "public": [
+          "dexpenses-207219-public"
+        ]
+      }
+    }
   }
 }

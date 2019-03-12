@@ -10,7 +10,14 @@
       "npm --prefix \"$RESOURCE_DIR\" run build"
     ]
   },
-  "storage": {
-    "rules": "storage.rules"
-  }
+  "storage": [
+    {
+      "target": "default",
+      "rules": "storage.rules"
+    },
+    {
+      "target": "public",
+      "rules": "storage.public.rules"
+    }
+  ]
 }
