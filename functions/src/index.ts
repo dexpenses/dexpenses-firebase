@@ -4,3 +4,4 @@ admin.initializeApp();
 
 export { detectText } from './detectText';
 export { analyseReceiptText } from './extract';
+export { gmapStage } from './gmap';
