@@ -5,4 +5,7 @@ export default [
   {
     format: 'dd.MM.yy',
   },
+  {
+    format: 'd-M-yyyy',
+  },
 ];

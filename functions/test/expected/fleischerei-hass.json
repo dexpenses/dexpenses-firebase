@@ -1,0 +1,18 @@
+{
+  "state": "ready",
+  "data": {
+    "header": ["Fieischerei & Partyservice", "Peter Haß"],
+    "address": {
+      "street": "Der Anger 1",
+      "city": "38302 Wolfenbüttel"
+    },
+    "phone": "05331 - 71845",
+    "date": "2017-09-22T22:00:00.000Z",
+    "time": null,
+    "amount": {
+      "value": 7.6,
+      "currency": "EUR"
+    },
+    "paymentMethod": "CASH"
+  }
+}

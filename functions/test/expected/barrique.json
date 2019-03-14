@@ -1,0 +1,17 @@
+{
+  "state": "partial",
+  "data": {
+    "header": ["Barrique", "38300 Woifenbuette l"],
+    "address": {
+      "city": "38300 Woifenbuette"
+    },
+    "phone": "05331/84942",
+    "date": null,
+    "time": null,
+    "amount": {
+      "value": 23.7,
+      "currency": "EUR"
+    },
+    "paymentMethod": "CASH"
+  }
+}
