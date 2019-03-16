@@ -1,4 +1,13 @@
 {
-  "indexes": [],
+  "indexes": [
+    {
+      "collectionId": "receipts",
+      "fields": [
+        { "fieldPath": "result.state", "mode": "ASCENDING" },
+        { "fieldPath": "result.data.date", "mode": "DESCENDING" },
+        { "fieldPath": "result.data.time", "mode": "DESCENDING" }
+      ]
+    }
+  ],
   "fieldOverrides": []
 }
