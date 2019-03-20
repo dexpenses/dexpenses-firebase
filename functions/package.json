@@ -24,7 +24,7 @@
   "devDependencies": {
     "@types/chai": "^4.1.7",
     "@types/chai-datetime": "0.0.32",
-    "@types/google__maps": "^0.5.2",
+    "@types/google__maps": "^0.5.4",
     "@types/luxon": "^1.11.1",
     "@types/mocha": "^5.2.6",
     "@types/sinon": "^7.0.9",
