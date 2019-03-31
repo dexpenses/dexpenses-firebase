@@ -1,3 +1,6 @@
+import { GeocodingResult, PlaceDetailsResult } from '@google/maps';
+import { Address } from './address';
+
 export type ReceiptResultState =
   | 'pending'
   | 'no-text'
@@ -13,7 +16,11 @@ export interface ReceiptResult {
   error?: any;
 }
 
-export interface Time { hour: number; minute: number; second: number; }
+export interface Time {
+  hour: number;
+  minute: number;
+  second: number;
+}
 
 export interface Receipt {
   header?: string[];
@@ -22,6 +29,7 @@ export interface Receipt {
   paymentMethod?: string;
   date?: Date;
   amount?: { value: number; currency: string };
-  address?: { street: string; city: string };
+  address?: Address;
   timestamp?: Date;
+  place?: GeocodingResult & PlaceDetailsResult;
 }

@@ -1,0 +1,22 @@
+{
+  "state": "ready",
+  "data": {
+    "header": ["real Wolfsburg", "Brandgehaege 9", "38444", "Wolfsburs"],
+    "address": {
+      "street": "Brandgehaege 9"
+    },
+    "phone": null,
+    "date": "2019-03-29T23:00:00.000Z",
+    "time": {
+      "hour": 19,
+      "minute": 10,
+      "second": 28
+    },
+    "amount": {
+      "value": 83.89,
+      "currency": "EUR"
+    },
+    "paymentMethod": "DEBIT",
+    "timestamp": "2019-03-30T18:10:28.000Z"
+  }
+}

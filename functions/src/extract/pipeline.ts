@@ -8,10 +8,13 @@ import DateTimePostProcessor from './postprocess/DateTimePostProcessor';
 import HeaderSanitizer from './postprocess/HeaderSanitizer';
 import { Receipt, ReceiptResult } from './receipt';
 import { TimeExtractor } from './time';
+import { PlaceExtractor } from './place';
+import PlacePostProcessor from './postprocess/PlacePostProcessor';
 
-const extractorPipeline = [
+export const extractorPipeline = [
   new HeaderExtractor(),
   new AddressExtractor(),
+  new PlaceExtractor(),
   new PhoneNumberExtractor(),
   new DateExtractor(),
   new TimeExtractor(),
@@ -21,13 +24,17 @@ const extractorPipeline = [
 
 // todo: check dependencies of extractors or re-order pipeline (error only on circular)
 
-const postProcessors = [new DateTimePostProcessor(), new HeaderSanitizer()];
+const postProcessors = [
+  new DateTimePostProcessor(),
+  new PlacePostProcessor(),
+  new HeaderSanitizer(),
+];
 
 function isReady({ header, date, amount }: Receipt): boolean {
   return !!header && header.length > 0 && !!date && !!amount;
 }
 
-export default function(text: string): ReceiptResult {
+export default async function(text: string): Promise<ReceiptResult> {
   if (!text) {
     return {
       state: 'no-text',
@@ -40,7 +47,7 @@ export default function(text: string): ReceiptResult {
   for (const extractor of extractorPipeline) {
     try {
       extractor.metadata = metadata;
-      const value = extractor.extract(text, lines, extracted);
+      const value = await extractor.extract(text, lines, extracted);
       extracted[extractor.field] = value;
       if (value) {
         anySuccess = true;

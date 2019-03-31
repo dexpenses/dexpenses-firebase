@@ -4,9 +4,9 @@ import extractorPipeline from './pipeline';
 
 export const analyseReceiptText = functions.firestore
   .document('receiptTextsByUser/{userId}/receiptTexts/{receiptId}')
-  .onCreate((snap, context) => {
+  .onCreate(async (snap, context) => {
     const data = snap.data();
-    const result = extractorPipeline((data || {}).text);
+    const result = await extractorPipeline((data || {}).text);
     return admin
       .firestore()
       .collection('receiptsByUser')

@@ -6,6 +6,16 @@ import 'mocha';
 import * as fs from 'fs';
 import * as path from 'path';
 import fakeFirestore from './firestore-stub';
+import { extractorPipeline } from '../src/extract/pipeline';
+import { PlaceExtractor } from '../src/extract/place';
+
+/*
+ * Skip Geo Coding API call during testing
+ */
+extractorPipeline.splice(
+  extractorPipeline.findIndex((e) => e instanceof PlaceExtractor),
+  1
+);
 
 const test = firebaseFunctionsTest();
 
@@ -31,9 +41,9 @@ describe('Analyze receipt text Cloud Function (offline)', () => {
     if (!textFile.endsWith('.txt')) {
       continue;
     }
-    it(`should be successfully extract info from '${textFile}'`, () => {
+    it(`should be successfully extract info from '${textFile}'`, async () => {
       const text = fs.readFileSync(path.resolve(dir, textFile), 'utf8');
-      const result = analyzeReceiptText(
+      const result = await analyzeReceiptText(
         {
           data() {
             return {

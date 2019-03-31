@@ -22,7 +22,7 @@ export abstract class Extractor {
     text: string,
     lines: string[],
     extracted: Receipt
-  ): any;
+  ): any | Promise<any>;
 
   public addMetadata(
     key: string,
