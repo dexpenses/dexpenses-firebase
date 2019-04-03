@@ -1,0 +1,23 @@
+{
+  "state": "ready",
+  "data": {
+    "header": ["Smiley's Pizza Profis, Inh.: M. Voigt"],
+    "address": {
+      "street": "Kantallee 1a",
+      "city": "38440 Wolfsburg"
+    },
+    "phone": "05361 272 666",
+    "date": "2019-03-13T23:00:00.000Z",
+    "time": {
+      "hour": 18,
+      "minute": 27,
+      "second": null
+    },
+    "amount": {
+      "value": 12.85,
+      "currency": "EUR"
+    },
+    "paymentMethod": "DEBIT",
+    "timestamp": "2019-03-14T17:27:00.000Z"
+  }
+}
