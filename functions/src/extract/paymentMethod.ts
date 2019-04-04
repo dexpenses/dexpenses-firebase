@@ -8,7 +8,12 @@ export enum PaymentMethod {
 }
 
 const paymentMethodIdentifiers = {
-  [PaymentMethod.DEBIT]: [/girocard/i, /zahlart[:\s]\s*EC/i, /EuroELV/i],
+  [PaymentMethod.DEBIT]: [
+    /girocard/i,
+    /zahlart[:\s]\s*EC/i,
+    /EuroELV/i,
+    /EC Kartenzahlung/i,
+  ],
   [PaymentMethod.CREDIT]: [/visa/i],
   [PaymentMethod.CASH]: [/bar/i],
 };

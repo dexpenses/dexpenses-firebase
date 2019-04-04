@@ -15,6 +15,10 @@ export class PhoneNumberExtractor extends Extractor {
     for (const [i, line] of extracted.header!.entries()) {
       const m = line.match(phoneRegex);
       if (m) {
+        const prefix = line.substring(0, line.indexOf(m[0]));
+        if (prefix.match(/St\.?Nr\.?\s*$/i)) {
+          continue;
+        }
         extracted.header!.splice(i); // remove anything afterwards as well
         return m[0].trim();
       }

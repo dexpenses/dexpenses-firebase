@@ -54,51 +54,36 @@ export class AddressExtractor extends Extractor {
       return null;
     }
     const address: Address = {};
-    const newHeaders: string[] = [];
-    for (const line of extracted.header) {
-      if (!address.street) {
-        // todo: account for dashes in the address
-        const street = line.match(
-          /([a-z\u00e0-\u00ff]+\s+)*[a-z\u00e0-\u02af]+([,\.]\s*|\s+)\d{1,4}\s?[a-z]?/i
-        );
-        if (street) {
-          address.street = street[0]
-            .replace('\u016b', '\u00fc') // todo: temp for to replace ü with line instead of docs
-            .replace(/[,\.]\s*/, '. '); // fix Bspstr.5 and Bspstr, 5
-          this.addMetadata(
-            'relevantHeaderLines',
-            newHeaders.length,
-            false,
-            (prev) => prev > newHeaders.length
-          );
-          newHeaders.push(line);
-          continue;
-        }
+    for (let i = 0; i < extracted.header.length; i += 1) {
+      const line = extracted.header[i];
+      // todo: account for dashes in the address
+      const street = line.match(
+        /([a-z\u00e0-\u00ff]+\s+)*[a-z\u00e0-\u02af]+([,\.]\s*|\s+)\d{1,4}\s?[a-z]?/i
+      );
+      if (street) {
+        address.street = street[0]
+          .replace('\u016b', '\u00fc') // todo: temp for to replace ü with line instead of docs
+          .replace(/[,\.]\s*/, '. '); // fix Bspstr.5 and Bspstr, 5
+        this.addMetadata('relevantHeaderLines', i, false, (prev) => prev > i);
+        break;
       }
-      if (!address.city) {
-        const city = line.match(this.cityRegex);
-        if (
-          city &&
-          (!this.zipCodeMapping || this.zipCodeMapping[city[1]] === city[2])
-        ) {
-          address.city = city[0].replace('\u016b', '\u00fc');
-          this.addMetadata(
-            'relevantHeaderLines',
-            newHeaders.length,
-            false,
-            (prev) => prev > newHeaders.length
-          );
-          newHeaders.push(line);
-          continue;
-        }
+    }
+    for (let i = 0; i < extracted.header.length; i += 1) {
+      const line = extracted.header[i];
+      const city = line.match(this.cityRegex);
+      if (
+        city &&
+        (!this.zipCodeMapping || this.zipCodeMapping[city[1]] === city[2])
+      ) {
+        address.city = city[0].replace('\u016b', '\u00fc');
+        this.addMetadata('relevantHeaderLines', i, false, (prev) => prev > i);
+        break;
       }
-      newHeaders.push(line);
     }
     if (!address.street || !address.city) {
       // keep address part in header if extraction was incomplete
       this.addMetadata('relevantHeaderLines', null, true);
     }
-    extracted.header = newHeaders;
     return address;
   }
 }
