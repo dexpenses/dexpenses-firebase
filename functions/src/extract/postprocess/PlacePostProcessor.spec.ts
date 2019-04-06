@@ -1,5 +1,3 @@
-import { expect } from 'chai';
-import 'mocha';
 import PlacePostProcessor, { fromComponents } from './PlacePostProcessor';
 import { AddressComponent } from '@google/maps';
 
@@ -42,7 +40,7 @@ describe('PlacePostProcessor', () => {
         types: ['postal_code'],
       },
     ];
-    expect(fromComponents(addressComponents)).to.deep.equal({
+    expect(fromComponents(addressComponents)).toEqual({
       street: 'Brandgehaege 9',
       city: '38444 Wolfsburg',
     });
@@ -58,7 +56,7 @@ describe('PlacePostProcessor', () => {
 
     const ppp = new PlacePostProcessor();
     ppp.touch(receipt, {});
-    expect(receipt.phone).to.equal('123456789');
+    expect(receipt.phone).toBe('123456789');
   });
 
   it('should not overwrite the extracted phone number', () => {
@@ -71,7 +69,7 @@ describe('PlacePostProcessor', () => {
 
     const ppp = new PlacePostProcessor();
     ppp.touch(receipt, {});
-    expect(receipt.phone).to.equal('987654321');
+    expect(receipt.phone).toBe('987654321');
   });
 
   it('should set the place name as single header line', () => {
@@ -84,6 +82,6 @@ describe('PlacePostProcessor', () => {
 
     const ppp = new PlacePostProcessor();
     ppp.touch(receipt, {});
-    expect(receipt.header).to.deep.equal(['place name']);
+    expect(receipt.header).toEqual(['place name']);
   });
 });

@@ -1,5 +1,3 @@
-import { expect } from 'chai';
-import 'mocha';
 import { HeaderExtractor } from './header';
 
 describe('Header extractor', () => {
@@ -18,16 +16,19 @@ describe('Header extractor', () => {
     23.05.2018
     19:47:44 Uhr
     `;
-    const result = extractor.extract(text, text.split('\n').map(s => s.trim()), {});
-    expect(result).not.to.be.undefined;
+    const result = extractor.extract(
+      text,
+      text.split('\n').map((s) => s.trim()),
+      {}
+    );
+    expect(result).not.toBeUndefined();
     if (result) {
-      expect(result).to.deep.equal([
+      expect(result).toEqual([
         'Cinemaxx Entertainment',
         'CxX Göttingen',
         'Bahnhofsallee 3',
-        '37081 Göttingen'
-      ])
+        '37081 Göttingen',
+      ]);
     }
   });
-
 });

@@ -1,11 +1,8 @@
 import * as firebaseFunctionsTest from 'firebase-functions-test';
-import * as sinon from 'sinon';
 import * as admin from 'firebase-admin';
-import { expect } from 'chai';
-import 'mocha';
 import * as fs from 'fs';
 import * as path from 'path';
-import fakeFirestore from './firestore-stub';
+import { firestore } from './firebase-stubs';
 import { extractorPipeline } from '../src/extract/pipeline';
 import { PlaceExtractor } from '../src/extract/place';
 
@@ -19,10 +16,12 @@ extractorPipeline.splice(
 
 const test = firebaseFunctionsTest();
 
-sinon.stub(admin, 'initializeApp');
-sinon.stub(admin, 'firestore').get(() => () => fakeFirestore);
+const initializeAppStub = jest.spyOn(admin, 'initializeApp');
+const firestoreStub = jest
+  .spyOn(admin, 'firestore' as any, 'get')
+  .mockReturnValue(() => firestore);
 const analyzeReceiptText = test.wrap(require('../src').analyseReceiptText);
-(admin.initializeApp as any).restore();
+initializeAppStub.mockRestore();
 
 const userId = test.auth.exampleUserRecord().uid;
 
@@ -31,10 +30,8 @@ describe('Analyze receipt text Cloud Function (offline)', () => {
   const dir = path.resolve(testRoot, 'data');
   const testFiles = fs.readdirSync(dir);
 
-  after(() => {
-    if ((admin.firestore as any).restore) {
-      (admin.firestore as any).restore();
-    }
+  afterAll(() => {
+    firestoreStub.mockRestore();
   });
 
   for (const textFile of testFiles) {
@@ -58,20 +55,7 @@ describe('Analyze receipt text Cloud Function (offline)', () => {
           },
         }
       );
-      const specFile = path.resolve(
-        testRoot,
-        'expected',
-        textFile.replace(/\.txt$/, '.json')
-      );
-      if (!fs.existsSync(specFile)) {
-        expect.fail(
-          'Spec file does not exist:\n' + JSON.stringify(result, undefined, 2)
-        );
-      }
-      const expected = JSON.parse(fs.readFileSync(specFile, 'utf8'));
-      expect(JSON.parse(JSON.stringify(result))).to.deep.equal({
-        result: expected,
-      });
+      expect(result).toMatchSnapshot();
     });
   }
 });

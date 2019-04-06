@@ -1,5 +1,3 @@
-import { expect } from 'chai';
-import 'mocha';
 import { AmountExtractor } from './amount';
 
 describe('Amount extractor', () => {
@@ -8,18 +6,18 @@ describe('Amount extractor', () => {
   it('should be successfully extract the amount', () => {
     const text = `Gesamt 11,10`;
     const result = extractor.extract(text, text.split['\n'], {});
-    expect(result).to.exist;
+    expect(result).toBeDefined();
     if (result) {
-      expect(result.value).to.equal(11.1);
+      expect(result.value).toBe(11.1);
     }
   });
 
   it('should be successfully extract the amount', () => {
     const text = `Betrag 11,10`;
     const result = extractor.extract(text, text.split('\n'), {});
-    expect(result).to.exist;
+    expect(result).toBeDefined();
     if (result) {
-      expect(result.value).to.equal(11.1);
+      expect(result.value).toBe(11.1);
     }
   });
 
@@ -27,9 +25,9 @@ describe('Amount extractor', () => {
     const text = `betrag
     11,10`;
     const result = extractor.extract(text, text.split('\n'), {});
-    expect(result).not.to.be.null;
+    expect(result).not.toBeNull();
     if (result) {
-      expect(result.value).to.equal(11.1);
+      expect(result.value).toBe(11.1);
     }
   });
 
@@ -37,9 +35,9 @@ describe('Amount extractor', () => {
     const text = `gesamt
     11,10`;
     const result = extractor.extract(text, text.split('\n'), {});
-    expect(result).to.exist;
+    expect(result).toBeDefined();
     if (result) {
-      expect(result.value).to.equal(11.1);
+      expect(result.value).toBe(11.1);
     }
   });
 
@@ -58,9 +56,9 @@ describe('Amount extractor', () => {
       text.split('\n').map((l) => l.trim()),
       {}
     );
-    expect(result).to.exist;
+    expect(result).toBeDefined();
     if (result) {
-      expect(result.value).to.equal(61.9);
+      expect(result.value).toBe(61.9);
     }
   });
 });

@@ -1,5 +1,3 @@
-import { expect } from 'chai';
-import 'mocha';
 import DateTimePostProcessor from './DateTimePostProcessor';
 import { DateTime } from 'luxon';
 
@@ -18,8 +16,8 @@ describe('Date time postprocessor', () => {
       },
     };
     postprocessor.touch(extracted);
-    expect(extracted).to.have.property('timestamp');
-    expect(extracted.timestamp).to.equalDate(
+    expect(extracted).toHaveProperty('timestamp');
+    expect(extracted.timestamp).toEqual(
       DateTime.fromISO('2019-02-22T11:12:13.000+01:00').toJSDate()
     );
   });

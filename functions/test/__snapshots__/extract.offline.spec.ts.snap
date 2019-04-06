@@ -1,0 +1,482 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Analyze receipt text Cloud Function (offline) should be successfully extract info from '2019_02_22_edeka.txt' 1`] = `
+Object {
+  "result": Object {
+    "data": Object {
+      "address": Object {
+        "city": "38440 Wolfsburg",
+        "street": "Grauhorststr. 1",
+      },
+      "amount": Object {
+        "currency": "EUR",
+        "value": 8.32,
+      },
+      "date": 2019-02-21T23:00:00.000Z,
+      "header": Array [
+        "EDEKA",
+        "Wir Lebensmittel",
+        "Edeka Fi1. 2129",
+      ],
+      "paymentMethod": "CREDIT",
+      "phone": null,
+      "time": Object {
+        "hour": 16,
+        "minute": 58,
+        "second": 57,
+      },
+      "timestamp": 2019-02-22T15:58:57.000Z,
+    },
+    "state": "ready",
+  },
+}
+`;
+
+exports[`Analyze receipt text Cloud Function (offline) should be successfully extract info from 'akia-handyshop.txt' 1`] = `
+Object {
+  "result": Object {
+    "data": Object {
+      "address": Object {
+        "city": "30159 Hannover",
+      },
+      "amount": Object {
+        "currency": "EUR",
+        "value": 17.99,
+      },
+      "date": 2017-08-31T22:00:00.000Z,
+      "header": Array [
+        "AKIA HANDYSHOP",
+        "Hannover HBF",
+        "Ernst-August-Platz",
+        "Im Hauptbahnhof( Osthalle)",
+        "30159 Hannover",
+      ],
+      "paymentMethod": "DEBIT",
+      "phone": "0511/23523333",
+      "time": Object {
+        "hour": 15,
+        "minute": 23,
+        "second": NaN,
+      },
+      "timestamp": 2017-09-01T13:23:00.000Z,
+    },
+    "state": "ready",
+  },
+}
+`;
+
+exports[`Analyze receipt text Cloud Function (offline) should be successfully extract info from 'apotheke.txt' 1`] = `
+Object {
+  "result": Object {
+    "data": Object {
+      "address": Object {
+        "city": "38302 Wolfenbüttel",
+        "street": "Danziger Str. 14",
+      },
+      "amount": Object {
+        "currency": "EUR",
+        "value": 27.87,
+      },
+      "date": 2017-09-26T22:00:00.000Z,
+      "header": Array [
+        "Akazien-Apotheke oHG",
+        "Uta und Thomas Eckert",
+      ],
+      "paymentMethod": "DEBIT",
+      "phone": "05331/72817",
+      "time": Object {
+        "hour": 17,
+        "minute": 16,
+        "second": NaN,
+      },
+      "timestamp": 2017-09-27T15:16:00.000Z,
+    },
+    "state": "ready",
+  },
+}
+`;
+
+exports[`Analyze receipt text Cloud Function (offline) should be successfully extract info from 'barrique.txt' 1`] = `
+Object {
+  "result": Object {
+    "data": Object {
+      "address": Object {
+        "city": "38300 Woifenbuette",
+      },
+      "amount": Object {
+        "currency": "EUR",
+        "value": 23.7,
+      },
+      "date": null,
+      "header": Array [
+        "Barrique",
+        "38300 Woifenbuette l",
+      ],
+      "paymentMethod": "CASH",
+      "phone": "05331/84942",
+      "time": null,
+    },
+    "state": "partial",
+  },
+}
+`;
+
+exports[`Analyze receipt text Cloud Function (offline) should be successfully extract info from 'cinemaxx.txt' 1`] = `
+Object {
+  "result": Object {
+    "data": Object {
+      "address": Object {
+        "city": "37081 Göttingen",
+        "street": "Bahnhofsallee 3",
+      },
+      "amount": Object {
+        "currency": "EUR",
+        "value": 11.1,
+      },
+      "date": 2018-05-22T22:00:00.000Z,
+      "header": Array [
+        "Cinemaxx Entertainment",
+        "CxX Göttingen",
+      ],
+      "paymentMethod": "DEBIT",
+      "phone": null,
+      "time": Object {
+        "hour": 19,
+        "minute": 47,
+        "second": 44,
+      },
+      "timestamp": 2018-05-23T17:47:44.000Z,
+    },
+    "state": "ready",
+  },
+}
+`;
+
+exports[`Analyze receipt text Cloud Function (offline) should be successfully extract info from 'edeka.txt' 1`] = `
+Object {
+  "result": Object {
+    "data": Object {
+      "address": Object {
+        "city": "38302 Wolfenbüttel",
+        "street": "Schweigerstr. 5",
+      },
+      "amount": Object {
+        "currency": "EUR",
+        "value": 44.13,
+      },
+      "date": 2018-05-25T22:00:00.000Z,
+      "header": Array [
+        "cente",
+        "E CENTER Denis Brueggendick",
+      ],
+      "paymentMethod": "DEBIT",
+      "phone": "05331/90570",
+      "time": Object {
+        "hour": 12,
+        "minute": 5,
+        "second": 16,
+      },
+      "timestamp": 2018-05-26T10:05:16.000Z,
+    },
+    "state": "ready",
+  },
+}
+`;
+
+exports[`Analyze receipt text Cloud Function (offline) should be successfully extract info from 'figaro-salon.txt' 1`] = `
+Object {
+  "result": Object {
+    "data": Object {
+      "address": Object {
+        "city": "01169 Dresden",
+        "street": "Schweizer Str. 2",
+      },
+      "amount": Object {
+        "currency": "EUR",
+        "value": 19.5,
+      },
+      "date": 2016-12-07T23:00:00.000Z,
+      "header": Array [
+        "FIGAR0 Dresden e G",
+        "Salon Schweizer Strasse",
+      ],
+      "paymentMethod": "DEBIT",
+      "phone": "0351-47 11 295",
+      "time": Object {
+        "hour": 11,
+        "minute": 56,
+        "second": NaN,
+      },
+      "timestamp": 2016-12-08T10:56:00.000Z,
+    },
+    "state": "ready",
+  },
+}
+`;
+
+exports[`Analyze receipt text Cloud Function (offline) should be successfully extract info from 'fleischerei-hass.txt' 1`] = `
+Object {
+  "result": Object {
+    "data": Object {
+      "address": Object {
+        "city": "38302 Wolfenbüttel",
+        "street": "Der Anger 1",
+      },
+      "amount": Object {
+        "currency": "EUR",
+        "value": 7.6,
+      },
+      "date": 2017-09-22T22:00:00.000Z,
+      "header": Array [
+        "Fieischerei & Partyservice",
+        "Peter Haß",
+      ],
+      "paymentMethod": "CASH",
+      "phone": "05331 - 71845",
+      "time": null,
+    },
+    "state": "ready",
+  },
+}
+`;
+
+exports[`Analyze receipt text Cloud Function (offline) should be successfully extract info from 'fleischerei-heine.txt' 1`] = `
+Object {
+  "result": Object {
+    "data": Object {
+      "address": Object {
+        "city": "38300 Wolfenbüttel",
+        "street": "Kornmarkt 15",
+      },
+      "amount": Object {
+        "currency": "EUR",
+        "value": 8.97,
+      },
+      "date": 2017-09-27T22:00:00.000Z,
+      "header": Array [
+        "Fleischerei Frank Heine",
+      ],
+      "paymentMethod": null,
+      "phone": "05331/2818",
+      "time": Object {
+        "hour": 15,
+        "minute": 46,
+        "second": NaN,
+      },
+      "timestamp": 2017-09-28T13:46:00.000Z,
+    },
+    "state": "ready",
+  },
+}
+`;
+
+exports[`Analyze receipt text Cloud Function (offline) should be successfully extract info from 'haargenau.txt' 1`] = `
+Object {
+  "result": Object {
+    "data": Object {
+      "address": Object {
+        "city": "38302 Wofenbuettel",
+        "street": "Breslauer Str 2 d",
+      },
+      "amount": Object {
+        "currency": "EUR",
+        "value": 15,
+      },
+      "date": 2017-08-30T22:00:00.000Z,
+      "header": Array [],
+      "paymentMethod": "DEBIT",
+      "phone": "05331 33838",
+      "time": null,
+    },
+    "state": "partial",
+  },
+}
+`;
+
+exports[`Analyze receipt text Cloud Function (offline) should be successfully extract info from 'media_markt.txt' 1`] = `
+Object {
+  "result": Object {
+    "data": Object {
+      "address": Object {
+        "city": "38444 WOLFSBURG",
+        "street": "Brandgehaege 3",
+      },
+      "amount": Object {
+        "currency": "EUR",
+        "value": 34.9,
+      },
+      "date": 2019-03-15T23:00:00.000Z,
+      "header": Array [
+        "MedlaMarkt",
+        "MEDIA MARKT WOLFSBURG",
+        "TV-HIFI ELEKTRO Gmbh",
+      ],
+      "paymentMethod": "CREDIT",
+      "phone": "05308-701",
+      "time": Object {
+        "hour": 17,
+        "minute": 18,
+        "second": 38,
+      },
+      "timestamp": 2019-03-16T16:18:38.000Z,
+    },
+    "state": "ready",
+  },
+}
+`;
+
+exports[`Analyze receipt text Cloud Function (offline) should be successfully extract info from 'rancho.txt' 1`] = `
+Object {
+  "result": Object {
+    "data": Object {
+      "address": Object {
+        "city": "33602 Bielefed",
+        "street": "Niederwalle 37",
+      },
+      "amount": Object {
+        "currency": "EUR",
+        "value": 61.9,
+      },
+      "date": 2019-02-24T23:00:00.000Z,
+      "header": Array [
+        "RANCHO",
+        "STEAKHOUSE",
+      ],
+      "paymentMethod": null,
+      "phone": "0521-96 79 79 79",
+      "time": Object {
+        "hour": 20,
+        "minute": 1,
+        "second": NaN,
+      },
+      "timestamp": 2019-02-25T19:01:00.000Z,
+    },
+    "state": "ready",
+  },
+}
+`;
+
+exports[`Analyze receipt text Cloud Function (offline) should be successfully extract info from 'real.txt' 1`] = `
+Object {
+  "result": Object {
+    "data": Object {
+      "address": Object {
+        "street": "Brandgehaege 9",
+      },
+      "amount": Object {
+        "currency": "EUR",
+        "value": 83.89,
+      },
+      "date": 2019-03-29T23:00:00.000Z,
+      "header": Array [
+        "real Wolfsburg",
+        "Brandgehaege 9",
+        "38444",
+        "Wolfsburs",
+      ],
+      "paymentMethod": "DEBIT",
+      "phone": null,
+      "time": Object {
+        "hour": 19,
+        "minute": 10,
+        "second": 28,
+      },
+      "timestamp": 2019-03-30T18:10:28.000Z,
+    },
+    "state": "ready",
+  },
+}
+`;
+
+exports[`Analyze receipt text Cloud Function (offline) should be successfully extract info from 'sausa.txt' 1`] = `
+Object {
+  "result": Object {
+    "data": Object {
+      "address": Object {
+        "city": "38440 Wolfsburg",
+        "street": "Porschestr. 32",
+      },
+      "amount": Object {
+        "currency": "EUR",
+        "value": 28.8,
+      },
+      "date": 2017-08-27T22:00:00.000Z,
+      "header": Array [
+        "Sausalitos Holding GmbH",
+        "Betrieb Wolfsburg",
+      ],
+      "paymentMethod": "CREDIT",
+      "phone": null,
+      "time": Object {
+        "hour": 20,
+        "minute": 33,
+        "second": NaN,
+      },
+      "timestamp": 2017-08-28T18:33:00.000Z,
+    },
+    "state": "ready",
+  },
+}
+`;
+
+exports[`Analyze receipt text Cloud Function (offline) should be successfully extract info from 'smileys.txt' 1`] = `
+Object {
+  "result": Object {
+    "data": Object {
+      "address": Object {
+        "city": "38440 Wolfsburg",
+        "street": "Kantallee 1a",
+      },
+      "amount": Object {
+        "currency": "EUR",
+        "value": 12.85,
+      },
+      "date": 2019-03-13T23:00:00.000Z,
+      "header": Array [
+        "Smiley's Pizza Profis, Inh.: M. Voigt",
+      ],
+      "paymentMethod": "DEBIT",
+      "phone": "05361 272 666",
+      "time": Object {
+        "hour": 18,
+        "minute": 27,
+        "second": NaN,
+      },
+      "timestamp": 2019-03-14T17:27:00.000Z,
+    },
+    "state": "ready",
+  },
+}
+`;
+
+exports[`Analyze receipt text Cloud Function (offline) should be successfully extract info from 'subway.txt' 1`] = `
+Object {
+  "result": Object {
+    "data": Object {
+      "address": Object {},
+      "amount": Object {
+        "currency": "EUR",
+        "value": 18.58,
+      },
+      "date": 2018-05-22T22:00:00.000Z,
+      "header": Array [
+        "K t",
+        "Vielen Dank , dass Sie",
+        "sich entschieden haben",
+        "gesund & lecker zu essen",
+        "Wir freuen uns auf Ihren",
+        "nächsten Besuch!",
+      ],
+      "paymentMethod": "DEBIT",
+      "phone": null,
+      "time": Object {
+        "hour": 18,
+        "minute": 58,
+        "second": 48,
+      },
+      "timestamp": 2018-05-23T16:58:48.000Z,
+    },
+    "state": "ready",
+  },
+}
+`;

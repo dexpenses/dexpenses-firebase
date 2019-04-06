@@ -1,6 +1,6 @@
 {
   "linterOptions": {
-    "exclude": ["**/*.spec.ts"]
+    "exclude": ["**/*.spec.ts", "test/**"]
   },
   "extends": ["tslint:recommended", "tslint-eslint-rules", "tslint-sonarts"],
   "rulesDirectory": ["node_modules/tslint-microsoft-contrib"],

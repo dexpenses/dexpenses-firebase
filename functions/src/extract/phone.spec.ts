@@ -1,5 +1,3 @@
-import { expect } from 'chai';
-import 'mocha';
 import { PhoneNumberExtractor } from './phone';
 
 describe('Phonenumber extractor', () => {
@@ -29,16 +27,16 @@ describe('Phonenumber extractor', () => {
           03575 946849
     `
       .split('\n')
-      .map(line => line.trim())
-      .filter(line => !!line);
+      .map((line) => line.trim())
+      .filter((line) => !!line);
 
     for (const phonenumber of phonenumbers) {
       const extracted = {
         header: ['Some Store', phonenumber],
       };
       const extractedPhone = extractor.extract('', [], extracted);
-      expect(extractedPhone).to.equal(phonenumber);
-      expect(extracted.header).to.deep.equal(['Some Store']);
+      expect(extractedPhone).toBe(phonenumber);
+      expect(extracted.header).toEqual(['Some Store']);
     }
   });
 });

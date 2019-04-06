@@ -1,4 +1,4 @@
-export default {
+export const firestore = {
   collection(c) {
     return {
       doc(d) {
@@ -19,3 +19,15 @@ export default {
     };
   },
 } as any;
+
+export const storage = {
+  bucket() {
+    return {
+      file(name) {
+        return {
+          delete: jest.fn().mockImplementation(async () => {}),
+        };
+      },
+    };
+  },
+};

@@ -1,5 +1,3 @@
-import { expect } from 'chai';
-import 'mocha';
 import { AddressExtractor } from './address';
 
 describe('Address extractor', () => {
@@ -21,9 +19,9 @@ describe('Address extractor', () => {
         header: ['Toller Laden', street, '38440 Wolfsburg'],
       };
       const result = extractor.extract('', [], extracted);
-      expect(result).to.exist;
+      expect(result).toBeDefined();
       if (result) {
-        expect(result.street).to.equal(street);
+        expect(result.street).toBe(street);
       }
     }
   });
@@ -40,9 +38,9 @@ describe('Address extractor', () => {
         header: ['Toller Laden', 'An dem Wege 1', city],
       };
       const result = extractor.extract('', [], extracted);
-      expect(result).to.exist;
+      expect(result).toBeDefined();
       if (result) {
-        expect(result.city).to.equal(city);
+        expect(result.city).toBe(city);
       }
     }
   });
