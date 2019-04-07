@@ -9,38 +9,6 @@ import TimeCondition from './TimeCondition';
 import { Time } from '../../extract/receipt';
 import PaymentMethodCondition from './PaymentMethodCondition';
 
-export const c = {
-  $and: [
-    {
-      header: 'markt',
-    },
-    {
-      amount: ['<', 10],
-    },
-    {
-      currency: 'EUR',
-    },
-    {
-      $or: [
-        {
-          date: ['weekday', '==', 6],
-        },
-        {
-          date: ['weekday', '==', 7],
-        },
-      ],
-    },
-    {
-      $not: {
-        paymentMethod: 'DEBIT',
-      },
-    },
-    {
-      time: ['after', '16:00'],
-    },
-  ],
-};
-
 function parseTime(timeString: string): Time {
   const [hour, minute, second] = timeString.split(':');
   return {
