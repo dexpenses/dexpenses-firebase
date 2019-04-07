@@ -1,7 +1,7 @@
-import { Condition } from './Condition';
+import Condition from './Condition';
 import { Receipt } from '../../extract/receipt';
 
-export class HeaderCondition implements Condition {
+export default class HeaderCondition implements Condition {
   constructor(private searchString: string, private caseSensitive = false) {}
 
   test(receipt: Receipt): boolean {

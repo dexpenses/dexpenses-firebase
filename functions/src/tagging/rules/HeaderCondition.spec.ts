@@ -1,6 +1,11 @@
-import { HeaderCondition } from './HeaderCondition';
+import HeaderCondition from './HeaderCondition';
 
 describe('HeaderCondition', () => {
+  it('should be false if absent', () => {
+    const condition = new HeaderCondition('header');
+    expect(condition.test({})).toBeFalsy();
+  });
+
   it('should match case-insensitively by default', () => {
     const condition = new HeaderCondition('walmart');
     expect(

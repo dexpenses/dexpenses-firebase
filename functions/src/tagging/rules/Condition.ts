@@ -1,5 +1,5 @@
 import { Receipt } from '../../extract/receipt';
 
-export interface Condition {
+export default interface Condition {
   test(receipt: Receipt): boolean;
 }
