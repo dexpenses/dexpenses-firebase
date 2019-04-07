@@ -23,6 +23,7 @@
       }
     ],
     "no-suspicious-comment": true,
-    "ordered-imports": false
+    "ordered-imports": false,
+    "member-access": false
   }
 }
