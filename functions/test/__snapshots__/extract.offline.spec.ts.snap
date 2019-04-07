@@ -56,7 +56,7 @@ Object {
       "time": Object {
         "hour": 15,
         "minute": 23,
-        "second": NaN,
+        "second": null,
       },
       "timestamp": 2017-09-01T13:23:00.000Z,
     },
@@ -87,7 +87,7 @@ Object {
       "time": Object {
         "hour": 17,
         "minute": 16,
-        "second": NaN,
+        "second": null,
       },
       "timestamp": 2017-09-27T15:16:00.000Z,
     },
@@ -205,7 +205,7 @@ Object {
       "time": Object {
         "hour": 11,
         "minute": 56,
-        "second": NaN,
+        "second": null,
       },
       "timestamp": 2016-12-08T10:56:00.000Z,
     },
@@ -261,7 +261,7 @@ Object {
       "time": Object {
         "hour": 15,
         "minute": 46,
-        "second": NaN,
+        "second": null,
       },
       "timestamp": 2017-09-28T13:46:00.000Z,
     },
@@ -347,7 +347,7 @@ Object {
       "time": Object {
         "hour": 20,
         "minute": 1,
-        "second": NaN,
+        "second": null,
       },
       "timestamp": 2019-02-25T19:01:00.000Z,
     },
@@ -410,7 +410,7 @@ Object {
       "time": Object {
         "hour": 20,
         "minute": 33,
-        "second": NaN,
+        "second": null,
       },
       "timestamp": 2017-08-28T18:33:00.000Z,
     },
@@ -440,7 +440,7 @@ Object {
       "time": Object {
         "hour": 18,
         "minute": 27,
-        "second": NaN,
+        "second": null,
       },
       "timestamp": 2019-03-14T17:27:00.000Z,
     },

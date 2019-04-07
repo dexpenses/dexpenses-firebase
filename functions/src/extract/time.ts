@@ -19,7 +19,7 @@ export class TimeExtractor extends Extractor {
       return {
         hour: parseInt(hour, 10),
         minute: parseInt(minute, 10),
-        second: parseInt(second, 10),
+        second: !second ? null : parseInt(second, 10),
       };
     });
   }
