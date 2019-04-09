@@ -19,7 +19,7 @@
     "core-js": "^3.0.1",
     "firebase-admin": "~7.0.0",
     "firebase-functions": "^2.2.0",
-    "luxon": "^1.11.4"
+    "luxon": "^1.12.1"
   },
   "devDependencies": {
     "@types/google__maps": "^0.5.2",
