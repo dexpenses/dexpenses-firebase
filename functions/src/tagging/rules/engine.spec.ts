@@ -1,13 +1,13 @@
 import ruleEngine from './engine';
-import AndCondition from '@dexmo/dexpenses-rule-conditions/lib/AndCondition';
-import HeaderCondition from '@dexmo/dexpenses-rule-conditions/lib/HeaderCondition';
-import AmountCondition from '@dexmo/dexpenses-rule-conditions/lib/AmountCondition';
-import CurrencyCondition from '@dexmo/dexpenses-rule-conditions/lib/CurrencyCondition';
-import OrCondition from '@dexmo/dexpenses-rule-conditions/lib/OrCondition';
-import DateCondition from '@dexmo/dexpenses-rule-conditions/lib/DateCondition';
-import NotCondition from '@dexmo/dexpenses-rule-conditions/lib/NotCondition';
-import PaymentMethodCondition from '@dexmo/dexpenses-rule-conditions/lib/PaymentMethodCondition';
-import TimeCondition from '@dexmo/dexpenses-rule-conditions/lib/TimeCondition';
+import AndCondition from '@dexpenses/rule-conditions/lib/AndCondition';
+import HeaderCondition from '@dexpenses/rule-conditions/lib/HeaderCondition';
+import AmountCondition from '@dexpenses/rule-conditions/lib/AmountCondition';
+import CurrencyCondition from '@dexpenses/rule-conditions/lib/CurrencyCondition';
+import OrCondition from '@dexpenses/rule-conditions/lib/OrCondition';
+import DateCondition from '@dexpenses/rule-conditions/lib/DateCondition';
+import NotCondition from '@dexpenses/rule-conditions/lib/NotCondition';
+import PaymentMethodCondition from '@dexpenses/rule-conditions/lib/PaymentMethodCondition';
+import TimeCondition from '@dexpenses/rule-conditions/lib/TimeCondition';
 import { Receipt } from '../../extract/receipt';
 import { DateTime } from 'luxon';
 
