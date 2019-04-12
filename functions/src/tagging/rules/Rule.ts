@@ -1,4 +1,4 @@
-import { Condition } from '@dexmo/dexpenses-rule-conditions';
+import { Condition } from '@dexpenses/rule-conditions';
 
 export interface Rule {
   condition: Condition;
