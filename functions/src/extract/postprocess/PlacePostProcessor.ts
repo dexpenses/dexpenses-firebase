@@ -5,7 +5,7 @@ import {
   AddressType,
   GeocodingAddressComponentType,
 } from '@google/maps';
-import { Address } from '../address';
+import { Address } from '../receipt';
 
 export default class PlacePostProcessor extends PostProcessor {
   public touch(extracted: Receipt, metadata: { [key: string]: any }) {
@@ -43,6 +43,7 @@ export function fromComponents(addressComponents: AddressComponent[]): Address {
   const streetNumber = extract('street_number', addressComponents);
   return {
     street: `${street} ${streetNumber}`,
-    city: `${postalCode} ${city}`,
+    zip: postalCode,
+    city,
   };
 }

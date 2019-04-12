@@ -1,5 +1,4 @@
 import { GeocodingResult, PlaceDetailsResult } from '@google/maps';
-import { Address } from './address';
 
 export type ReceiptResultState =
   | 'pending'
@@ -14,6 +13,12 @@ export interface ReceiptResult {
   state: ReceiptResultState;
   data?: Receipt;
   error?: any;
+}
+
+export interface Address {
+  zip?: string;
+  city?: string;
+  street?: string;
 }
 
 export interface Time {

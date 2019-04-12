@@ -42,7 +42,8 @@ describe('PlacePostProcessor', () => {
     ];
     expect(fromComponents(addressComponents)).toEqual({
       street: 'Brandgehaege 9',
-      city: '38444 Wolfsburg',
+      city: 'Wolfsburg',
+      zip: '38444',
     });
   });
 

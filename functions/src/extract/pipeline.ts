@@ -1,4 +1,3 @@
-import { AddressExtractor } from './address';
 import { AmountExtractor } from './amount';
 import { DateExtractor } from './date';
 import { HeaderExtractor } from './header';
@@ -13,7 +12,6 @@ import PlacePostProcessor from './postprocess/PlacePostProcessor';
 
 export const extractorPipeline = [
   new HeaderExtractor(),
-  new AddressExtractor(),
   new PlaceExtractor(),
   new PhoneNumberExtractor(),
   new DateExtractor(),

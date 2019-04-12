@@ -4,9 +4,8 @@ import { HeaderExtractor } from './header';
 import { Receipt } from './receipt';
 import * as gmaps from '@google/maps';
 import * as functions from 'firebase-functions';
-import { Address, AddressExtractor } from './address';
 
-@DependsOn(HeaderExtractor, AddressExtractor)
+@DependsOn(HeaderExtractor)
 export class PlaceExtractor extends Extractor {
   constructor() {
     super('place');
@@ -20,7 +19,7 @@ export class PlaceExtractor extends Extractor {
       key: functions.config().gmaps.key,
       Promise,
     });
-    const address = buildAddressQuery(extracted.header, extracted.address);
+    const address = extracted.header.join(',');
     const res = await client.geocode({ address }).asPromise();
     const result = res.json.results[0];
     if (!result.place_id) {
@@ -34,11 +33,4 @@ export class PlaceExtractor extends Extractor {
       .asPromise();
     return { ...result, ...pdr.json.result };
   }
-}
-
-function buildAddressQuery(header: string[], address?: Address): string {
-  if (address && address.street && address.city) {
-    return `${header.join(',')}, ${address.street}, ${address.city}`;
-  }
-  return header.join(',');
 }
