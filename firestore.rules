@@ -3,5 +3,9 @@ service cloud.firestore {
     match /receiptsByUser/{userId}/receipts/{receiptId} {
       allow read, write: if request.auth.uid == userId;
     }
+
+    match /recurringPaymentsByUser/{userId}/recurringPayments/{id} {
+      allow read, write: if request.auth.uid == userId;
+    }
   }
 }
