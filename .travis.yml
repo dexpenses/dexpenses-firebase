@@ -20,7 +20,6 @@ install:
 script:
   - npm run test
   - npm run build
-
 jobs:
   include:
     - stage: sonar
@@ -31,3 +30,13 @@ jobs:
       env: TZ=UTC
       node_js:
         - '11'
+deploy:
+  on:
+    branch: master
+  skip_cleanup: true
+  provider: firebase
+  env: TZ=UTC
+  node_js:
+    - '11'
+  token:
+    secure: XjSN2VHONxN5/b/wFPCyBdTrdsb1D9ydcqi/NUMqii7s23nCYfHLlgVcadXlqdXV6LrgU3chwXHjgE3LIDH3mW10qIT3TipSQSemHFA4Hp69b622AuzDZmWsTSEeWa5kePc/p/bKrLQo4AJLL29/fVcVe2RmT806aKJz5K8zAY2GDBnmGqQkNnWpT6crmZaz1vtn9LduaWDCSfJiFzKo1WDumi9BcVnjKlmJNpLBCaLvIe1Hsx6G7Xfal7jHpEwzdDBWAtBAnqwKjN6I0w4nV9QTeN5rqPw8jbPW8IF8K+vH/bxfjhc2zeP+qhWJIgU2+afBnqDEV5jk9J1a1ph+Mpia1bUOWLndQOtct7rJOMNT6S2kl/9Cs9dL30UIUA5FUBmVJ2IYrdKrTPt4gTqe+QvulAVDdszyThwoxI2/f90TH3BsYjsKcmJO95eanlXU24skTMCQwbBzrYP2C8P/Q/gyR9+McVYZO4UDDkLNt9KBVDPEo11vRrI6Qrdh8zzScq1figEg3AE5s9AhkHCR5itlTxaCWfApQHdP9kJnJijxGjdzY6eNKV80v9rfsxpyNu+/+30W+RBPaw+tTwkmoxMJU3RT2FjAAEknt5tHrXcdErS0CWhpjbrsmREXTbGRMVWVZNsp65AQfIHOezyQ5lMz1vul5ieHC0IFHppXQv4=
