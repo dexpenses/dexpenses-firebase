@@ -4,6 +4,7 @@ import {
   matchers,
   DOT_MATCHER,
   DASH_MATCHER,
+  loadModel,
 } from './date.model';
 
 describe('The date extractor model', () => {
@@ -55,5 +56,18 @@ describe('The date extractor regex builder', () => {
         matchers.yyyy.source
       }`
     );
+  });
+});
+
+describe('Date extractor polisher', () => {
+  it('should correctly polish loosely matched strings', () => {
+    const [def] = loadModel([
+      {
+        format: 'dd.MM.yyyy',
+      },
+    ]);
+    const match = '01.04, 2019'.match(def.regex);
+    expect(match).toBeTruthy();
+    expect(def.polishLooselyMatchedString(match!)).toBe('01.04.2019');
   });
 });

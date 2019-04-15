@@ -33,6 +33,94 @@ Object {
 }
 `;
 
+exports[`Analyze receipt text Cloud Function (offline) should be successfully extract info from 'Cafe_Zimt_und_Zucker_hmue.txt' 1`] = `
+Object {
+  "result": Object {
+    "data": Object {
+      "amount": Object {
+        "currency": "EUR",
+        "value": 19.4,
+      },
+      "date": 2019-04-12T22:00:00.000Z,
+      "header": Array [
+        "Zimt & Zucker",
+        "An der Werrabrücke",
+        "Lange Str. 1",
+        "34346 Hann o Münden",
+        "Vielen Dank",
+        "T(",
+      ],
+      "paymentMethod": "DEBIT",
+      "phone": null,
+      "time": Object {
+        "hour": 15,
+        "minute": 1,
+        "second": 6,
+      },
+      "timestamp": 2019-04-13T13:01:06.000Z,
+    },
+    "state": "ready",
+  },
+}
+`;
+
+exports[`Analyze receipt text Cloud Function (offline) should be successfully extract info from 'Salon-haargenau-hmue.txt' 1`] = `
+Object {
+  "result": Object {
+    "data": Object {
+      "amount": Object {
+        "currency": "EUR",
+        "value": 15,
+      },
+      "date": 2019-04-12T22:00:00.000Z,
+      "header": Array [
+        "Salon haargenau",
+        "Bahnhofstraße 1",
+        "34346 Hann Münden",
+      ],
+      "paymentMethod": "DEBIT",
+      "phone": "05541/6241",
+      "time": Object {
+        "hour": 13,
+        "minute": 3,
+        "second": null,
+      },
+      "timestamp": 2019-04-13T11:03:00.000Z,
+    },
+    "state": "ready",
+  },
+}
+`;
+
+exports[`Analyze receipt text Cloud Function (offline) should be successfully extract info from 'Vockeroth.txt' 1`] = `
+Object {
+  "result": Object {
+    "data": Object {
+      "amount": Object {
+        "currency": "EUR",
+        "value": 117.95,
+      },
+      "date": 2019-04-12T22:00:00.000Z,
+      "header": Array [
+        "Bek leidungshaeuser",
+        "Vockeroth GmbH",
+        "Lange Str.73",
+        "34346 Hann Muenden",
+      ],
+      "paymentMethod": "DEBIT",
+      "phone": "7019910",
+      "time": Object {
+        "hour": 14,
+        "minute": 3,
+        "second": null,
+      },
+      "timestamp": 2019-04-13T12:03:00.000Z,
+    },
+    "state": "ready",
+  },
+}
+`;
+
 exports[`Analyze receipt text Cloud Function (offline) should be successfully extract info from 'akia-handyshop.txt' 1`] = `
 Object {
   "result": Object {

@@ -27,8 +27,7 @@ export function tokenize(format: string): string[] {
   }
   return tokens;
 }
-
-export const DOT_MATCHER = '\\s?\\.\\s?';
+export const DOT_MATCHER = '\\s?[\\.,]\\s?';
 export const DASH_MATCHER = '\\s?\\-\\s?';
 
 export function escapeLoosely(token: string): string {
@@ -60,11 +59,25 @@ function buildRegex(entry: DateModelEntry): RegExp {
 export interface DateExtractionDef {
   format: string;
   regex: RegExp;
+  polishLooselyMatchedString(match: RegExpMatchArray): string;
 }
 
 export function loadModel(model: DateModel): DateExtractionDef[] {
   return model.map((e) => ({
     format: e.format,
     regex: buildRegex(e),
+    polishLooselyMatchedString(match: RegExpMatchArray): string {
+      let matchIndex = 0;
+      return tokenize(e.format)
+        .map((token) => {
+          if (matchers[token]) {
+            matchIndex += 1;
+            return match[matchIndex];
+          } else {
+            return token;
+          }
+        })
+        .join('');
+    },
   }));
 }

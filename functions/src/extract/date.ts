@@ -19,7 +19,7 @@ export class DateExtractor extends Extractor {
     for (const def of this.model) {
       const m = text.match(def.regex);
       if (m) {
-        const fullDate = m[0].replace(/\s*/g, '');
+        const fullDate = def.polishLooselyMatchedString(m);
         cleanHeaders(extracted, fullDate);
         return DateTime.fromFormat(fullDate, def.format, {
           zone: 'Europe/Berlin',
