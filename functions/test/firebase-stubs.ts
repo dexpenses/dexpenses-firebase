@@ -1,14 +1,27 @@
+export const firestoreDb = {};
 export const firestore = {
-  collection(c) {
+  collection(rootCollection: string) {
     return {
-      doc(d) {
+      doc(rootDoc: string) {
         return {
-          collection(c) {
+          collection(collection: string) {
             return {
-              doc(d) {
+              doc(doc: string) {
                 return {
-                  set(data) {
+                  set(data: string) {
+                    firestoreDb[
+                      `${rootCollection}/${rootDoc}/${collection}/${doc}`
+                    ] = data;
                     return data;
+                  },
+                  get() {
+                    return {
+                      exists: true,
+                      data:
+                        firestoreDb[
+                          `${rootCollection}/${rootDoc}/${collection}/${doc}`
+                        ],
+                    };
                   },
                 };
               },
@@ -30,4 +43,8 @@ export const storage = {
       },
     };
   },
+};
+
+export const messaging = {
+  sendToTopic: jest.fn(),
 };

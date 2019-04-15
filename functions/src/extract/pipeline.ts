@@ -12,12 +12,12 @@ import PlacePostProcessor from './postprocess/PlacePostProcessor';
 
 export const extractorPipeline = [
   new HeaderExtractor(),
-  new PlaceExtractor(),
   new PhoneNumberExtractor(),
   new DateExtractor(),
   new TimeExtractor(),
   new AmountExtractor(),
   new PaymentMethodExtractor(),
+  new PlaceExtractor(),
 ];
 
 // todo: check dependencies of extractors or re-order pipeline (error only on circular)

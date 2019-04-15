@@ -3,7 +3,7 @@
   "scripts": {
     "lint": "tslint --force --project tsconfig.json",
     "lint:sonar": "npm run lint -- -t json -o .sonar/tslint-report.json",
-    "build": "tsc",
+    "build": "tsc --project tsconfig.build.json",
     "serve": "npm run build && firebase serve --only functions",
     "shell": "npm run build && firebase functions:shell",
     "start": "npm run shell",
