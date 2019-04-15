@@ -18,7 +18,7 @@ before_install:
 install:
   - npm install
 script:
-  - npm run test
+  - npm run test -- --silent
   - npm run build
 jobs:
   include:
@@ -31,6 +31,7 @@ jobs:
       node_js:
         - '11'
     - stage: deploy
+      script: skip
       before_deploy: cd $TRAVIS_BUILD_DIR
       deploy:
         on:

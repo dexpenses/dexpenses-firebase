@@ -11,6 +11,9 @@
     "test:cov": "jest --silent --coverage --collect-coverage-from=src/**"
   },
   "main": "lib/index.js",
+  "engines": {
+    "node": "8"
+  },
   "dependencies": {
     "@dexpenses/rule-conditions": "^1.0.4",
     "@google-cloud/storage": "^2.5.0",
