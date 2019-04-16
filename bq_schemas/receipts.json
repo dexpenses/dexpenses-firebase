@@ -1,0 +1,53 @@
+[
+  {
+    "mode": "REQUIRED",
+    "name": "user_id",
+    "type": "STRING"
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "receipt_id",
+    "type": "STRING"
+  },
+  {
+    "mode": "REPEATED",
+    "name": "tags",
+    "type": "STRING"
+  },
+  {
+    "name": "amount",
+    "type": "FLOAT"
+  },
+
+  {
+    "name": "currency",
+    "type": "STRING"
+  },
+  {
+    "name": "payment_method",
+    "type": "STRING"
+  },
+  {
+    "name": "location",
+    "type": "GEOGRAPHY"
+  },
+  {
+    "name": "timestamp",
+    "type": "TIMESTAMP"
+  },
+  {
+    "mode": "REPEATED",
+    "name": "header",
+    "type": "STRING"
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "bq_inserted_at",
+    "type": "TIMESTAMP"
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "bq_op",
+    "type": "STRING"
+  }
+]
