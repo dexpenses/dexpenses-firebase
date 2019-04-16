@@ -4,16 +4,19 @@ import PostProcessor from './PostProcessor';
 
 export default class DateTimePostProcessor extends PostProcessor {
   public touch(extracted: Receipt) {
-    if (extracted.date && extracted.time) {
-      const { hour, minute, second } = extracted.time;
-      extracted.timestamp = DateTime.fromJSDate(extracted.date)
-        .setZone('Europe/Berlin')
-        .set({
+    if (extracted.date) {
+      let timestamp = DateTime.fromJSDate(extracted.date).setZone(
+        'Europe/Berlin'
+      );
+      if (extracted.time) {
+        const { hour, minute, second } = extracted.time;
+        timestamp = timestamp.set({
           hour,
           minute,
           second,
-        })
-        .toJSDate();
+        });
+      }
+      extracted.timestamp = timestamp.toJSDate();
     }
   }
 }
