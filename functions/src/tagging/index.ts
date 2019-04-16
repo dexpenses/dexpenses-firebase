@@ -38,7 +38,7 @@ export const tagging = functions.pubsub
         return r as Rule;
       })
     );
-    const tags = taggingEngine.tag(receipt.data() as Receipt);
+    const tags = taggingEngine.tag(receipt.data()!.result.data as Receipt);
     if (tags.length === 0) {
       return;
     }
