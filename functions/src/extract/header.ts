@@ -21,18 +21,13 @@ export class HeaderExtractor extends Extractor {
     super('header');
   }
 
-  public _isIrrelevantLine(line: string): boolean {
-    return irrelevantLines.some((r) => !!line.match(r));
-  }
-
-  public _isHeaderDelimiter(line: string): boolean {
-    return !line.match(/[\d\w]/) || !!line.match(/^\s*Artikelname\s*$/i);
-  }
-
   public extract(text: string, lines: string[], extracted: Receipt) {
     const headerLines: string[] = [];
-    // todo: possibly jump to first non-empty line?
-    for (let i = 0; i < this.options.maxHeaderLines && i < lines.length; i++) {
+    let i = this._firstHeaderLine(lines);
+    if (i === -1) {
+      return [];
+    }
+    for (i; i < this.options.maxHeaderLines && i < lines.length; i++) {
       const line = lines[i];
       if (this._isIrrelevantLine(line)) {
         continue;
@@ -43,6 +38,24 @@ export class HeaderExtractor extends Extractor {
       headerLines.push(line);
     }
     return headerLines;
+  }
+
+  private _isIrrelevantLine(line: string): boolean {
+    return irrelevantLines.some((r) => !!line.match(r));
+  }
+
+  private _isHeaderDelimiter(line: string): boolean {
+    return !line.match(/[\d\w]/) || !!line.match(/^\s*Artikelname\s*$/i);
+  }
+
+  private _firstHeaderLine(lines: string[]): number {
+    for (let i = 0; i < lines.length; i += 1) {
+      const line = lines[i].trim();
+      if (!this._isIrrelevantLine(line) && !this._isHeaderDelimiter(line)) {
+        return i;
+      }
+    }
+    return -1;
   }
 }
 
