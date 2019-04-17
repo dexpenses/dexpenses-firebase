@@ -7,4 +7,7 @@ admin.initializeApp();
 export { detectText } from './detectText';
 export { analyseReceiptText } from './extract';
 export { tagging } from './tagging';
-export { receiptsToBigQuery } from './big-query-export';
+export {
+  receiptsToBigQuery,
+  recurringPaymentsToBigQuery,
+} from './big-query-export';
