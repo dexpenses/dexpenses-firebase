@@ -4,11 +4,11 @@ import { HeaderExtractor } from './header';
 import { PaymentMethodExtractor } from './paymentMethod';
 import { PhoneNumberExtractor } from './phone';
 import DateTimePostProcessor from './postprocess/DateTimePostProcessor';
-import HeaderSanitizer from './postprocess/HeaderSanitizer';
 import { Receipt, ReceiptResult } from './receipt';
 import { TimeExtractor } from './time';
 import { PlaceExtractor } from './place';
 import PlacePostProcessor from './postprocess/PlacePostProcessor';
+import cleanUp from './clean-up';
 
 export const extractorPipeline = [
   new HeaderExtractor(),
@@ -22,11 +22,7 @@ export const extractorPipeline = [
 
 // todo: check dependencies of extractors or re-order pipeline (error only on circular)
 
-const postProcessors = [
-  new DateTimePostProcessor(),
-  new PlacePostProcessor(),
-  new HeaderSanitizer(),
-];
+const postProcessors = [new DateTimePostProcessor(), new PlacePostProcessor()];
 
 function isReady({ header, date, amount }: Receipt): boolean {
   return !!header && header.length > 0 && !!date && !!amount;
@@ -38,6 +34,7 @@ export default async function(text: string): Promise<ReceiptResult> {
       state: 'no-text',
     };
   }
+  text = cleanUp(text);
   const lines = text.split('\n');
   const extracted: Receipt = {};
   const metadata = {};

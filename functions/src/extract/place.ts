@@ -4,7 +4,6 @@ import { HeaderExtractor } from './header';
 import { Receipt } from './receipt';
 import { createClient as createGmapsClient } from '@google/maps';
 import * as functions from 'firebase-functions';
-import HeaderSanitizer from './postprocess/HeaderSanitizer';
 import { PhoneNumberExtractor } from './phone';
 
 @DependsOn(HeaderExtractor, PhoneNumberExtractor)
@@ -21,15 +20,9 @@ export class PlaceExtractor extends Extractor {
       key: functions.config().gmaps.key,
       Promise,
     });
-    const sanitized = {
-      header: [...extracted.header],
-    };
-    new HeaderSanitizer().touch(sanitized, this.metadata);
-    const address = sanitized.header.join(',');
-    console.log('Sending GeoCode request with address: ' + address);
+    const address = extracted.header.join(',');
     const res = await client.geocode({ address }).asPromise();
     const result = res.json.results[0];
-    console.log('Got GeoCode result: ' + JSON.stringify(result));
     if (!result.place_id) {
       return result;
     }
@@ -39,7 +32,6 @@ export class PlaceExtractor extends Extractor {
         fields: ['name', 'formatted_phone_number', 'website'],
       })
       .asPromise();
-    console.log('Got PlaceDetails result: ' + JSON.stringify(pdr));
     return { ...result, ...pdr.json.result };
   }
 }

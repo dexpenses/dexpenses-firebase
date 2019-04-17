@@ -15,7 +15,6 @@ export default class PlacePostProcessor extends PostProcessor {
     }
     if (place.name) {
       extracted.header = [place.name];
-      metadata.relevantHeaderLines = undefined; // disable header sanitizer
     }
     if (place.address_components) {
       extracted.address = fromComponents(place.address_components);
