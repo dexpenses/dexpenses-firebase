@@ -1,7 +1,7 @@
-import * as vision from '@google-cloud/vision';
+import { ImageAnnotatorClient } from '@google-cloud/vision';
 import * as admin from 'firebase-admin';
 import * as functions from 'firebase-functions';
-import * as path from 'path';
+import { basename, dirname } from 'path';
 import { ReceiptResult } from './extract/receipt';
 
 const BAD_IMAGE = 3;
@@ -12,11 +12,11 @@ export const detectText = functions.storage
     if (!object.name) {
       return;
     }
-    const userId = path.basename(path.dirname(object.name));
-    const fileName = path.basename(object.name);
+    const userId = basename(dirname(object.name));
+    const fileName = basename(object.name);
     console.log('OCR', userId, fileName);
-    const client = new vision.ImageAnnotatorClient();
-    const [result] = await client.documentTextDetection(
+    const client = new ImageAnnotatorClient();
+    const [result] = await client.textDetection(
       `gs://${object.bucket}/${object.name}`
     );
     if (result.error) {

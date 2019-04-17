@@ -22,7 +22,7 @@ const testResults = {
 };
 
 jest.mock('@google-cloud/vision');
-vision.ImageAnnotatorClient.prototype.documentTextDetection = jest
+vision.ImageAnnotatorClient.prototype.textDetection = jest
   .fn()
   .mockImplementation(
     async (file) => testResults[file.match(/\/([^\/]+)$/)[1]]

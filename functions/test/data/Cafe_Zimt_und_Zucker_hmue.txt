@@ -15,14 +15,15 @@ on
 Kartenzahlung
 girocar d
 Nr
-VU-Nr
-TerminaL ID
-Pos In fo
 8000180013
 52040856
 00 055 00
+VU-Nr
+TerminaL ID
+Pos In fo
 Weitere Daten 0000000000
 /E800////440302
 Betrag EUR
-19,40
+19,4θ
 *Zahlung erfolgt**
+
