@@ -56,12 +56,11 @@ export const receiptsToBigQuery = functions.firestore
       receipt_id: receiptId,
     };
     if (snap.after.exists) {
-      const data = snap.after.data() as any;
-      const receipt = data.result.data;
-      if (!receipt) {
-        console.log(`No receipt data for ${userId}/${receiptId}`);
+      const data = snap.after.data()!;
+      if (!data.result || !data.result.data) {
         return;
       }
+      const receipt = data.result.data;
       row = {
         ...row,
         tags: data.tags || [],

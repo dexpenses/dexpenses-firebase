@@ -2,74 +2,78 @@ import { ImageAnnotatorClient } from '@google-cloud/vision';
 import * as admin from 'firebase-admin';
 import * as functions from 'firebase-functions';
 import { basename, dirname } from 'path';
-import { ReceiptResult } from './extract/receipt';
+import { PubSub } from '@google-cloud/pubsub';
 
-const BAD_IMAGE = 3;
+interface TextDetectionResult {
+  state: 'error' | 'no-text' | 'success';
+  error?: Status;
+  text?: string;
+}
+
+export interface TextDetectionResultMessage {
+  text: string;
+  userId: string;
+  fileName: string;
+}
+
+interface AnnotateImageResponse {
+  error?: Status;
+  fullTextAnnotation?: TextAnnotation;
+}
+interface Status {
+  code?: number;
+  details?: Array<Record<string, any>>;
+  message?: string;
+}
+interface TextAnnotation {
+  text?: string;
+}
+
+function processVisionResult(
+  result: AnnotateImageResponse
+): TextDetectionResult {
+  if (result.error) {
+    return {
+      state: 'error',
+      error: result.error,
+    };
+  }
+  if (!result.fullTextAnnotation || !result.fullTextAnnotation.text) {
+    return {
+      state: 'no-text',
+    };
+  }
+  return {
+    state: 'success',
+    text: result.fullTextAnnotation.text,
+  };
+}
 
 export const detectText = functions.storage
   .object()
   .onFinalize(async (object) => {
-    if (!object.name) {
-      return;
-    }
-    const userId = basename(dirname(object.name));
-    const fileName = basename(object.name);
-    console.log('OCR', userId, fileName);
+    const userId = basename(dirname(object.name!));
+    const fileName = basename(object.name!);
     const client = new ImageAnnotatorClient();
-    const [result] = await client.textDetection(
+    const [annotateImageResponse] = await client.textDetection(
       `gs://${object.bucket}/${object.name}`
     );
-    if (result.error) {
-      await admin
-        .storage()
-        .bucket()
-        .file(object.name)
-        .delete();
-      let receiptResult: ReceiptResult;
-      if (result.error.code === BAD_IMAGE) {
-        receiptResult = {
-          state: 'bad-image',
-        };
-      } else {
-        receiptResult = {
-          state: 'error',
-          error: result.error,
-        };
-      }
+    const result = processVisionResult(annotateImageResponse);
+    if (result.state !== 'success') {
       return admin
         .firestore()
-        .collection('receiptsByUser')
+        .collection('detectionErrorsByUser')
         .doc(userId)
-        .collection('receipts')
+        .collection('detectionErrors')
         .doc(fileName)
-        .set(receiptResult, {
-          merge: true,
-        });
+        .set(result);
     }
-    const fullTextAnnotation = result.fullTextAnnotation;
-    if (!fullTextAnnotation) {
-      return admin
-        .firestore()
-        .collection('receiptsByUser')
-        .doc(userId)
-        .collection('receipts')
-        .doc(fileName)
-        .set(
-          {
-            state: 'no-text',
-          } as ReceiptResult,
-          {
-            merge: true,
-          }
-        );
-    }
-    return admin
-      .firestore()
-      .collection('receiptTextsByUser')
-      .doc(userId)
-      .collection('receiptTexts')
-      .doc(fileName)
-      .set({
-        text: fullTextAnnotation.text,
-      });
+    const message: TextDetectionResultMessage = {
+      text: result.text!,
+      userId,
+      fileName,
+    };
+    return new PubSub()
+      .topic('extraction')
+      .publish(Buffer.from(JSON.stringify(message)));
   });

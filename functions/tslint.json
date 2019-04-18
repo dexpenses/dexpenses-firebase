@@ -24,6 +24,7 @@
     ],
     "no-suspicious-comment": true,
     "ordered-imports": false,
-    "member-access": false
+    "member-access": false,
+    "member-ordering": false
   }
 }

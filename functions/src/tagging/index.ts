@@ -1,9 +1,8 @@
 import * as admin from 'firebase-admin';
 import * as functions from 'firebase-functions';
 import { FieldValue } from '@google-cloud/firestore';
-import { parseCondition, Receipt } from '@dexpenses/rule-conditions';
+import { Receipt } from '@dexpenses/rule-conditions';
 import TaggingEngine from './TaggingEngine';
-import { Rule } from './rules/Rule';
 
 export interface TaggingMessage {
   userId: string;
@@ -14,31 +13,24 @@ export const tagging = functions.pubsub
   .topic('tagging')
   .onPublish(async (message) => {
     const data: TaggingMessage = message.json;
-    const receipt = await admin
+    const receiptRef = await admin
       .firestore()
       .collection('receiptsByUser')
       .doc(data.userId)
       .collection('receipts')
       .doc(data.receiptId)
       .get();
-    if (!receipt.exists) {
+    if (!receiptRef.exists) {
       console.error('Invalid tagging request: Receipt does not exist');
       return;
     }
-    const rules = await admin
-      .firestore()
-      .collection('rulesByUser')
-      .doc(data.userId)
-      .collection('rules')
-      .get();
-    const taggingEngine = new TaggingEngine(
-      rules.docs.map((rule) => {
-        const r = rule.data();
-        r.condition = parseCondition(r.condition);
-        return r as Rule;
-      })
-    );
-    const tags = taggingEngine.tag(receipt.data()!.result.data as Receipt);
+    const receipt = receiptRef.data()!;
+    if (!receipt.result || !receipt.result.data) {
+      console.log(`Not tagging ${data.userId}/${data.receiptId}: no data.`);
+      return;
+    }
+    const taggingEngine = await TaggingEngine.loadForUser(data.userId);
+    const tags = taggingEngine.tag(receiptRef.data()!.result.data as Receipt);
     if (tags.length === 0) {
       return;
     }

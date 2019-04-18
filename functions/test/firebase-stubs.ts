@@ -44,7 +44,3 @@ export const storage = {
     };
   },
 };
-
-export const messaging = {
-  sendToTopic: jest.fn(),
-};

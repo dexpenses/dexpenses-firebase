@@ -24,7 +24,7 @@ export const extractorPipeline = [
 
 const postProcessors = [new DateTimePostProcessor(), new PlacePostProcessor()];
 
-function isReady({ header, date, amount }: Receipt): boolean {
+export function isReady({ header, date, amount }: Receipt): boolean {
   return !!header && header.length > 0 && !!date && !!amount;
 }
 

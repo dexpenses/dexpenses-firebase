@@ -1,4 +1,6 @@
 import TaggingEngine from './TaggingEngine';
+import DateCondition from '@dexpenses/rule-conditions/lib/DateCondition';
+import { DateTime } from 'luxon';
 
 describe('TaggingEngine', () => {
   it('should not fail if place type not found', () => {
@@ -32,5 +34,21 @@ describe('TaggingEngine', () => {
         } as any,
       })
     ).toEqual(['food', 'entertainment']);
+  });
+
+  it('should tag DateCondition on weekday', () => {
+    const engine = new TaggingEngine([
+      {
+        condition: new DateCondition('weekday', '==', 7),
+        tags: ['tag'],
+      },
+    ]);
+    expect(
+      engine.tag({
+        date: DateTime.fromFormat('31.03.2019', 'dd.MM.yyyy', {
+          zone: 'Europe/Berlin',
+        }).toJSDate(),
+      })
+    ).toEqual(['tag']);
   });
 });
