@@ -22,8 +22,8 @@
     "@google-cloud/vision": "^0.25.0",
     "@google/maps": "^0.5.5",
     "core-js": "^3.0.1",
-    "firebase-admin": "^7.2.0",
-    "firebase-functions": "^2.2.1",
+    "firebase-admin": "^7.3.0",
+    "firebase-functions": "^2.3.0",
     "luxon": "^1.12.1"
   },
   "devDependencies": {
@@ -41,7 +41,7 @@
     "tslint-eslint-rules": "^5.4.0",
     "tslint-microsoft-contrib": "^6.1.1",
     "tslint-sonarts": "^1.9.0",
-    "typescript": "^3.4.3"
+    "typescript": "^3.4.4"
   },
   "private": true
 }
