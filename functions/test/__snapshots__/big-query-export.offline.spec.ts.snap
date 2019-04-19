@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BigQueryExport (offline) - receipts should create insert 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      Object {
+        "amount": undefined,
+        "bq_inserted_at": 2019-01-01T00:00:00.000Z,
+        "bq_op": "I",
+        "currency": undefined,
+        "header": Array [
+          "header",
+        ],
+        "location": undefined,
+        "payment_method": undefined,
+        "receipt_id": "test-receipt.jpg",
+        "tags": Array [],
+        "timestamp": null,
+        "user_id": "testUserId",
+      },
+    ],
+  ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": undefined,
+    },
+  ],
+}
+`;
+
+exports[`BigQueryExport (offline) - recurringPayments should create insert 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      Object {
+        "amount": 10,
+        "bq_inserted_at": 2019-01-01T00:00:00.000Z,
+        "bq_op": "I",
+        "c_period": 1,
+        "currency": "EUR",
+        "description": "description",
+        "name": "name",
+        "payment_id": "abcdef",
+        "payment_method": "DEBIT",
+        "period": "Monthly",
+        "user_id": "testUserId",
+      },
+    ],
+  ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": undefined,
+    },
+  ],
+}
+`;
