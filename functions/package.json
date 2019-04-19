@@ -8,7 +8,7 @@
     "shell": "npm run build && firebase functions:shell",
     "start": "npm run shell",
     "test": "jest",
-    "test:cov": "jest --silent --coverage --collect-coverage-from=src/**"
+    "test:cov": "jest --silent --coverage --collect-coverage-from=src/**/* --collect-coverage-from=!**/__snapshots__/**"
   },
   "main": "lib/index.js",
   "engines": {
