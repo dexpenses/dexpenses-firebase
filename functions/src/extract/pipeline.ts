@@ -1,12 +1,12 @@
-import { AmountExtractor } from './amount';
-import { DateExtractor } from './date';
-import { HeaderExtractor } from './header';
-import { PaymentMethodExtractor } from './paymentMethod';
-import { PhoneNumberExtractor } from './phone';
+import { AmountExtractor } from './extractor/amount';
+import { DateExtractor } from './extractor/date';
+import { HeaderExtractor } from './extractor/header';
+import { PaymentMethodExtractor } from './extractor/paymentMethod';
+import { PhoneNumberExtractor } from './extractor/phone';
 import DateTimePostProcessor from './postprocess/DateTimePostProcessor';
 import { Receipt, ReceiptResult } from './receipt';
-import { TimeExtractor } from './time';
-import { PlaceExtractor } from './place';
+import { TimeExtractor } from './extractor/time';
+import { PlaceExtractor } from './extractor/place';
 import PlacePostProcessor from './postprocess/PlacePostProcessor';
 import cleanUp from './clean-up';
 
@@ -19,8 +19,6 @@ export const extractorPipeline = [
   new PaymentMethodExtractor(),
   new PlaceExtractor(),
 ];
-
-// todo: check dependencies of extractors or re-order pipeline (error only on circular)
 
 const postProcessors = [new DateTimePostProcessor(), new PlacePostProcessor()];
 
@@ -37,11 +35,9 @@ export default async function(text: string): Promise<ReceiptResult> {
   text = cleanUp(text);
   const lines = text.split('\n');
   const extracted: Receipt = {};
-  const metadata = {};
   let anySuccess = false;
   for (const extractor of extractorPipeline) {
     try {
-      extractor.metadata = metadata;
       const value = await extractor.extract(text, lines, extracted);
       extracted[extractor.field] = value;
       if (value) {
@@ -60,7 +56,7 @@ export default async function(text: string): Promise<ReceiptResult> {
     };
   }
   for (const postProcessor of postProcessors) {
-    postProcessor.touch(extracted, metadata);
+    postProcessor.touch(extracted);
   }
   return {
     state: isReady(extracted) ? 'ready' : 'partial',
