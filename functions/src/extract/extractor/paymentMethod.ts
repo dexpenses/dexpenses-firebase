@@ -1,5 +1,6 @@
 import { Extractor } from './extractor';
-import { Receipt } from './receipt';
+import { Receipt } from '../receipt';
+import { anyLineMatches } from './util';
 
 export enum PaymentMethod {
   DEBIT = 'DEBIT',
@@ -31,7 +32,7 @@ function tryMatchMethod(line: string): string | null {
   return null;
 }
 
-export class PaymentMethodExtractor extends Extractor {
+export class PaymentMethodExtractor extends Extractor<string> {
   constructor() {
     super('paymentMethod');
   }
@@ -41,7 +42,7 @@ export class PaymentMethodExtractor extends Extractor {
     lines: string[],
     extracted: Receipt
   ): string | null {
-    return Extractor.anyLineMatches(lines, (line) => {
+    return anyLineMatches(lines, (line) => {
       return tryMatchMethod(line);
     }).asIs();
   }

@@ -1,5 +1,5 @@
 import { Extractor } from './extractor';
-import { Receipt } from './receipt';
+import { Receipt } from '../receipt';
 
 const irrelevantLines = [
   /^Datum:?/i,
@@ -12,7 +12,7 @@ const irrelevantLines = [
   /zwischensumme/i,
 ];
 
-export class HeaderExtractor extends Extractor {
+export class HeaderExtractor extends Extractor<string[]> {
   constructor(
     protected options = {
       maxHeaderLines: 8,

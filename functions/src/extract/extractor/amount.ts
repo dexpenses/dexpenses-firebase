@@ -1,12 +1,12 @@
 import { Extractor } from './extractor';
-import { Receipt } from './receipt';
+import { Receipt } from '../receipt';
 
 export interface Amount {
   value: number;
   currency: 'EUR' | 'USD' | 'GBP';
 }
 
-export class AmountExtractor extends Extractor {
+export class AmountExtractor extends Extractor<Amount> {
   constructor() {
     super('amount');
   }

@@ -1,12 +1,12 @@
-import { DependsOn } from './DependsOn';
+import { DependsOn } from '../DependsOn';
 import { Extractor } from './extractor';
 import { HeaderExtractor } from './header';
-import { Receipt } from './receipt';
+import { Receipt } from '../receipt';
 
 const phoneRegex = /(\(?([\d \-\)\–\+\/\(]+){6,}\)?([ .-–\/]?)([\d]+))/;
 
 @DependsOn(HeaderExtractor)
-export class PhoneNumberExtractor extends Extractor {
+export class PhoneNumberExtractor extends Extractor<string> {
   constructor() {
     super('phone');
   }

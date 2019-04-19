@@ -5,7 +5,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { firestore } from './firebase-stubs';
 import { extractorPipeline } from '../src/extract/pipeline';
-import { PlaceExtractor } from '../src/extract/place';
+import { PlaceExtractor } from '../src/extract/extractor/place';
 
 /*
  * Skip Geo Coding API call during testing

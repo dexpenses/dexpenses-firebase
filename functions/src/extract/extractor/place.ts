@@ -1,13 +1,21 @@
-import { DependsOn } from './DependsOn';
+import { DependsOn } from '../DependsOn';
 import { Extractor } from './extractor';
 import { HeaderExtractor } from './header';
-import { Receipt } from './receipt';
-import { createClient as createGmapsClient } from '@google/maps';
+import { Receipt } from '../receipt';
+import {
+  createClient as createGmapsClient,
+  GeocodingResult,
+  PlaceDetailsResult,
+} from '@google/maps';
 import * as functions from 'firebase-functions';
 import { PhoneNumberExtractor } from './phone';
+import { DateExtractor } from './date';
+import { TimeExtractor } from './time';
 
-@DependsOn(HeaderExtractor, PhoneNumberExtractor)
-export class PlaceExtractor extends Extractor {
+export type Place = GeocodingResult & PlaceDetailsResult;
+
+@DependsOn(HeaderExtractor, PhoneNumberExtractor, DateExtractor, TimeExtractor)
+export class PlaceExtractor extends Extractor<Place> {
   constructor() {
     super('place');
   }
@@ -24,7 +32,7 @@ export class PlaceExtractor extends Extractor {
     const res = await client.geocode({ address }).asPromise();
     const result = res.json.results[0];
     if (!result.place_id) {
-      return result;
+      return result as Place;
     }
     const pdr = await client
       .place({
@@ -32,6 +40,6 @@ export class PlaceExtractor extends Extractor {
         fields: ['name', 'formatted_phone_number', 'website'],
       })
       .asPromise();
-    return { ...result, ...pdr.json.result };
+    return { ...result, ...pdr.json.result } as Place;
   }
 }

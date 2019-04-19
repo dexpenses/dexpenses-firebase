@@ -56,7 +56,7 @@ describe('PlacePostProcessor', () => {
     };
 
     const ppp = new PlacePostProcessor();
-    ppp.touch(receipt, {});
+    ppp.touch(receipt);
     expect(receipt.phone).toBe('123456789');
   });
 
@@ -69,7 +69,7 @@ describe('PlacePostProcessor', () => {
     };
 
     const ppp = new PlacePostProcessor();
-    ppp.touch(receipt, {});
+    ppp.touch(receipt);
     expect(receipt.phone).toBe('987654321');
   });
 
@@ -82,7 +82,7 @@ describe('PlacePostProcessor', () => {
     };
 
     const ppp = new PlacePostProcessor();
-    ppp.touch(receipt, {});
+    ppp.touch(receipt);
     expect(receipt.header).toEqual(['place name']);
   });
 });

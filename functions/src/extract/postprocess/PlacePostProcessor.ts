@@ -8,7 +8,7 @@ import {
 import { Address } from '../receipt';
 
 export default class PlacePostProcessor extends PostProcessor {
-  public touch(extracted: Receipt, metadata: { [key: string]: any }) {
+  public touch(extracted: Receipt) {
     const place = extracted.place;
     if (!place) {
       return;

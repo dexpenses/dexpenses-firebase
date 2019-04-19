@@ -1,16 +1,17 @@
-import { DependsOn } from './DependsOn';
+import { DependsOn } from '../DependsOn';
 import { Extractor } from './extractor';
 import { cleanHeaders, HeaderExtractor } from './header';
-import { Receipt } from './receipt';
+import { Receipt, Time } from '../receipt';
+import { anyLineMatches } from './util';
 
 @DependsOn(HeaderExtractor)
-export class TimeExtractor extends Extractor {
+export class TimeExtractor extends Extractor<Time> {
   constructor() {
     super('time');
   }
 
   public extract(text: string, lines: string[], extracted: Receipt) {
-    return Extractor.anyLineMatches(lines, (line) => {
+    return anyLineMatches(lines, (line) => {
       return line.match(
         /((?:[01][0-9]|2[0-4]))\s?:\s?([0-5][0-9])(?:\s?:\s?([0-5][0-9]))?/
       );
@@ -19,7 +20,7 @@ export class TimeExtractor extends Extractor {
       return {
         hour: parseInt(hour, 10),
         minute: parseInt(minute, 10),
-        second: !second ? null : parseInt(second, 10),
+        second: !second ? undefined : parseInt(second, 10),
       };
     });
   }
