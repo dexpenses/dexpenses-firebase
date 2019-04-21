@@ -13,7 +13,7 @@ export default class DateTimePostProcessor extends PostProcessor {
         timestamp = timestamp.set({
           hour,
           minute,
-          second,
+          second: second || undefined,
         });
       }
       extracted.timestamp = timestamp.toJSDate();

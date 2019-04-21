@@ -4,6 +4,7 @@ import extractorPipeline from './pipeline';
 import { isReady } from './pipeline';
 import { PubSub } from '@google-cloud/pubsub';
 import { TextDetectionResultMessage } from '../detectText';
+import { TaggingMessage } from '../tagging';
 
 export const extractReceipt = functions.pubsub
   .topic('extraction')
@@ -29,12 +30,14 @@ export const extractReceipt = functions.pubsub
           merge: true,
         }
       );
+    // TODO: only if extraction was successful
     return new PubSub().topic('tagging').publish(
       Buffer.from(
         JSON.stringify({
           userId: data.userId,
           receiptId,
-        })
+          result,
+        } as TaggingMessage)
       )
     );
   });

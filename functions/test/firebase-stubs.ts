@@ -1,4 +1,5 @@
 export const firestoreDb = {};
+export const updateFn = jest.fn();
 export const firestore = {
   collection(rootCollection: string) {
     return {
@@ -14,6 +15,7 @@ export const firestore = {
                     ] = data;
                     return data;
                   },
+                  update: updateFn,
                   get() {
                     return {
                       exists: true,

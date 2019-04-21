@@ -24,7 +24,7 @@ export interface Address {
 export interface Time {
   hour: number;
   minute: number;
-  second?: number;
+  second?: number | null;
 }
 
 export interface Receipt {

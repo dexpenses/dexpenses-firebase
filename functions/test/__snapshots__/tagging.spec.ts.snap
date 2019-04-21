@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tagging cloud function (offline) should load rules, calculate tags and save tags 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      Object {
+        "tags": ArrayUnionTransform {
+          "elements": Array [
+            "tag",
+          ],
+        },
+      },
+    ],
+  ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": undefined,
+    },
+  ],
+}
+`;
