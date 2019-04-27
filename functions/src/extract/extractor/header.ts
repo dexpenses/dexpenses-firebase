@@ -10,6 +10,7 @@ const irrelevantLines = [
   /K-U-N-D-E-N-B-E-L-E-[gqa]/i,
   /h(ae|ä)ndlerbeleg/i,
   /zwischensumme/i,
+  /^Fax[.:]?\s/i, // TODO: just not is the first line, it could be the name of the store
 ];
 
 export class HeaderExtractor extends Extractor<string[]> {
@@ -45,7 +46,11 @@ export class HeaderExtractor extends Extractor<string[]> {
   }
 
   private _isHeaderDelimiter(line: string): boolean {
-    return !line.match(/[\d\w]/) || !!line.match(/^\s*Artikelname\s*$/i);
+    return (
+      !line.match(/[\d\w]/) ||
+      !!line.match(/^\s*Artikelname\s*$/i) ||
+      !!line.match(/^UID\sNr/i)
+    );
   }
 
   private _firstHeaderLine(lines: string[]): number {

@@ -16,9 +16,9 @@ export interface ReceiptResult {
 }
 
 export interface Address {
-  zip?: string;
-  city?: string;
-  street?: string;
+  zip?: string | null;
+  city?: string | null;
+  street?: string | null;
 }
 
 export interface Time {

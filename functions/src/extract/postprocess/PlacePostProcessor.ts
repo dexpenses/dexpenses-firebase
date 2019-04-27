@@ -28,11 +28,13 @@ export default class PlacePostProcessor extends PostProcessor {
 function extract(
   componentName: AddressType | GeocodingAddressComponentType,
   addressComponents: AddressComponent[]
-): string | undefined {
-  return addressComponents
-    .filter((ac) => ac.types.indexOf(componentName) !== -1)
-    .map((ac) => ac.long_name)
-    .shift();
+): string | null {
+  return (
+    addressComponents
+      .filter((ac) => ac.types.indexOf(componentName) !== -1)
+      .map((ac) => ac.long_name)
+      .shift() || null
+  );
 }
 
 export function fromComponents(addressComponents: AddressComponent[]): Address {
