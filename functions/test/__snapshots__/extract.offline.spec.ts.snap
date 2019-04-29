@@ -108,7 +108,7 @@ Object {
         "34346 Hann Muenden",
       ],
       "paymentMethod": "DEBIT",
-      "phone": "7019910",
+      "phone": null,
       "time": Object {
         "hour": 14,
         "minute": 3,
@@ -174,6 +174,339 @@ Object {
         "second": null,
       },
       "timestamp": 2017-09-27T15:16:00.000Z,
+    },
+    "state": "ready",
+  },
+}
+`;
+
+exports[`Analyze receipt text Cloud Function (offline) should be successfully extract info from 'bamberg-asian-shop.txt' 1`] = `
+Object {
+  "result": Object {
+    "data": Object {
+      "amount": Object {
+        "currency": "EUR",
+        "value": 1.5,
+      },
+      "date": 2019-01-17T23:00:00.000Z,
+      "header": Array [
+        "ASIAN SHOP",
+        "Obere Konigstr.16",
+        "96052 Bamberg",
+      ],
+      "paymentMethod": "CASH",
+      "phone": "0951-18557292",
+      "time": null,
+      "timestamp": 2019-01-17T23:00:00.000Z,
+    },
+    "state": "ready",
+  },
+}
+`;
+
+exports[`Analyze receipt text Cloud Function (offline) should be successfully extract info from 'bamberg-city-market.txt' 1`] = `
+Object {
+  "result": Object {
+    "data": Object {
+      "amount": Object {
+        "currency": "EUR",
+        "value": 4.91,
+      },
+      "date": 2018-11-05T23:00:00.000Z,
+      "header": Array [
+        "CITY-MARKT",
+        "96047 BAMBERG LANGE STR, 12-14",
+      ],
+      "paymentMethod": "CASH",
+      "phone": "0951/9230775",
+      "time": Object {
+        "hour": 16,
+        "minute": 16,
+        "second": null,
+      },
+      "timestamp": 2018-11-06T15:16:00.000Z,
+    },
+    "state": "ready",
+  },
+}
+`;
+
+exports[`Analyze receipt text Cloud Function (offline) should be successfully extract info from 'bamberg-cunda.txt' 1`] = `
+Object {
+  "result": Object {
+    "data": Object {
+      "amount": Object {
+        "currency": "EUR",
+        "value": 12,
+      },
+      "date": 2019-01-30T23:00:00.000Z,
+      "header": Array [
+        "C&A D",
+        "Bamberg",
+        "Franz-Ludwig-Strasse 4",
+      ],
+      "paymentMethod": "DEBIT",
+      "phone": null,
+      "time": Object {
+        "hour": 13,
+        "minute": 54,
+        "second": 53,
+      },
+      "timestamp": 2019-01-31T12:54:53.000Z,
+    },
+    "state": "ready",
+  },
+}
+`;
+
+exports[`Analyze receipt text Cloud Function (offline) should be successfully extract info from 'bamberg-denns-biomarkt.txt' 1`] = `
+Object {
+  "result": Object {
+    "data": Object {
+      "amount": Object {
+        "currency": "EUR",
+        "value": 13.37,
+      },
+      "date": 2018-11-06T23:00:00.000Z,
+      "header": Array [
+        "denns",
+        "denn's Biomarkt GmbH",
+        "Obere Königstrasse 18-22",
+        "96047 Bambers",
+      ],
+      "paymentMethod": "DEBIT",
+      "phone": "0951 2080125",
+      "time": Object {
+        "hour": 16,
+        "minute": 14,
+        "second": 29,
+      },
+      "timestamp": 2018-11-07T15:14:29.000Z,
+    },
+    "state": "ready",
+  },
+}
+`;
+
+exports[`Analyze receipt text Cloud Function (offline) should be successfully extract info from 'bamberg-karstadt.txt' 1`] = `
+Object {
+  "result": Object {
+    "data": Object {
+      "amount": Object {
+        "currency": "EUR",
+        "value": 16.99,
+      },
+      "date": 2019-02-07T23:00:00.000Z,
+      "header": Array [
+        "KARSTADT",
+        "Karstadt Warenhaus GmbH",
+        "Grüner Markt 23",
+        "96047 Bambers",
+      ],
+      "paymentMethod": "DEBIT",
+      "phone": null,
+      "time": Object {
+        "hour": 10,
+        "minute": 59,
+        "second": null,
+      },
+      "timestamp": 2019-02-08T09:59:00.000Z,
+    },
+    "state": "ready",
+  },
+}
+`;
+
+exports[`Analyze receipt text Cloud Function (offline) should be successfully extract info from 'bamberg-mayerische.txt' 1`] = `
+Object {
+  "result": Object {
+    "data": Object {
+      "amount": Object {
+        "currency": "EUR",
+        "value": 11,
+      },
+      "date": 2019-04-01T22:00:00.000Z,
+      "header": Array [
+        "Mayersche Droste GmbH & Co. KG",
+        "Königsallee 18",
+        "40212 Düsseldorf",
+      ],
+      "paymentMethod": "DEBIT",
+      "phone": "0211 542569-0",
+      "time": Object {
+        "hour": 12,
+        "minute": 1,
+        "second": null,
+      },
+      "timestamp": 2019-04-02T10:01:00.000Z,
+    },
+    "state": "ready",
+  },
+}
+`;
+
+exports[`Analyze receipt text Cloud Function (offline) should be successfully extract info from 'bamberg-mueller.txt' 1`] = `
+Object {
+  "result": Object {
+    "data": Object {
+      "amount": Object {
+        "currency": "EUR",
+        "value": 4.82,
+      },
+      "date": 2019-04-23T22:00:00.000Z,
+      "header": Array [
+        "MMüller",
+        "Maxiniliansplatz 14, 96047 Banberg",
+      ],
+      "paymentMethod": "CASH",
+      "phone": "+49 951/5193936-0",
+      "time": Object {
+        "hour": 9,
+        "minute": 32,
+        "second": null,
+      },
+      "timestamp": 2019-04-24T07:32:00.000Z,
+    },
+    "state": "ready",
+  },
+}
+`;
+
+exports[`Analyze receipt text Cloud Function (offline) should be successfully extract info from 'bamberg-osianderische-buchhandlung.txt' 1`] = `
+Object {
+  "result": Object {
+    "data": Object {
+      "amount": Object {
+        "currency": "EUR",
+        "value": 14.99,
+      },
+      "date": 2019-02-07T23:00:00.000Z,
+      "header": Array [
+        "os 1andersche Buchhandlung GmbH",
+      ],
+      "paymentMethod": "DEBIT",
+      "phone": "+49 951 297925 0",
+      "time": Object {
+        "hour": 11,
+        "minute": 8,
+        "second": null,
+      },
+      "timestamp": 2019-02-08T10:08:00.000Z,
+    },
+    "state": "ready",
+  },
+}
+`;
+
+exports[`Analyze receipt text Cloud Function (offline) should be successfully extract info from 'bamberg-stoffideen.txt' 1`] = `
+Object {
+  "result": Object {
+    "data": Object {
+      "amount": Object {
+        "currency": "EUR",
+        "value": 12.85,
+      },
+      "date": 2018-12-16T23:00:00.000Z,
+      "header": Array [
+        "STOFF",
+        "Ihr Stoff- und Nähexpertegn",
+        "Stoff-Ideen KMR GmbH",
+        "Filiale Bamberg",
+        "Fleischstraße 17",
+        "96047 Bamberg",
+      ],
+      "paymentMethod": "DEBIT",
+      "phone": "0951 50904990",
+      "time": Object {
+        "hour": 14,
+        "minute": 14,
+        "second": null,
+      },
+      "timestamp": 2018-12-17T13:14:00.000Z,
+    },
+    "state": "ready",
+  },
+}
+`;
+
+exports[`Analyze receipt text Cloud Function (offline) should be successfully extract info from 'bamberg-tedi.txt' 1`] = `
+Object {
+  "result": Object {
+    "data": Object {
+      "amount": Object {
+        "currency": "EUR",
+        "value": 3.5,
+      },
+      "date": 2018-12-16T23:00:00.000Z,
+      "header": Array [
+        "TEDI GmbH & Co. KG",
+        "96047 Bamberg",
+        "Fleischstrale 11-13",
+        "Fil lale 5178",
+        "Kasio 1",
+      ],
+      "paymentMethod": "CASH",
+      "phone": null,
+      "time": Object {
+        "hour": 14,
+        "minute": 30,
+        "second": null,
+      },
+      "timestamp": 2018-12-17T13:30:00.000Z,
+    },
+    "state": "ready",
+  },
+}
+`;
+
+exports[`Analyze receipt text Cloud Function (offline) should be successfully extract info from 'bamberg-wollstudio.txt' 1`] = `
+Object {
+  "result": Object {
+    "data": Object {
+      "amount": Object {
+        "currency": "EUR",
+        "value": 10.15,
+      },
+      "date": 2018-11-26T23:00:00.000Z,
+      "header": Array [
+        "ww",
+        "WOLLSTUDI0 xxx",
+        "FRIEDERIKE PFUND",
+        "PROMENADE 18 96047 BAMBER",
+        "粖 IELEHN:",
+      ],
+      "paymentMethod": "CASH",
+      "phone": "0951-202173",
+      "time": null,
+      "timestamp": 2018-11-26T23:00:00.000Z,
+    },
+    "state": "ready",
+  },
+}
+`;
+
+exports[`Analyze receipt text Cloud Function (offline) should be successfully extract info from 'bamberg-wong-asia-markt.txt' 1`] = `
+Object {
+  "result": Object {
+    "data": Object {
+      "amount": Object {
+        "currency": "EUR",
+        "value": 3.89,
+      },
+      "date": 2013-01-17T23:00:00.000Z,
+      "header": Array [
+        "WONG S ASIA MARKT",
+        "Luitpoldstr.43",
+        "96052 Baiberg",
+      ],
+      "paymentMethod": "CASH",
+      "phone": "0951-9179681",
+      "time": Object {
+        "hour": 11,
+        "minute": 55,
+        "second": null,
+      },
+      "timestamp": 2013-01-18T10:55:00.000Z,
     },
     "state": "ready",
   },
@@ -447,6 +780,34 @@ Object {
 }
 `;
 
+exports[`Analyze receipt text Cloud Function (offline) should be successfully extract info from 'messebuchhandlung.txt' 1`] = `
+Object {
+  "result": Object {
+    "data": Object {
+      "amount": Object {
+        "currency": "EUR",
+        "value": 12.99,
+      },
+      "date": 2019-03-22T23:00:00.000Z,
+      "header": Array [
+        "Messebuchhandlung",
+        "powered by Haufe",
+        "Lieferdatum = Rechnungsdatum",
+      ],
+      "paymentMethod": null,
+      "phone": "+49 341 9954 250",
+      "time": Object {
+        "hour": 16,
+        "minute": 20,
+        "second": 46,
+      },
+      "timestamp": 2019-03-23T15:20:46.000Z,
+    },
+    "state": "ready",
+  },
+}
+`;
+
 exports[`Analyze receipt text Cloud Function (offline) should be successfully extract info from 'rancho.txt' 1`] = `
 Object {
   "result": Object {
@@ -621,13 +982,68 @@ Object {
 }
 `;
 
+exports[`Analyze receipt text Cloud Function (offline) should be successfully extract info from 'wf-buecher-behr.txt' 1`] = `
+Object {
+  "result": Object {
+    "data": Object {
+      "amount": Object {
+        "currency": "EUR",
+        "value": 10.49,
+      },
+      "date": 2018-08-27T22:00:00.000Z,
+      "header": Array [
+        "Bücher Behr",
+        "Die Buchhandiung am Kornmark:",
+        "Die Buchhandlung am Kor nmarkt",
+        "Kornmarkt 4-5",
+        "38300 Wolfenhüttel",
+      ],
+      "paymentMethod": "DEBIT",
+      "phone": "05331-98890",
+      "time": null,
+      "timestamp": 2018-08-27T22:00:00.000Z,
+    },
+    "state": "ready",
+  },
+}
+`;
+
+exports[`Analyze receipt text Cloud Function (offline) should be successfully extract info from 'wf-nanu-nana.txt' 1`] = `
+Object {
+  "result": Object {
+    "data": Object {
+      "amount": Object {
+        "currency": "EUR",
+        "value": 4.45,
+      },
+      "date": 2018-08-27T22:00:00.000Z,
+      "header": Array [
+        "suchenstobern finden",
+        "NANU NANA",
+        "Lange Herzogstr, 57",
+        "38300 Wolfenbütte",
+      ],
+      "paymentMethod": "CASH",
+      "phone": "05331-8560085",
+      "time": Object {
+        "hour": 18,
+        "minute": 3,
+        "second": 25,
+      },
+      "timestamp": 2018-08-28T16:03:25.000Z,
+    },
+    "state": "ready",
+  },
+}
+`;
+
 exports[`Analyze receipt text Cloud Function (offline) should be successfully extract info from 'zeis-restaurant-bamberg.txt' 1`] = `
 Object {
   "result": Object {
     "data": Object {
       "amount": Object {
         "currency": "EUR",
-        "value": 8.9,
+        "value": 38.9,
       },
       "date": 2019-04-25T22:00:00.000Z,
       "header": Array [

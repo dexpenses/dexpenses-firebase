@@ -31,10 +31,11 @@ describe('Phonenumber extractor', () => {
       .filter((line) => !!line);
 
     for (const phonenumber of phonenumbers) {
+      const lines = ['Some Store', phonenumber];
       const extracted = {
-        header: ['Some Store', phonenumber],
+        header: lines,
       };
-      const extractedPhone = extractor.extract('', [], extracted);
+      const extractedPhone = extractor.extract('', lines, extracted);
       expect(extractedPhone).toBe(phonenumber);
       expect(extracted.header).toEqual(['Some Store']);
     }

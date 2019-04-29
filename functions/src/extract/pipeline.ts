@@ -9,18 +9,23 @@ import { TimeExtractor } from './extractor/time';
 import { PlaceExtractor } from './extractor/place';
 import PlacePostProcessor from './postprocess/PlacePostProcessor';
 import cleanUp from './clean-up';
+import HeaderCleanUpPostProcessor from './postprocess/HeaderCleanUpPostProcessor';
 
 export const extractorPipeline = [
   new HeaderExtractor(),
   new PhoneNumberExtractor(),
   new DateExtractor(),
   new TimeExtractor(),
-  new AmountExtractor(),
   new PaymentMethodExtractor(),
+  new AmountExtractor(),
   new PlaceExtractor(),
 ];
 
-const postProcessors = [new DateTimePostProcessor(), new PlacePostProcessor()];
+const postProcessors = [
+  new HeaderCleanUpPostProcessor(),
+  new DateTimePostProcessor(),
+  new PlacePostProcessor(),
+];
 
 export function isReady({ header, date, amount }: Receipt): boolean {
   return !!header && header.length > 0 && !!date && !!amount;
