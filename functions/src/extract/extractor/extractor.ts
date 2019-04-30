@@ -1,4 +1,4 @@
-import { Receipt } from '../receipt';
+import { Receipt } from '../../model/receipt';
 
 export type Opt<T> = T | undefined | null;
 

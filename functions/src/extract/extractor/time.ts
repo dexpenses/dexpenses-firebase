@@ -1,7 +1,7 @@
 import { DependsOn } from '../DependsOn';
 import { Extractor } from './extractor';
 import { cleanHeaders, HeaderExtractor } from './header';
-import { Receipt, Time } from '../receipt';
+import { Receipt, Time } from '../../model/receipt';
 import { anyLineMatches } from './util';
 
 @DependsOn(HeaderExtractor)

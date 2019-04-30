@@ -1,12 +1,8 @@
 import { Extractor } from './extractor';
-import { Receipt } from '../receipt';
+import { Receipt, Amount } from '../../model/receipt';
 import { DependsOn } from '../DependsOn';
 import { PaymentMethodExtractor } from './paymentMethod';
-
-export interface Amount {
-  value: number;
-  currency: 'EUR' | 'USD' | 'GBP';
-}
+import { getAllMatches } from '../../utils/regex-utils';
 
 @DependsOn(PaymentMethodExtractor)
 export class AmountExtractor extends Extractor<Amount> {
@@ -59,20 +55,6 @@ export class AmountExtractor extends Extractor<Amount> {
     }
     return null;
   }
-}
-
-function getAllMatches(regex: RegExp, s: string) {
-  let m: RegExpExecArray | null;
-  const matches: RegExpExecArray[] = [];
-  while ((m = regex.exec(s)) !== null) {
-    // This is necessary to avoid infinite loops with zero-width matches
-    if (m.index === regex.lastIndex) {
-      regex.lastIndex++;
-    }
-
-    matches.push(m);
-  }
-  return matches;
 }
 
 export function getAmountValues(lines: string[]): number[] {

@@ -1,4 +1,4 @@
-import { Receipt } from '../receipt';
+import { Receipt } from '../../model/receipt';
 import PostProcessor from './PostProcessor';
 
 export default class HeaderCleanUpPostProcessor extends PostProcessor {

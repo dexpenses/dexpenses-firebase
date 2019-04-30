@@ -27,6 +27,11 @@ export interface Time {
   second?: number | null;
 }
 
+export interface Amount {
+  value: number;
+  currency: 'EUR' | 'USD' | 'GBP';
+}
+
 export interface Receipt {
   header?: string[];
   time?: Time;

@@ -4,7 +4,7 @@ import model from './date.model.de';
 import { DependsOn } from '../DependsOn';
 import { Extractor } from './extractor';
 import { cleanHeaders, HeaderExtractor } from './header';
-import { Receipt } from '../receipt';
+import { Receipt } from '../../model/receipt';
 
 @DependsOn(HeaderExtractor)
 export class DateExtractor extends Extractor<Date> {

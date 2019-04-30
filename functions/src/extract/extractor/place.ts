@@ -1,7 +1,7 @@
 import { DependsOn } from '../DependsOn';
 import { Extractor } from './extractor';
 import { HeaderExtractor } from './header';
-import { Receipt } from '../receipt';
+import { Receipt } from '../../model/receipt';
 import {
   createClient as createGmapsClient,
   GeocodingResult,

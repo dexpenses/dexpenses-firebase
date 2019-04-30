@@ -4,7 +4,7 @@ import { HeaderExtractor } from './extractor/header';
 import { PaymentMethodExtractor } from './extractor/paymentMethod';
 import { PhoneNumberExtractor } from './extractor/phone';
 import DateTimePostProcessor from './postprocess/DateTimePostProcessor';
-import { Receipt, ReceiptResult } from './receipt';
+import { Receipt, ReceiptResult } from '../model/receipt';
 import { TimeExtractor } from './extractor/time';
 import { PlaceExtractor } from './extractor/place';
 import PlacePostProcessor from './postprocess/PlacePostProcessor';

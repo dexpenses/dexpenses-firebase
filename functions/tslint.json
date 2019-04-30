@@ -25,6 +25,7 @@
     "no-suspicious-comment": true,
     "ordered-imports": false,
     "member-access": false,
-    "member-ordering": false
+    "member-ordering": false,
+    "no-conditional-assignment": false
   }
 }

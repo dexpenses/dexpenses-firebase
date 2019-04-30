@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon';
-import { Receipt } from '../receipt';
+import { Receipt } from '../../model/receipt';
 import PostProcessor from './PostProcessor';
 
 export default class DateTimePostProcessor extends PostProcessor {
