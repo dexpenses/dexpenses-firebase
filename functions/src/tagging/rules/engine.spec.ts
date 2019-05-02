@@ -8,7 +8,7 @@ import DateCondition from '@dexpenses/rule-conditions/lib/DateCondition';
 import NotCondition from '@dexpenses/rule-conditions/lib/NotCondition';
 import PaymentMethodCondition from '@dexpenses/rule-conditions/lib/PaymentMethodCondition';
 import TimeCondition from '@dexpenses/rule-conditions/lib/TimeCondition';
-import { Receipt } from '../../extract/receipt';
+import { Receipt } from '../../model/receipt';
 import { DateTime } from 'luxon';
 
 describe('RuleEngine', () => {

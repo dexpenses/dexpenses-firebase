@@ -1,5 +1,5 @@
 import { Extractor } from './extractor';
-import { Receipt } from '../receipt';
+import { Receipt } from '../../model/receipt';
 
 const irrelevantLines = [
   /^Datum:?/i,
@@ -11,6 +11,8 @@ const irrelevantLines = [
   /h(ae|ä)ndlerbeleg/i,
   /zwischensumme/i,
   /^Fax[.:]?\s/i, // TODO: just not is the first line, it could be the name of the store
+  /^Terminal\-?ID/i,
+  /^TA\-?Nr/i,
 ];
 
 export class HeaderExtractor extends Extractor<string[]> {
@@ -49,7 +51,10 @@ export class HeaderExtractor extends Extractor<string[]> {
     return (
       !line.match(/[\d\w]/) ||
       !!line.match(/^\s*Artikelname\s*$/i) ||
-      !!line.match(/^UID\sNr/i)
+      !!line.match(/^\s*Preis:?\s*$/i) ||
+      !!line.match(/^UID\sNr/i) ||
+      !!line.match(/^\s*EUR\s*$/i) ||
+      !!line.match(/^\s*\d+[,.]\d\d\s*$/i)
     );
   }
 
@@ -64,8 +69,24 @@ export class HeaderExtractor extends Extractor<string[]> {
   }
 }
 
-export function cleanHeaders(extracted: Receipt, value: string) {
+export function cleanHeaders(
+  extracted: Receipt,
+  value: string,
+  sliceAfterMatch = false
+) {
   if (!extracted.header) {
+    return;
+  }
+  if (sliceAfterMatch) {
+    for (const [i, line] of extracted.header.entries()) {
+      if (line.includes(value)) {
+        extracted.header = [...extracted.header.slice(0, i)];
+        const l = _sanitize(line, value);
+        if (l) {
+          extracted.header.push(l);
+        }
+      }
+    }
     return;
   }
   extracted.header = extracted.header

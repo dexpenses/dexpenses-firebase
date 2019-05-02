@@ -6,7 +6,7 @@ export const deleteImageOnReceiptDelete = functions.firestore
   .onDelete((snap, context) => {
     return admin
       .storage()
-      .bucket()
+      .bucket('dexpenses-207219.appspot.com')
       .file(`images/${context.params.userId}/${context.params.receiptId}`)
       .delete();
   });

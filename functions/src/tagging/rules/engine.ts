@@ -1,4 +1,4 @@
-import { Receipt } from '../../extract/receipt';
+import { Receipt } from '../../model/receipt';
 import { Rule } from './Rule';
 
 export default function(receipt: Receipt, rules: Rule[]): string[] {

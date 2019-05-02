@@ -1,10 +1,10 @@
 import { DependsOn } from '../DependsOn';
 import { Extractor } from './extractor';
-import { HeaderExtractor } from './header';
-import { Receipt } from '../receipt';
+import { HeaderExtractor, cleanHeaders } from './header';
+import { Receipt } from '../../model/receipt';
 
-const phoneRegex = /(\(?([\d \-\)\–\+\/\(]+){6,}\)?([ .-–\/]?)([\d]+))/;
-const prefixRegex = /(?:Tel(?:efon)?|Fon)\.?:?\s+/i;
+const phoneRegex = /(?:^|[.,:\s])(\(?(?=\+49|0)([\d \-\)\–\+\/\(]+){6,}\)?([ \-–\/]?)([\d]+))/;
+const prefixRegex = /(?:Tel(?:efon)?|Fon)\.?:?/i;
 const prefixedRegex = new RegExp(
   `${prefixRegex.source}${phoneRegex.source}`,
   'i'
@@ -17,22 +17,22 @@ export class PhoneNumberExtractor extends Extractor<string> {
   }
 
   public extract(text: string, lines: string[], extracted: Receipt) {
-    for (const [i, line] of extracted.header!.entries()) {
+    for (const line of lines) {
       const m = line.match(prefixedRegex);
       if (m) {
-        extracted.header!.splice(i); // remove anything afterwards as well
+        cleanHeaders(extracted, m[0], true);
         return m[1].trim();
       }
     }
-    for (const [i, line] of extracted.header!.entries()) {
+    for (const line of extracted.header!) {
       const m = line.match(phoneRegex);
       if (m) {
         const prefix = line.substring(0, line.indexOf(m[0]));
         if (prefix.match(/St\.?Nr\.?\s*$/i) || prefix.match(/^UID\sNr\.?/i)) {
           continue;
         }
-        extracted.header!.splice(i); // remove anything afterwards as well
-        return m[0].trim();
+        cleanHeaders(extracted, m[0], true);
+        return m[1].trim();
       }
     }
     return null;

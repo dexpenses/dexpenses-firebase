@@ -1,6 +1,6 @@
 import { checkDependencies, DependsOn } from './DependsOn';
 import { Extractor } from './extractor/extractor';
-import { Receipt } from './receipt';
+import { Receipt } from '../model/receipt';
 
 class ExtractorA extends Extractor<any> {
   public extract(text: string, lines: string[], extracted: Receipt) {
