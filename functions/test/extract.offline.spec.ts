@@ -33,38 +33,56 @@ pubsub.PubSub.prototype.topic = jest.fn().mockReturnValue({
 
 const userId = test.auth.exampleUserRecord().uid;
 
-describe('Analyze receipt text Cloud Function (offline)', () => {
-  const testRoot = __dirname;
-  const dir = path.resolve(testRoot, 'data');
-  const testFiles = fs.readdirSync(dir);
-
-  afterAll(() => {
-    firestoreStub.mockRestore();
-    (pubsub.PubSub.prototype.topic as any).mockRestore();
-  });
-
-  for (const textFile of testFiles) {
-    if (!textFile.endsWith('.txt')) {
-      continue;
-    }
-    it(`should be successfully extract info from '${textFile}'`, async () => {
-      const text = fs.readFileSync(path.resolve(dir, textFile), 'utf8');
-      const receiptId = textFile.replace(/\.txt$/, '.jpg');
-      await extractReceipt({
-        json: {
-          text,
-          userId,
-          fileName: receiptId,
-        },
-      });
-      const result = firestore
-        .collection('receiptsByUser')
-        .doc(userId)
-        .collection('receipts')
-        .doc(receiptId)
-        .get();
-      expect(result.exists).toBeTruthy();
-      expect(result.data).toMatchSnapshot();
-    });
-  }
+afterAll(() => {
+  firestoreStub.mockRestore();
+  (pubsub.PubSub.prototype.topic as any).mockRestore();
 });
+
+const testSuites: Record<string, string[]> = {
+  general: [],
+};
+
+const testRoot = __dirname;
+const dir = path.resolve(testRoot, 'data');
+for (const entry of fs.readdirSync(dir)) {
+  const entry_path = path.resolve(dir, entry);
+  if (fs.statSync(entry_path).isDirectory()) {
+    testSuites[path.basename(entry_path)] = fs
+      .readdirSync(entry_path)
+      .filter((f) => f.endsWith('.txt'))
+      .map((f) => path.resolve(entry_path, f));
+  } else if (entry.endsWith('.txt')) {
+    testSuites.general.push(entry_path);
+  }
+}
+
+for (const [suite, files] of Object.entries(testSuites)) {
+  describe(`Extract receipt cloud function (offline) for "${suite}" receipts`, () => {
+    for (const textFile of files) {
+      if (!textFile.endsWith('.txt')) {
+        continue;
+      }
+      it(`should successfully extract info from '${path.basename(
+        textFile
+      )}'`, async () => {
+        const text = fs.readFileSync(textFile, 'utf8');
+        const receiptId = textFile.replace(/\.txt$/, '.jpg');
+        await extractReceipt({
+          json: {
+            text,
+            userId,
+            fileName: receiptId,
+          },
+        });
+        const result = firestore
+          .collection('receiptsByUser')
+          .doc(userId)
+          .collection('receipts')
+          .doc(receiptId)
+          .get();
+        expect(result.exists).toBeTruthy();
+        expect(result.data).toMatchSnapshot();
+      });
+    }
+  });
+}

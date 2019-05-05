@@ -1,6 +1,37 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Analyze receipt text Cloud Function (offline) should be successfully extract info from '2019_02_22_edeka.txt' 1`] = `
+exports[`Extract receipt cloud function (offline) for "ec" receipts should successfully extract info from 'Cafe_Zimt_und_Zucker_hmue.txt' 1`] = `
+Object {
+  "result": Object {
+    "data": Object {
+      "amount": Object {
+        "currency": "EUR",
+        "value": 19.4,
+      },
+      "date": 2019-04-12T22:00:00.000Z,
+      "header": Array [
+        "Zimt & Zucker",
+        "An der Werrabrücke",
+        "Lange Str. 1",
+        "34346 Hann o Münden",
+        "Vielen Dank",
+        "T(",
+      ],
+      "paymentMethod": "DEBIT",
+      "phone": null,
+      "time": Object {
+        "hour": 15,
+        "minute": 1,
+        "second": 6,
+      },
+      "timestamp": 2019-04-13T13:01:06.000Z,
+    },
+    "state": "ready",
+  },
+}
+`;
+
+exports[`Extract receipt cloud function (offline) for "general" receipts should successfully extract info from '2019_02_22_edeka.txt' 1`] = `
 Object {
   "result": Object {
     "data": Object {
@@ -33,38 +64,7 @@ Object {
 }
 `;
 
-exports[`Analyze receipt text Cloud Function (offline) should be successfully extract info from 'Cafe_Zimt_und_Zucker_hmue.txt' 1`] = `
-Object {
-  "result": Object {
-    "data": Object {
-      "amount": Object {
-        "currency": "EUR",
-        "value": 19.4,
-      },
-      "date": 2019-04-12T22:00:00.000Z,
-      "header": Array [
-        "Zimt & Zucker",
-        "An der Werrabrücke",
-        "Lange Str. 1",
-        "34346 Hann o Münden",
-        "Vielen Dank",
-        "T(",
-      ],
-      "paymentMethod": "DEBIT",
-      "phone": null,
-      "time": Object {
-        "hour": 15,
-        "minute": 1,
-        "second": 6,
-      },
-      "timestamp": 2019-04-13T13:01:06.000Z,
-    },
-    "state": "ready",
-  },
-}
-`;
-
-exports[`Analyze receipt text Cloud Function (offline) should be successfully extract info from 'Salon-haargenau-hmue.txt' 1`] = `
+exports[`Extract receipt cloud function (offline) for "general" receipts should successfully extract info from 'Salon-haargenau-hmue.txt' 1`] = `
 Object {
   "result": Object {
     "data": Object {
@@ -92,7 +92,7 @@ Object {
 }
 `;
 
-exports[`Analyze receipt text Cloud Function (offline) should be successfully extract info from 'Vockeroth.txt' 1`] = `
+exports[`Extract receipt cloud function (offline) for "general" receipts should successfully extract info from 'Vockeroth.txt' 1`] = `
 Object {
   "result": Object {
     "data": Object {
@@ -121,7 +121,7 @@ Object {
 }
 `;
 
-exports[`Analyze receipt text Cloud Function (offline) should be successfully extract info from 'akia-handyshop.txt' 1`] = `
+exports[`Extract receipt cloud function (offline) for "general" receipts should successfully extract info from 'akia-handyshop.txt' 1`] = `
 Object {
   "result": Object {
     "data": Object {
@@ -151,7 +151,7 @@ Object {
 }
 `;
 
-exports[`Analyze receipt text Cloud Function (offline) should be successfully extract info from 'apotheke.txt' 1`] = `
+exports[`Extract receipt cloud function (offline) for "general" receipts should successfully extract info from 'apotheke.txt' 1`] = `
 Object {
   "result": Object {
     "data": Object {
@@ -180,7 +180,7 @@ Object {
 }
 `;
 
-exports[`Analyze receipt text Cloud Function (offline) should be successfully extract info from 'bamberg-asian-shop.txt' 1`] = `
+exports[`Extract receipt cloud function (offline) for "general" receipts should successfully extract info from 'bamberg-asian-shop.txt' 1`] = `
 Object {
   "result": Object {
     "data": Object {
@@ -204,7 +204,7 @@ Object {
 }
 `;
 
-exports[`Analyze receipt text Cloud Function (offline) should be successfully extract info from 'bamberg-city-market.txt' 1`] = `
+exports[`Extract receipt cloud function (offline) for "general" receipts should successfully extract info from 'bamberg-city-market.txt' 1`] = `
 Object {
   "result": Object {
     "data": Object {
@@ -231,7 +231,7 @@ Object {
 }
 `;
 
-exports[`Analyze receipt text Cloud Function (offline) should be successfully extract info from 'bamberg-cunda.txt' 1`] = `
+exports[`Extract receipt cloud function (offline) for "general" receipts should successfully extract info from 'bamberg-cunda.txt' 1`] = `
 Object {
   "result": Object {
     "data": Object {
@@ -259,7 +259,7 @@ Object {
 }
 `;
 
-exports[`Analyze receipt text Cloud Function (offline) should be successfully extract info from 'bamberg-denns-biomarkt.txt' 1`] = `
+exports[`Extract receipt cloud function (offline) for "general" receipts should successfully extract info from 'bamberg-denns-biomarkt.txt' 1`] = `
 Object {
   "result": Object {
     "data": Object {
@@ -288,7 +288,7 @@ Object {
 }
 `;
 
-exports[`Analyze receipt text Cloud Function (offline) should be successfully extract info from 'bamberg-karstadt.txt' 1`] = `
+exports[`Extract receipt cloud function (offline) for "general" receipts should successfully extract info from 'bamberg-karstadt.txt' 1`] = `
 Object {
   "result": Object {
     "data": Object {
@@ -317,7 +317,7 @@ Object {
 }
 `;
 
-exports[`Analyze receipt text Cloud Function (offline) should be successfully extract info from 'bamberg-mayerische.txt' 1`] = `
+exports[`Extract receipt cloud function (offline) for "general" receipts should successfully extract info from 'bamberg-mayerische.txt' 1`] = `
 Object {
   "result": Object {
     "data": Object {
@@ -345,7 +345,7 @@ Object {
 }
 `;
 
-exports[`Analyze receipt text Cloud Function (offline) should be successfully extract info from 'bamberg-mueller.txt' 1`] = `
+exports[`Extract receipt cloud function (offline) for "general" receipts should successfully extract info from 'bamberg-mueller.txt' 1`] = `
 Object {
   "result": Object {
     "data": Object {
@@ -372,7 +372,7 @@ Object {
 }
 `;
 
-exports[`Analyze receipt text Cloud Function (offline) should be successfully extract info from 'bamberg-osianderische-buchhandlung.txt' 1`] = `
+exports[`Extract receipt cloud function (offline) for "general" receipts should successfully extract info from 'bamberg-osianderische-buchhandlung.txt' 1`] = `
 Object {
   "result": Object {
     "data": Object {
@@ -398,7 +398,7 @@ Object {
 }
 `;
 
-exports[`Analyze receipt text Cloud Function (offline) should be successfully extract info from 'bamberg-stoffideen.txt' 1`] = `
+exports[`Extract receipt cloud function (offline) for "general" receipts should successfully extract info from 'bamberg-stoffideen.txt' 1`] = `
 Object {
   "result": Object {
     "data": Object {
@@ -429,7 +429,7 @@ Object {
 }
 `;
 
-exports[`Analyze receipt text Cloud Function (offline) should be successfully extract info from 'bamberg-tedi.txt' 1`] = `
+exports[`Extract receipt cloud function (offline) for "general" receipts should successfully extract info from 'bamberg-tedi.txt' 1`] = `
 Object {
   "result": Object {
     "data": Object {
@@ -459,7 +459,7 @@ Object {
 }
 `;
 
-exports[`Analyze receipt text Cloud Function (offline) should be successfully extract info from 'bamberg-wollstudio.txt' 1`] = `
+exports[`Extract receipt cloud function (offline) for "general" receipts should successfully extract info from 'bamberg-wollstudio.txt' 1`] = `
 Object {
   "result": Object {
     "data": Object {
@@ -485,7 +485,7 @@ Object {
 }
 `;
 
-exports[`Analyze receipt text Cloud Function (offline) should be successfully extract info from 'bamberg-wong-asia-markt.txt' 1`] = `
+exports[`Extract receipt cloud function (offline) for "general" receipts should successfully extract info from 'bamberg-wong-asia-markt.txt' 1`] = `
 Object {
   "result": Object {
     "data": Object {
@@ -513,7 +513,7 @@ Object {
 }
 `;
 
-exports[`Analyze receipt text Cloud Function (offline) should be successfully extract info from 'barrique.txt' 1`] = `
+exports[`Extract receipt cloud function (offline) for "general" receipts should successfully extract info from 'barrique.txt' 1`] = `
 Object {
   "result": Object {
     "data": Object {
@@ -535,7 +535,7 @@ Object {
 }
 `;
 
-exports[`Analyze receipt text Cloud Function (offline) should be successfully extract info from 'cinemaxx.txt' 1`] = `
+exports[`Extract receipt cloud function (offline) for "general" receipts should successfully extract info from 'cinemaxx.txt' 1`] = `
 Object {
   "result": Object {
     "data": Object {
@@ -564,7 +564,7 @@ Object {
 }
 `;
 
-exports[`Analyze receipt text Cloud Function (offline) should be successfully extract info from 'comixart-bamberg.txt' 1`] = `
+exports[`Extract receipt cloud function (offline) for "general" receipts should successfully extract info from 'comixart-bamberg.txt' 1`] = `
 Object {
   "result": Object {
     "data": Object {
@@ -589,7 +589,7 @@ Object {
 }
 `;
 
-exports[`Analyze receipt text Cloud Function (offline) should be successfully extract info from 'dunkin-donuts-bamberg.txt' 1`] = `
+exports[`Extract receipt cloud function (offline) for "general" receipts should successfully extract info from 'dunkin-donuts-bamberg.txt' 1`] = `
 Object {
   "result": Object {
     "data": Object {
@@ -617,7 +617,7 @@ Object {
 }
 `;
 
-exports[`Analyze receipt text Cloud Function (offline) should be successfully extract info from 'edeka.txt' 1`] = `
+exports[`Extract receipt cloud function (offline) for "general" receipts should successfully extract info from 'edeka.txt' 1`] = `
 Object {
   "result": Object {
     "data": Object {
@@ -646,7 +646,7 @@ Object {
 }
 `;
 
-exports[`Analyze receipt text Cloud Function (offline) should be successfully extract info from 'figaro-salon.txt' 1`] = `
+exports[`Extract receipt cloud function (offline) for "general" receipts should successfully extract info from 'figaro-salon.txt' 1`] = `
 Object {
   "result": Object {
     "data": Object {
@@ -675,7 +675,7 @@ Object {
 }
 `;
 
-exports[`Analyze receipt text Cloud Function (offline) should be successfully extract info from 'fleischerei-hass.txt' 1`] = `
+exports[`Extract receipt cloud function (offline) for "general" receipts should successfully extract info from 'fleischerei-hass.txt' 1`] = `
 Object {
   "result": Object {
     "data": Object {
@@ -700,7 +700,7 @@ Object {
 }
 `;
 
-exports[`Analyze receipt text Cloud Function (offline) should be successfully extract info from 'fleischerei-heine.txt' 1`] = `
+exports[`Extract receipt cloud function (offline) for "general" receipts should successfully extract info from 'fleischerei-heine.txt' 1`] = `
 Object {
   "result": Object {
     "data": Object {
@@ -728,7 +728,7 @@ Object {
 }
 `;
 
-exports[`Analyze receipt text Cloud Function (offline) should be successfully extract info from 'haargenau.txt' 1`] = `
+exports[`Extract receipt cloud function (offline) for "general" receipts should successfully extract info from 'haargenau.txt' 1`] = `
 Object {
   "result": Object {
     "data": Object {
@@ -751,7 +751,7 @@ Object {
 }
 `;
 
-exports[`Analyze receipt text Cloud Function (offline) should be successfully extract info from 'media_markt.txt' 1`] = `
+exports[`Extract receipt cloud function (offline) for "general" receipts should successfully extract info from 'media_markt.txt' 1`] = `
 Object {
   "result": Object {
     "data": Object {
@@ -780,7 +780,7 @@ Object {
 }
 `;
 
-exports[`Analyze receipt text Cloud Function (offline) should be successfully extract info from 'messebuchhandlung.txt' 1`] = `
+exports[`Extract receipt cloud function (offline) for "general" receipts should successfully extract info from 'messebuchhandlung.txt' 1`] = `
 Object {
   "result": Object {
     "data": Object {
@@ -808,7 +808,7 @@ Object {
 }
 `;
 
-exports[`Analyze receipt text Cloud Function (offline) should be successfully extract info from 'rancho.txt' 1`] = `
+exports[`Extract receipt cloud function (offline) for "general" receipts should successfully extract info from 'rancho.txt' 1`] = `
 Object {
   "result": Object {
     "data": Object {
@@ -837,7 +837,7 @@ Object {
 }
 `;
 
-exports[`Analyze receipt text Cloud Function (offline) should be successfully extract info from 'real.txt' 1`] = `
+exports[`Extract receipt cloud function (offline) for "general" receipts should successfully extract info from 'real.txt' 1`] = `
 Object {
   "result": Object {
     "data": Object {
@@ -866,7 +866,7 @@ Object {
 }
 `;
 
-exports[`Analyze receipt text Cloud Function (offline) should be successfully extract info from 'rewe-bamberg.txt' 1`] = `
+exports[`Extract receipt cloud function (offline) for "general" receipts should successfully extract info from 'rewe-bamberg.txt' 1`] = `
 Object {
   "result": Object {
     "data": Object {
@@ -894,7 +894,7 @@ Object {
 }
 `;
 
-exports[`Analyze receipt text Cloud Function (offline) should be successfully extract info from 'sausa.txt' 1`] = `
+exports[`Extract receipt cloud function (offline) for "general" receipts should successfully extract info from 'sausa.txt' 1`] = `
 Object {
   "result": Object {
     "data": Object {
@@ -923,7 +923,7 @@ Object {
 }
 `;
 
-exports[`Analyze receipt text Cloud Function (offline) should be successfully extract info from 'smileys.txt' 1`] = `
+exports[`Extract receipt cloud function (offline) for "general" receipts should successfully extract info from 'smileys.txt' 1`] = `
 Object {
   "result": Object {
     "data": Object {
@@ -951,7 +951,7 @@ Object {
 }
 `;
 
-exports[`Analyze receipt text Cloud Function (offline) should be successfully extract info from 'subway.txt' 1`] = `
+exports[`Extract receipt cloud function (offline) for "general" receipts should successfully extract info from 'subway.txt' 1`] = `
 Object {
   "result": Object {
     "data": Object {
@@ -982,7 +982,7 @@ Object {
 }
 `;
 
-exports[`Analyze receipt text Cloud Function (offline) should be successfully extract info from 'wf-buecher-behr.txt' 1`] = `
+exports[`Extract receipt cloud function (offline) for "general" receipts should successfully extract info from 'wf-buecher-behr.txt' 1`] = `
 Object {
   "result": Object {
     "data": Object {
@@ -1008,7 +1008,7 @@ Object {
 }
 `;
 
-exports[`Analyze receipt text Cloud Function (offline) should be successfully extract info from 'wf-nanu-nana.txt' 1`] = `
+exports[`Extract receipt cloud function (offline) for "general" receipts should successfully extract info from 'wf-nanu-nana.txt' 1`] = `
 Object {
   "result": Object {
     "data": Object {
@@ -1037,7 +1037,7 @@ Object {
 }
 `;
 
-exports[`Analyze receipt text Cloud Function (offline) should be successfully extract info from 'zeis-restaurant-bamberg.txt' 1`] = `
+exports[`Extract receipt cloud function (offline) for "general" receipts should successfully extract info from 'zeis-restaurant-bamberg.txt' 1`] = `
 Object {
   "result": Object {
     "data": Object {
