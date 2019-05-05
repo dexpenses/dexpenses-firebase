@@ -12,7 +12,7 @@ const paymentMethodIdentifiers = {
   [PaymentMethod.DEBIT]: [
     /[g9]irocar\s*d/i,
     /zahlart[:\s]\s*EC/i,
-    /EuroELV/i,
+    /Euro\s?ELV/i,
     /EC Kartenzahlung/i,
     /gegeben EC/i,
     /EC Karte/i,
@@ -20,7 +20,7 @@ const paymentMethodIdentifiers = {
     /Lastschrift/i,
   ],
   [PaymentMethod.CREDIT]: [/visa/i],
-  [PaymentMethod.CASH]: [/bar/i],
+  [PaymentMethod.CASH]: [/(^|\s)bar(\s|$)/i, /(^|\s)bargeld(\s|$)/i],
 };
 
 function tryMatchMethod(line: string): string | null {
