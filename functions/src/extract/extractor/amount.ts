@@ -57,12 +57,19 @@ export class AmountExtractor extends Extractor<Amount> {
   }
 }
 
+/*
+ 1. line start or space
+ 2. optionally negative number (, and . match as decimal point with optional space after decimal point)
+ with no leading zero where S also matches as 5
+ 3. line end, space or dash
+ */
+const amountValuePattern = /(?:^|\s)-?((?:[1-9]\d+|\d)[,.]\s?[\dS]{2})(?:[\-\s]|$)/gim;
+
+// TODO: we could include date filter (i.e. not take dd.MM from the matched date as amount value)
 export function getAmountValues(lines: string[]): number[] {
   return lines
     .filter((line) => !line.includes('AS-Zeit') && !line.endsWith('Uhr'))
-    .flatMap<any>((line) =>
-      getAllMatches(/(?:^|\s)-?(\d+[,.]\s?[\dS]{2})(?:[\-\s]|$)/gim, line)
-    )
+    .flatMap<any>((line) => getAllMatches(amountValuePattern, line))
     .map(([_, amount]) =>
       parseFloat(
         amount
