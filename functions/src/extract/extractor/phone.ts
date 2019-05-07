@@ -3,7 +3,7 @@ import { Extractor } from './extractor';
 import { HeaderExtractor, cleanHeaders } from './header';
 import { Receipt } from '../../model/receipt';
 
-const phoneRegex = /(?:^|[.,:\s])(\(?(?=\+49|0)([\d \-\)\–\+\/\(]+){6,}\)?([ \-–\/]?)([\d]+))/;
+const phoneRegex = /(?:^|[.,:\s])(\(?(?=\+49|\(?0)((\([\d \-\–\+\/]+\)|[\d \-\–\+\/])+){6,}\)?([ \-–\/]?)([\d]+))/;
 const prefixRegex = /(?:Tel(?:efon)?|Fon)\.?:?/i;
 const prefixedRegex = new RegExp(
   `${prefixRegex.source}${phoneRegex.source}`,

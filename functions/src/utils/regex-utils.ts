@@ -11,3 +11,9 @@ export function getAllMatches(regex: RegExp, s: string) {
   }
   return matches;
 }
+
+export function regexTrim(s: string, r: RegExp): string {
+  return s
+    .replace(new RegExp(`^${r.source}`, r.flags), '')
+    .replace(new RegExp(`${r.source}$`, r.flags), '');
+}

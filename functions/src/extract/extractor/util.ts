@@ -12,3 +12,16 @@ export function anyLineMatches<T>(
   }
   return Optional.none();
 }
+
+export function anyMatches(
+  text: string,
+  patterns: RegExp[]
+): Optional<RegExpMatchArray> {
+  for (const pattern of patterns) {
+    const m = text.match(pattern);
+    if (m) {
+      return new Optional(m);
+    }
+  }
+  return Optional.none();
+}

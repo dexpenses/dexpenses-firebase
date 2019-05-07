@@ -6,6 +6,7 @@ export enum PaymentMethod {
   DEBIT = 'DEBIT',
   CREDIT = 'CREDIT',
   CASH = 'CASH',
+  DKV_CARD = 'DKV_CARD',
 }
 
 const paymentMethodIdentifiers = {
@@ -18,9 +19,11 @@ const paymentMethodIdentifiers = {
     /EC Karte/i,
     /gegeben kreditsch\./i,
     /Lastschrift/i,
+    /(^|\s)EC(\s|$)/i,
   ],
   [PaymentMethod.CREDIT]: [/visa/i],
   [PaymentMethod.CASH]: [/(^|\s)bar(\s|$)/i, /(^|\s)bargeld(\s|$)/i],
+  [PaymentMethod.DKV_CARD]: [/DK[VI] Selection Card/i, /(^|\s)DKV(\s|$)/i],
 };
 
 function tryMatchMethod(line: string): string | null {

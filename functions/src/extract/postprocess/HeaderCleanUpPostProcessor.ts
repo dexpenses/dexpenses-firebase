@@ -1,5 +1,6 @@
 import { Receipt } from '../../model/receipt';
 import PostProcessor from './PostProcessor';
+import { HeaderExtractor } from '../extractor/header';
 
 export default class HeaderCleanUpPostProcessor extends PostProcessor {
   public touch(extracted: Receipt) {
@@ -10,6 +11,13 @@ export default class HeaderCleanUpPostProcessor extends PostProcessor {
     if (i !== -1) {
       extracted.header.splice(i);
     }
+    /*
+    run irrelevant header line filter once again
+    since header lines could have changed (been cleaned) by other extractors
+     */
+    extracted.header = extracted.header.filter(
+      (line) => !HeaderExtractor.isIrrelevantLine(line)
+    );
   }
 }
 

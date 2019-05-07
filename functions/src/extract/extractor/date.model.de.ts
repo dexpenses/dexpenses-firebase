@@ -14,4 +14,7 @@ export default [
   {
     format: 'dd/MM/yyyy',
   },
+  {
+    format: 'ddMMyyyy',
+  },
 ];

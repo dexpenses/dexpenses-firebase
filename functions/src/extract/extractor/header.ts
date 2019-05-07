@@ -13,6 +13,7 @@ const irrelevantLines = [
   /^Fax[.:]?\s/i, // TODO: just not is the first line, it could be the name of the store
   /^Terminal\-?ID/i,
   /^TA\-?Nr/i,
+  /^\(?\s?[O0]rtstarif\s?\)?$/i,
 ];
 
 export class HeaderExtractor extends Extractor<string[]> {
@@ -32,19 +33,30 @@ export class HeaderExtractor extends Extractor<string[]> {
     }
     for (i; i < this.options.maxHeaderLines && i < lines.length; i++) {
       const line = lines[i];
-      if (this._isIrrelevantLine(line)) {
+      if (HeaderExtractor.isIrrelevantLine(line)) {
         continue;
       }
       if (!line.trim() || this._isHeaderDelimiter(line)) {
-        return headerLines;
+        break;
       }
-      headerLines.push(line);
+      headerLines.push(HeaderExtractor.trim(line));
     }
-    return headerLines;
+    return [...new Set(headerLines)];
   }
 
-  private _isIrrelevantLine(line: string): boolean {
+  static isIrrelevantLine(line: string): boolean {
     return irrelevantLines.some((r) => !!line.match(r));
+  }
+
+  /**
+   * Trims the header line from *, x and spaces
+   *
+   * @param line the line to trim
+   * @example '**** Header****' -> 'Header'
+   * @example '*xxx Header*xx*' -> 'Header'
+   */
+  static trim(line: string): string {
+    return line.replace(/^[\s*x]*[\s*]/i, '').replace(/[\s*][\s*x]*$/i, '');
   }
 
   private _isHeaderDelimiter(line: string): boolean {
@@ -61,7 +73,10 @@ export class HeaderExtractor extends Extractor<string[]> {
   private _firstHeaderLine(lines: string[]): number {
     for (let i = 0; i < lines.length; i += 1) {
       const line = lines[i].trim();
-      if (!this._isIrrelevantLine(line) && !this._isHeaderDelimiter(line)) {
+      if (
+        !HeaderExtractor.isIrrelevantLine(line) &&
+        !this._isHeaderDelimiter(line)
+      ) {
         return i;
       }
     }

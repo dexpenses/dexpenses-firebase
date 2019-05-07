@@ -3,6 +3,7 @@ import { Receipt, Amount } from '../../model/receipt';
 import { DependsOn } from '../DependsOn';
 import { PaymentMethodExtractor } from './paymentMethod';
 import { getAllMatches } from '../../utils/regex-utils';
+import { anyMatches } from './util';
 
 @DependsOn(PaymentMethodExtractor)
 export class AmountExtractor extends Extractor<Amount> {
@@ -15,20 +16,19 @@ export class AmountExtractor extends Extractor<Amount> {
     lines: string[],
     extracted: Receipt
   ): Amount | null {
-    let m = text.match(/(?:gesamt|summe)(?:\s+EUR)?\s*(\d+,\d\d).*$/i);
-    if (m) {
-      return {
-        value: parseFloat(m[1].replace(',', '.')),
-        currency: 'EUR',
-      } as Amount;
-    }
-
-    m = text.match(/betrag(?:\s+EUR)?\s*(\d+,\d\d).*$/i);
-    if (m) {
-      return {
-        value: parseFloat(m[1].replace(',', '.')),
-        currency: 'EUR',
-      } as Amount;
+    const amount = anyMatches(text, [
+      /(?:gesamt|summe)(?:\s+EUR)?\s*(\d+,\d\d).*$/i,
+      /betrag(?:\s+EUR)?\s*(\d+,\d\d).*$/i,
+      /^geg(?:\.|eben)(?:\sVISA)?$(?:\s+EUR)?\s*(\d+,\d\d).*$/im,
+    ]).then(
+      (m) =>
+        ({
+          value: parseFloat(m[1].replace(',', '.')),
+          currency: 'EUR',
+        } as Amount)
+    );
+    if (amount) {
+      return amount;
     }
     if (extracted.paymentMethod === 'CASH') {
       const amountValue = findAmountFromCashPaymentValues(
