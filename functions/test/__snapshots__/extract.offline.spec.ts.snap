@@ -1071,6 +1071,34 @@ Object {
 }
 `;
 
+exports[`Extract receipt cloud function (offline) for "normal" receipts should successfully extract info from 'dbahn-bistro.txt' 1`] = `
+Object {
+  "result": Object {
+    "data": Object {
+      "amount": Object {
+        "currency": "EUR",
+        "value": 6.4,
+      },
+      "date": 2018-06-05T22:00:00.000Z,
+      "header": Array [
+        "DB FERNVERKEHR AG",
+        "STEPHENSONSTR. 1",
+        "60326 FRANK-URI AM MAIN",
+      ],
+      "paymentMethod": null,
+      "phone": null,
+      "time": Object {
+        "hour": 20,
+        "minute": 3,
+        "second": null,
+      },
+      "timestamp": 2018-06-06T18:03:00.000Z,
+    },
+    "state": "ready",
+  },
+}
+`;
+
 exports[`Extract receipt cloud function (offline) for "normal" receipts should successfully extract info from 'dresden-butlers.txt' 1`] = `
 Object {
   "result": Object {
@@ -1094,6 +1122,65 @@ Object {
         "second": null,
       },
       "timestamp": 2016-12-09T12:09:00.000Z,
+    },
+    "state": "ready",
+  },
+}
+`;
+
+exports[`Extract receipt cloud function (offline) for "normal" receipts should successfully extract info from 'duesseldorf-le-crobag.txt' 1`] = `
+Object {
+  "result": Object {
+    "data": Object {
+      "amount": Object {
+        "currency": "EUR",
+        "value": 8.18,
+      },
+      "date": 2019-03-31T22:00:00.000Z,
+      "header": Array [
+        "LE CROBAG",
+        "Fr anchisepar tner: Patrizia Laudani di Nar do",
+        "Düssel dor f Hauptbahnhof",
+        "Konr ad-Adenauer-Platz 1, 40210 Düsseldorf",
+      ],
+      "paymentMethod": null,
+      "phone": null,
+      "time": Object {
+        "hour": 18,
+        "minute": 35,
+        "second": null,
+      },
+      "timestamp": 2019-04-01T16:35:00.000Z,
+    },
+    "state": "ready",
+  },
+}
+`;
+
+exports[`Extract receipt cloud function (offline) for "normal" receipts should successfully extract info from 'goe-goertz.txt' 1`] = `
+Object {
+  "result": Object {
+    "data": Object {
+      "amount": Object {
+        "currency": "EUR",
+        "value": 80.9,
+      },
+      "date": 2018-03-28T22:00:00.000Z,
+      "header": Array [
+        "GORTZ 17",
+        "Gm",
+        "Re",
+        "Kornmarkt 9",
+        "37073 Gottingen",
+      ],
+      "paymentMethod": "DEBIT",
+      "phone": "+49 (551) 44035",
+      "time": Object {
+        "hour": 12,
+        "minute": 23,
+        "second": 14,
+      },
+      "timestamp": 2018-03-29T10:23:14.000Z,
     },
     "state": "ready",
   },
@@ -1124,6 +1211,63 @@ Object {
         "second": null,
       },
       "timestamp": 2017-09-01T13:23:00.000Z,
+    },
+    "state": "ready",
+  },
+}
+`;
+
+exports[`Extract receipt cloud function (offline) for "normal" receipts should successfully extract info from 'hannover-marche.txt' 1`] = `
+Object {
+  "result": Object {
+    "data": Object {
+      "amount": Object {
+        "currency": "EUR",
+        "value": 13,
+      },
+      "date": 2019-03-16T23:00:00.000Z,
+      "header": Array [
+        "marche",
+        "MOVENPICK",
+        "Gastrononie Flughafen",
+        "Hannover GnbH",
+        "30669 Hannover",
+      ],
+      "paymentMethod": "CASH",
+      "phone": "+49 511 977 2509",
+      "time": Object {
+        "hour": 10,
+        "minute": 6,
+        "second": null,
+      },
+      "timestamp": 2019-03-17T09:06:00.000Z,
+    },
+    "state": "ready",
+  },
+}
+`;
+
+exports[`Extract receipt cloud function (offline) for "normal" receipts should successfully extract info from 'kassel-ikea-full.txt' 1`] = `
+Object {
+  "result": Object {
+    "data": Object {
+      "amount": Object {
+        "currency": "EUR",
+        "value": 230.69,
+      },
+      "date": 2018-12-21T23:00:00.000Z,
+      "header": Array [
+        "EA Deutschland GmbH & Co.KG",
+        "nrich",
+      ],
+      "paymentMethod": null,
+      "phone": "06192/93999",
+      "time": Object {
+        "hour": 14,
+        "minute": 38,
+        "second": null,
+      },
+      "timestamp": 2018-12-22T13:38:00.000Z,
     },
     "state": "ready",
   },

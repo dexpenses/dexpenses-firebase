@@ -45,7 +45,7 @@ export class HeaderExtractor extends Extractor<string[]> {
   }
 
   static isIrrelevantLine(line: string): boolean {
-    return irrelevantLines.some((r) => !!line.match(r));
+    return line.length <= 1 || irrelevantLines.some((r) => !!line.match(r));
   }
 
   /**

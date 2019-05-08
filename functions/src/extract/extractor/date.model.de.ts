@@ -1,5 +1,8 @@
 export default [
   {
+    format: 'dd.MM.yy HH:mm',
+  },
+  {
     format: 'dd.MM.yyyy',
   },
   {
@@ -13,6 +16,9 @@ export default [
   },
   {
     format: 'dd/MM/yyyy',
+  },
+  {
+    format: 'ddMM-yyyy',
   },
   {
     format: 'ddMMyyyy',

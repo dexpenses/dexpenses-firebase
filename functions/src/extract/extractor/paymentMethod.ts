@@ -20,9 +20,10 @@ const paymentMethodIdentifiers = {
     /gegeben kreditsch\./i,
     /Lastschrift/i,
     /(^|\s)EC(\s|$)/i,
+    /(^|\s)SEPA(\s|$)/i,
   ],
   [PaymentMethod.CREDIT]: [/visa/i],
-  [PaymentMethod.CASH]: [/(^|\s)bar(\s|$)/i, /(^|\s)bargeld(\s|$)/i],
+  [PaymentMethod.CASH]: [/(^|\s)bar(geld|zahlung)?(\s|$)/i],
   [PaymentMethod.DKV_CARD]: [/DK[VI] Selection Card/i, /(^|\s)DKV(\s|$)/i],
 };
 

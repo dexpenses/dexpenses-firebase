@@ -5,6 +5,9 @@ export const matchers = {
   MM: /(0[1-9]|1[0-2])/,
   yyyy: /([12]\d{3})/,
   yy: /([1-6][0-9])/,
+  HH: /([01]\d|2[0-4])/,
+  mm: /([0-5]\d)/,
+  ss: /([0-5]\d)/,
 };
 const matcherChars = [...new Set(Object.keys(matchers).map((f) => f[0]))];
 

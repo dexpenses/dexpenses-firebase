@@ -20,6 +20,7 @@ export class AmountExtractor extends Extractor<Amount> {
       /(?:gesamt|summe)(?:\s+EUR)?\s*(\d+,\d\d).*$/i,
       /betrag(?:\s+EUR)?\s*(\d+,\d\d).*$/i,
       /^geg(?:\.|eben)(?:\sVISA)?$(?:\s+EUR)?\s*(\d+,\d\d).*$/im,
+      /^(\d+,\d\d)$\n^Total in EUR$/im,
     ]).then(
       (m) =>
         ({
