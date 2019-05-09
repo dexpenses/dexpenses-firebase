@@ -1331,6 +1331,34 @@ Object {
 }
 `;
 
+exports[`Extract receipt cloud function (offline) for "normal" receipts should successfully extract info from 'wf-barrique.txt' 1`] = `
+Object {
+  "result": Object {
+    "data": Object {
+      "amount": Object {
+        "currency": "EUR",
+        "value": 20,
+      },
+      "date": 2018-11-30T23:00:00.000Z,
+      "header": Array [
+        "Barrique Wolfenbuttel",
+        "Lange Herzog Str. 58",
+        "8300 Wolfenbuttel",
+      ],
+      "paymentMethod": "CASH",
+      "phone": "05331 984942",
+      "time": Object {
+        "hour": 10,
+        "minute": 48,
+        "second": 28,
+      },
+      "timestamp": 2018-12-01T09:48:28.000Z,
+    },
+    "state": "ready",
+  },
+}
+`;
+
 exports[`Extract receipt cloud function (offline) for "normal" receipts should successfully extract info from 'wf-buecher-behr.txt' 1`] = `
 Object {
   "result": Object {
@@ -1351,6 +1379,65 @@ Object {
       "phone": "05331-98890",
       "time": null,
       "timestamp": 2018-08-27T22:00:00.000Z,
+    },
+    "state": "ready",
+  },
+}
+`;
+
+exports[`Extract receipt cloud function (offline) for "normal" receipts should successfully extract info from 'wf-depot.txt' 1`] = `
+Object {
+  "result": Object {
+    "data": Object {
+      "amount": Object {
+        "currency": "EUR",
+        "value": 20.08,
+      },
+      "date": 2018-11-30T23:00:00.000Z,
+      "header": Array [
+        "DEPOT",
+        "dti",
+        "eihaach",
+        "Lange Herzogstrae 61 62",
+        "38300 Wolfenbuttel",
+        "depot onine co",
+      ],
+      "paymentMethod": "CREDIT",
+      "phone": "+49 5331 856 029 1",
+      "time": Object {
+        "hour": 10,
+        "minute": 35,
+        "second": null,
+      },
+      "timestamp": 2018-12-01T09:35:00.000Z,
+    },
+    "state": "ready",
+  },
+}
+`;
+
+exports[`Extract receipt cloud function (offline) for "normal" receipts should successfully extract info from 'wf-dm.txt' 1`] = `
+Object {
+  "result": Object {
+    "data": Object {
+      "amount": Object {
+        "currency": "EUR",
+        "value": 2.5,
+      },
+      "date": 2018-12-04T23:00:00.000Z,
+      "header": Array [
+        "dm-drogerie markt",
+        "Schweigerstraße 9a",
+        "38302 Wolfenbüttel",
+      ],
+      "paymentMethod": "CREDIT",
+      "phone": "05331/9028264",
+      "time": Object {
+        "hour": 17,
+        "minute": 21,
+        "second": null,
+      },
+      "timestamp": 2018-12-05T16:21:00.000Z,
     },
     "state": "ready",
   },
@@ -1433,6 +1520,92 @@ Object {
         "second": null,
       },
       "timestamp": 2017-09-28T13:46:00.000Z,
+    },
+    "state": "ready",
+  },
+}
+`;
+
+exports[`Extract receipt cloud function (offline) for "normal" receipts should successfully extract info from 'wf-hellweg.txt' 1`] = `
+Object {
+  "result": Object {
+    "data": Object {
+      "amount": Object {
+        "currency": "EUR",
+        "value": 10.99,
+      },
+      "date": 2018-10-26T22:00:00.000Z,
+      "header": Array [
+        "HELLWEG",
+        "Dle Proh-Bauunarkte IDEEN MUSS MAN HABEN",
+        "Schhweigerstrasse 13",
+        "38302 Wolfenbüttel",
+        "HELLWEG Die Profi-Baumärkte GmbH&Co.KG",
+      ],
+      "paymentMethod": "CREDIT",
+      "phone": "05331/900810",
+      "time": Object {
+        "hour": 12,
+        "minute": 17,
+        "second": 32,
+      },
+      "timestamp": 2018-10-27T10:17:32.000Z,
+    },
+    "state": "ready",
+  },
+}
+`;
+
+exports[`Extract receipt cloud function (offline) for "normal" receipts should successfully extract info from 'wf-kienast-schuhe-1.txt' 1`] = `
+Object {
+  "result": Object {
+    "data": Object {
+      "amount": Object {
+        "currency": "EUR",
+        "value": 69.99,
+      },
+      "date": 2018-12-07T23:00:00.000Z,
+      "header": Array [
+        "Kienast Schuhe",
+        "Muehlenstraße 5",
+        "38300 Wolfenbüttel",
+      ],
+      "paymentMethod": null,
+      "phone": null,
+      "time": Object {
+        "hour": 12,
+        "minute": 39,
+        "second": null,
+      },
+      "timestamp": 2018-12-08T11:39:00.000Z,
+    },
+    "state": "ready",
+  },
+}
+`;
+
+exports[`Extract receipt cloud function (offline) for "normal" receipts should successfully extract info from 'wf-kienast-schuhe-2.txt' 1`] = `
+Object {
+  "result": Object {
+    "data": Object {
+      "amount": Object {
+        "currency": "EUR",
+        "value": 69.99,
+      },
+      "date": 2018-12-07T23:00:00.000Z,
+      "header": Array [
+        "Kienast Schuhe",
+        "Muehlenstr. 5",
+        "38300 Wolfenbuettel",
+      ],
+      "paymentMethod": "CREDIT",
+      "phone": null,
+      "time": Object {
+        "hour": 12,
+        "minute": 42,
+        "second": null,
+      },
+      "timestamp": 2018-12-08T11:42:00.000Z,
     },
     "state": "ready",
   },

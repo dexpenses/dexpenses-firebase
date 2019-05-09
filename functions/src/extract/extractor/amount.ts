@@ -2,7 +2,10 @@ import { Extractor } from './extractor';
 import { Receipt, Amount } from '../../model/receipt';
 import { DependsOn } from '../DependsOn';
 import { PaymentMethodExtractor } from './paymentMethod';
-import { getAllMatches } from '../../utils/regex-utils';
+import {
+  getAllMatches,
+  anyMatches as anyRegexMatches,
+} from '../../utils/regex-utils';
 import { anyMatches } from './util';
 
 @DependsOn(PaymentMethodExtractor)
@@ -66,11 +69,28 @@ export class AmountExtractor extends Extractor<Amount> {
  */
 const amountValuePattern = /(?:^|\s)-?((?:[1-9]\d+|\d)[,.]\s?[\dS]{2})(?:[\-\s]|$)/gim;
 
+const illegalAmountPrefixPatterns = [
+  /AS-Zeit:?\s?$/i,
+  /dieser punktestand entspricht:?\s?$/i,
+];
+
+const illegalAmountSuffixPatterns = [/^\s?%/, /^\s?Uhr/i];
+
 // TODO: we could include date filter (i.e. not take dd.MM from the matched date as amount value)
 export function getAmountValues(lines: string[]): number[] {
   return lines
-    .filter((line) => !line.includes('AS-Zeit') && !line.endsWith('Uhr'))
-    .flatMap<any>((line) => getAllMatches(amountValuePattern, line))
+    .flatMap((line) => getAllMatches(amountValuePattern, line))
+    .filter(
+      (match) =>
+        !anyRegexMatches(
+          match.input.slice(0, match.index),
+          illegalAmountPrefixPatterns
+        ) &&
+        !anyRegexMatches(
+          match.input.slice(match.index + match[0].length),
+          illegalAmountSuffixPatterns
+        )
+    )
     .map(([_, amount]) =>
       parseFloat(
         amount

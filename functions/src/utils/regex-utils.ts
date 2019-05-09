@@ -1,3 +1,7 @@
+export function anyMatches(s: string, patterns: RegExp[]): boolean {
+  return patterns.some((p) => !!s.match(p));
+}
+
 export function getAllMatches(regex: RegExp, s: string) {
   let m: RegExpExecArray | null;
   const matches: RegExpExecArray[] = [];

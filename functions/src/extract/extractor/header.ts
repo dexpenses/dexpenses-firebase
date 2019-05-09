@@ -119,6 +119,7 @@ function _sanitize(line: string, value?: string): string {
   }
   return `${line.substring(0, i)}${line.substring(i + value.length)}`
     .trim()
-    .replace(/^[,.]/, '')
-    .replace(/[,.]$/, '');
+    .replace(/^[,.\/]/, '')
+    .replace(/[,.\/]$/, '')
+    .trim();
 }
