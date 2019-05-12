@@ -17,13 +17,6 @@ export class PhoneNumberExtractor extends Extractor<string> {
   }
 
   public extract(text: string, lines: string[], extracted: Receipt) {
-    for (const line of lines) {
-      const m = line.match(prefixedRegex);
-      if (m) {
-        cleanHeaders(extracted, m[0], true);
-        return m[1].trim();
-      }
-    }
     for (const line of extracted.header!) {
       const m = line.match(phoneRegex);
       if (m) {
@@ -31,6 +24,14 @@ export class PhoneNumberExtractor extends Extractor<string> {
         if (prefix.match(/St\.?Nr\.?\s*$/i) || prefix.match(/^UID\sNr\.?/i)) {
           continue;
         }
+        cleanHeaders(extracted, prefixedRegex, true);
+        cleanHeaders(extracted, phoneRegex, true);
+        return m[1].trim();
+      }
+    }
+    for (const line of lines) {
+      const m = line.match(prefixedRegex);
+      if (m) {
         cleanHeaders(extracted, m[0], true);
         return m[1].trim();
       }

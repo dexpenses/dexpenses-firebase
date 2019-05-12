@@ -67,7 +67,7 @@ export class AmountExtractor extends Extractor<Amount> {
  with no leading zero where S also matches as 5
  3. line end, space or dash
  */
-const amountValuePattern = /(?:^|\s)-?((?:[1-9]\d+|\d)[,.]\s?[\dS]{2})(?:[\-\s]|$)/gim;
+const amountValuePattern = /(?:^|\s|\*)-?((?:[1-9]\d+|\d)[,.]\s?[\dS]{2})(?:[\-\s]|$)/gim;
 
 const illegalAmountPrefixPatterns = [
   /AS-Zeit:?\s?$/i,

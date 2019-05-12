@@ -86,7 +86,7 @@ export class HeaderExtractor extends Extractor<string[]> {
 
 export function cleanHeaders(
   extracted: Receipt,
-  value: string,
+  value: string | RegExp,
   sliceAfterMatch = false
 ) {
   if (!extracted.header) {
@@ -94,7 +94,10 @@ export function cleanHeaders(
   }
   if (sliceAfterMatch) {
     for (const [i, line] of extracted.header.entries()) {
-      if (line.includes(value)) {
+      if (
+        (typeof value === 'string' && line.includes(value)) ||
+        line.match(value)
+      ) {
         extracted.header = [...extracted.header.slice(0, i)];
         const l = _sanitize(line, value);
         if (l) {
@@ -109,15 +112,28 @@ export function cleanHeaders(
     .filter((line) => !!line);
 }
 
-function _sanitize(line: string, value?: string): string {
+function _sanitize(line: string, value?: string | RegExp): string {
   if (!value) {
     return line;
   }
-  const i = line.indexOf(value);
-  if (i === -1) {
-    return line;
+  let i: number;
+  let l: number;
+  if (typeof value === 'string') {
+    i = line.indexOf(value);
+    if (i === -1) {
+      return line;
+    }
+    l = value.length;
+  } else {
+    const m = line.match(value);
+    if (!m) {
+      return line;
+    }
+    i = m.index!;
+    l = m[0].length;
   }
-  return `${line.substring(0, i)}${line.substring(i + value.length)}`
+
+  return `${line.substring(0, i)}${line.substring(i + l)}`
     .trim()
     .replace(/^[,.\/]/, '')
     .replace(/[,.\/]$/, '')

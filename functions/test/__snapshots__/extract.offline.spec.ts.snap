@@ -1512,7 +1512,7 @@ Object {
         "Kornmarkt 15",
         "38300 Wolfenbüttel",
       ],
-      "paymentMethod": null,
+      "paymentMethod": "CASH",
       "phone": "05331/2818",
       "time": Object {
         "hour": 15,
@@ -1612,6 +1612,36 @@ Object {
 }
 `;
 
+exports[`Extract receipt cloud function (offline) for "normal" receipts should successfully extract info from 'wf-klier.txt' 1`] = `
+Object {
+  "result": Object {
+    "data": Object {
+      "amount": Object {
+        "currency": "EUR",
+        "value": 19,
+      },
+      "date": 2018-12-18T23:00:00.000Z,
+      "header": Array [
+        "KLIER",
+        "KLIER #1561",
+        "im E Center",
+        "Schweigerstr. 5",
+        "38302 Wolfenbüttel",
+      ],
+      "paymentMethod": null,
+      "phone": "0 53 31/9 35 91 28",
+      "time": Object {
+        "hour": 17,
+        "minute": 23,
+        "second": null,
+      },
+      "timestamp": 2018-12-19T16:23:00.000Z,
+    },
+    "state": "ready",
+  },
+}
+`;
+
 exports[`Extract receipt cloud function (offline) for "normal" receipts should successfully extract info from 'wf-nanu-nana.txt' 1`] = `
 Object {
   "result": Object {
@@ -1635,6 +1665,114 @@ Object {
         "second": 25,
       },
       "timestamp": 2018-08-28T16:03:25.000Z,
+    },
+    "state": "ready",
+  },
+}
+`;
+
+exports[`Extract receipt cloud function (offline) for "normal" receipts should successfully extract info from 'wf-post.txt' 1`] = `
+Object {
+  "result": Object {
+    "data": Object {
+      "amount": Object {
+        "currency": "EUR",
+        "value": 3.6,
+      },
+      "date": 2018-07-27T22:00:00.000Z,
+      "header": Array [
+        "Deutsche Post AG",
+        "38302 Wolfenbittel",
+      ],
+      "paymentMethod": null,
+      "phone": null,
+      "time": null,
+      "timestamp": 2018-07-27T22:00:00.000Z,
+    },
+    "state": "ready",
+  },
+}
+`;
+
+exports[`Extract receipt cloud function (offline) for "normal" receipts should successfully extract info from 'wf-rewe-rodeland.txt' 1`] = `
+Object {
+  "result": Object {
+    "data": Object {
+      "amount": Object {
+        "currency": "EUR",
+        "value": 2.97,
+      },
+      "date": 2018-11-05T23:00:00.000Z,
+      "header": Array [
+        "REWE",
+        "Am Rodeland",
+        "38302 Wolfenbüttel",
+      ],
+      "paymentMethod": "CREDIT",
+      "phone": "05331/907026",
+      "time": Object {
+        "hour": 17,
+        "minute": 7,
+        "second": 21,
+      },
+      "timestamp": 2018-11-06T16:07:21.000Z,
+    },
+    "state": "ready",
+  },
+}
+`;
+
+exports[`Extract receipt cloud function (offline) for "normal" receipts should successfully extract info from 'wf-wurst-basar.txt' 1`] = `
+Object {
+  "result": Object {
+    "data": Object {
+      "amount": Object {
+        "currency": "EUR",
+        "value": 6.32,
+      },
+      "date": 2018-12-07T23:00:00.000Z,
+      "header": Array [
+        "wurst-Basar",
+        "Nolfenbüttel",
+        "Lange Herzogstraße 3",
+        "38300 Wolfenbüttel",
+      ],
+      "paymentMethod": "CASH",
+      "phone": "05331-8560268",
+      "time": Object {
+        "hour": 12,
+        "minute": 43,
+        "second": 17,
+      },
+      "timestamp": 2018-12-08T11:43:17.000Z,
+    },
+    "state": "ready",
+  },
+}
+`;
+
+exports[`Extract receipt cloud function (offline) for "normal" receipts should successfully extract info from 'wob-burgerme.txt' 1`] = `
+Object {
+  "result": Object {
+    "data": Object {
+      "amount": Object {
+        "currency": "EUR",
+        "value": 18.47,
+      },
+      "date": 2019-04-04T22:00:00.000Z,
+      "header": Array [
+        "Inh. D. Schmerling",
+        "Rothenfelderstraße 12",
+        "38440 Wolfsburg",
+      ],
+      "paymentMethod": "ONLINE",
+      "phone": "(05361) 22 192 22",
+      "time": Object {
+        "hour": 18,
+        "minute": 56,
+        "second": null,
+      },
+      "timestamp": 2019-04-05T16:56:00.000Z,
     },
     "state": "ready",
   },
