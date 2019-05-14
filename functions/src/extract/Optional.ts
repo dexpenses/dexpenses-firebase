@@ -18,4 +18,8 @@ export class Optional<T> {
     }
     return this.value;
   }
+
+  isPresent(): boolean {
+    return !!this.value;
+  }
 }

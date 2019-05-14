@@ -66,7 +66,8 @@ export class HeaderExtractor extends Extractor<string[]> {
       !!line.match(/^\s*Preis:?\s*$/i) ||
       !!line.match(/^UID\sNr/i) ||
       !!line.match(/^\s*EUR\s*$/i) ||
-      !!line.match(/^\s*\d+[,.]\d\d\s*$/i)
+      !!line.match(/^\s*\d+[,.]\d\d\s*$/i) ||
+      !!line.match(/^\s*St\.?Nr\.?/i)
     );
   }
 

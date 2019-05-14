@@ -24,6 +24,7 @@ export class AmountExtractor extends Extractor<Amount> {
       /betrag(?:\s+EUR)?\s*(\d+,\d\d).*$/i,
       /^geg(?:\.|eben)(?:\sVISA)?$(?:\s+EUR)?\s*(\d+,\d\d).*$/im,
       /^(\d+,\d\d)$\n^Total in EUR$/im,
+      /(\d+,\d\d)(?:$\n^eur)?$\n^zu zahlen/im,
     ]).then(
       (m) =>
         ({

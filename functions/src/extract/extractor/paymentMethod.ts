@@ -7,6 +7,7 @@ export enum PaymentMethod {
   CREDIT = 'CREDIT',
   CASH = 'CASH',
   DKV_CARD = 'DKV_CARD',
+  PAYPAL = 'PAYPAL',
   ONLINE = 'ONLINE',
 }
 
@@ -17,7 +18,7 @@ const paymentMethodIdentifiers = {
     /Euro\s?ELV/i,
     /EC Kartenzahlung/i,
     /gegeben EC/i,
-    /EC Karte/i,
+    /EC[\s\-]Karte/i,
     /gegeben kreditsch\./i,
     /Lastschrift/i,
     /(^|\s)EC(\s|$)/i,
@@ -29,21 +30,9 @@ const paymentMethodIdentifiers = {
     /(^|\s)Gegeben(\s|$)/,
   ],
   [PaymentMethod.DKV_CARD]: [/DK[VI] Selection Card/i, /(^|\s)DKV(\s|$)/i],
-  [PaymentMethod.ONLINE]: [/(^|\s)Onlinezahlung(\s|$)/i],
+  [PaymentMethod.PAYPAL]: [/(^|\s)PayPal(\s|$)/i],
+  [PaymentMethod.ONLINE]: [/(^|\s)Onlinezahlung(\s|$)/i, /(^|\s)Online(\s|$)/i],
 };
-
-function tryMatchMethod(line: string): string | null {
-  // tslint:disable-next-line: forin
-  for (const method in paymentMethodIdentifiers) {
-    const identifiers = paymentMethodIdentifiers[method];
-    for (const identifier of identifiers) {
-      if (line.match(identifier)) {
-        return method;
-      }
-    }
-  }
-  return null;
-}
 
 export class PaymentMethodExtractor extends Extractor<string> {
   constructor() {
@@ -55,8 +44,17 @@ export class PaymentMethodExtractor extends Extractor<string> {
     lines: string[],
     extracted: Receipt
   ): string | null {
-    return anyLineMatches(lines, (line) => {
-      return tryMatchMethod(line);
-    }).asIs();
+    for (const [method, identifiers] of Object.entries(
+      paymentMethodIdentifiers
+    )) {
+      for (const identifier of identifiers) {
+        if (
+          anyLineMatches(lines, (line) => line.match(identifier)).isPresent()
+        ) {
+          return method;
+        }
+      }
+    }
+    return null;
   }
 }

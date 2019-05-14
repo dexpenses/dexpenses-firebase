@@ -1628,7 +1628,7 @@ Object {
         "Schweigerstr. 5",
         "38302 Wolfenbüttel",
       ],
-      "paymentMethod": null,
+      "paymentMethod": "DEBIT",
       "phone": "0 53 31/9 35 91 28",
       "time": Object {
         "hour": 17,
@@ -1779,6 +1779,37 @@ Object {
 }
 `;
 
+exports[`Extract receipt cloud function (offline) for "normal" receipts should successfully extract info from 'wob-daenisches-bettenlager.txt' 1`] = `
+Object {
+  "result": Object {
+    "data": Object {
+      "amount": Object {
+        "currency": "EUR",
+        "value": 294.54,
+      },
+      "date": 2018-12-14T23:00:00.000Z,
+      "header": Array [
+        "BETTENLAGE",
+        "Gualitat sehr preiswert",
+        "Danisches BETTENLAGER",
+        "GmbH &Co KG",
+        "Brandgehäge 5",
+        "38444 Wolfsbur",
+      ],
+      "paymentMethod": "DEBIT",
+      "phone": "05308 93030",
+      "time": Object {
+        "hour": 18,
+        "minute": 10,
+        "second": 49,
+      },
+      "timestamp": 2018-12-15T17:10:49.000Z,
+    },
+    "state": "ready",
+  },
+}
+`;
+
 exports[`Extract receipt cloud function (offline) for "normal" receipts should successfully extract info from 'wob-edeka.txt' 1`] = `
 Object {
   "result": Object {
@@ -1806,6 +1837,37 @@ Object {
         "second": 57,
       },
       "timestamp": 2019-02-22T15:58:57.000Z,
+    },
+    "state": "ready",
+  },
+}
+`;
+
+exports[`Extract receipt cloud function (offline) for "normal" receipts should successfully extract info from 'wob-hornbach.txt' 1`] = `
+Object {
+  "result": Object {
+    "data": Object {
+      "amount": Object {
+        "currency": "EUR",
+        "value": 67.95,
+      },
+      "date": 2019-01-18T23:00:00.000Z,
+      "header": Array [
+        "HORNBACH",
+        "Es gibt immer was za tun",
+        "HORNBACH Baumarkt AG",
+        "Filiale 583",
+        "Brandgehaege 7",
+        "38444 Wolfsburg",
+      ],
+      "paymentMethod": "CREDIT",
+      "phone": "05308 9332-0",
+      "time": Object {
+        "hour": 17,
+        "minute": 46,
+        "second": null,
+      },
+      "timestamp": 2019-01-19T16:46:00.000Z,
     },
     "state": "ready",
   },
@@ -1841,6 +1903,62 @@ Object {
 }
 `;
 
+exports[`Extract receipt cloud function (offline) for "normal" receipts should successfully extract info from 'wob-moemax.txt' 1`] = `
+Object {
+  "result": Object {
+    "data": Object {
+      "amount": Object {
+        "currency": "EUR",
+        "value": 2.7,
+      },
+      "date": 2018-12-14T23:00:00.000Z,
+      "header": Array [
+        "Br andgehaege6",
+        "38444 Wolfsburg",
+      ],
+      "paymentMethod": null,
+      "phone": "050/ 111 523 280",
+      "time": Object {
+        "hour": 14,
+        "minute": 25,
+        "second": null,
+      },
+      "timestamp": 2018-12-15T13:25:00.000Z,
+    },
+    "state": "ready",
+  },
+}
+`;
+
+exports[`Extract receipt cloud function (offline) for "normal" receipts should successfully extract info from 'wob-nypd-pizza.txt' 1`] = `
+Object {
+  "result": Object {
+    "data": Object {
+      "amount": Object {
+        "currency": "EUR",
+        "value": 17.2,
+      },
+      "date": 2018-12-17T23:00:00.000Z,
+      "header": Array [
+        "k *k",
+        "k k",
+        "d dem Balken 2 Www.nypa pizza.de",
+        "38448 Wolfsburg",
+      ],
+      "paymentMethod": "ONLINE",
+      "phone": "05361 275 12 50",
+      "time": Object {
+        "hour": 18,
+        "minute": 34,
+        "second": null,
+      },
+      "timestamp": 2018-12-18T17:34:00.000Z,
+    },
+    "state": "ready",
+  },
+}
+`;
+
 exports[`Extract receipt cloud function (offline) for "normal" receipts should successfully extract info from 'wob-real.txt' 1`] = `
 Object {
   "result": Object {
@@ -1870,6 +1988,34 @@ Object {
 }
 `;
 
+exports[`Extract receipt cloud function (offline) for "normal" receipts should successfully extract info from 'wob-real-full.txt' 1`] = `
+Object {
+  "result": Object {
+    "data": Object {
+      "amount": Object {
+        "currency": "EUR",
+        "value": 112.79,
+      },
+      "date": 2019-05-03T22:00:00.000Z,
+      "header": Array [
+        "real GmbH",
+        "38444 Wolfsburg",
+        "Brandgehaege 9",
+      ],
+      "paymentMethod": null,
+      "phone": "0 53 08 40 46 30",
+      "time": Object {
+        "hour": 20,
+        "minute": 11,
+        "second": null,
+      },
+      "timestamp": 2019-05-04T18:11:00.000Z,
+    },
+    "state": "ready",
+  },
+}
+`;
+
 exports[`Extract receipt cloud function (offline) for "normal" receipts should successfully extract info from 'wob-smileys.txt' 1`] = `
 Object {
   "result": Object {
@@ -1882,7 +2028,6 @@ Object {
       "header": Array [
         "Smiley's Pizza Profis, Inh.: M. Voigt",
         "Kantallee 1a, 38440 Wolfsburg",
-        "St.Nr. 19/145/10973",
       ],
       "paymentMethod": "DEBIT",
       "phone": "05361 272 666",
@@ -1892,6 +2037,35 @@ Object {
         "second": null,
       },
       "timestamp": 2019-03-14T17:27:00.000Z,
+    },
+    "state": "ready",
+  },
+}
+`;
+
+exports[`Extract receipt cloud function (offline) for "normal" receipts should successfully extract info from 'wob-smileys-paypal.txt' 1`] = `
+Object {
+  "result": Object {
+    "data": Object {
+      "amount": Object {
+        "currency": "EUR",
+        "value": 12.85,
+      },
+      "date": 2019-04-02T22:00:00.000Z,
+      "header": Array [
+        "il TImI",
+        "Smie",
+        "Smiley's Pizza Profis, Inh.: M. Voigt",
+        "Kantallee 1a, 38440 Wolfsburg",
+      ],
+      "paymentMethod": "PAYPAL",
+      "phone": "05361 272 666",
+      "time": Object {
+        "hour": 20,
+        "minute": 19,
+        "second": null,
+      },
+      "timestamp": 2019-04-03T18:19:00.000Z,
     },
     "state": "ready",
   },
