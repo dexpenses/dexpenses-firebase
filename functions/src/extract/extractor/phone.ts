@@ -17,22 +17,22 @@ export class PhoneNumberExtractor extends Extractor<string> {
   }
 
   public extract(text: string, lines: string[], extracted: Receipt) {
-    for (const line of extracted.header!) {
+    for (const [i, line] of extracted.header!.entries()) {
       const m = line.match(phoneRegex);
       if (m) {
         const prefix = line.substring(0, line.indexOf(m[0]));
         if (prefix.match(/St\.?Nr\.?\s*$/i) || prefix.match(/^UID\sNr\.?/i)) {
           continue;
         }
-        cleanHeaders(extracted, prefixedRegex, true);
-        cleanHeaders(extracted, phoneRegex, true);
+        cleanHeaders(extracted, prefixedRegex, i > 0);
+        cleanHeaders(extracted, phoneRegex, i > 0);
         return m[1].trim().replace(/o/gi, '0');
       }
     }
-    for (const line of lines) {
+    for (const [i, line] of lines.entries()) {
       const m = line.match(prefixedRegex);
       if (m) {
-        cleanHeaders(extracted, m[0], true);
+        cleanHeaders(extracted, m[0], i > 0);
         return m[1].trim().replace(/o/gi, '0');
       }
     }

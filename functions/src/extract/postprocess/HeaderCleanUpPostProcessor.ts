@@ -11,6 +11,9 @@ export default class HeaderCleanUpPostProcessor extends PostProcessor {
     if (i !== -1) {
       extracted.header.splice(i);
     }
+    extracted.header = extracted.header.map((line) =>
+      line.replace(/([a-zA-Z])(Nr\.\s?\d+)/g, '$1 $2')
+    );
     /*
     run irrelevant header line filter once again
     since header lines could have changed (been cleaned) by other extractors

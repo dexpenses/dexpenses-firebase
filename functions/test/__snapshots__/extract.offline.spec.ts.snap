@@ -1,5 +1,199 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Extract receipt cloud function (offline) for "ec" receipts should successfully extract info from 'bamberg-spaghetteria.txt' 1`] = `
+Object {
+  "result": Object {
+    "data": Object {
+      "amount": Object {
+        "currency": "EUR",
+        "value": 20,
+      },
+      "date": 2019-04-26T22:00:00.000Z,
+      "header": Array [
+        "Spaghetteria 0rlando",
+        "Jésuitenstraße 3",
+        "96047 Bamber",
+      ],
+      "paymentMethod": "DEBIT",
+      "phone": "+49951208322",
+      "time": Object {
+        "hour": 19,
+        "minute": 0,
+        "second": null,
+      },
+      "timestamp": 2019-04-27T17:00:00.000Z,
+    },
+    "state": "ready",
+  },
+}
+`;
+
+exports[`Extract receipt cloud function (offline) for "ec" receipts should successfully extract info from 'bs-bolero.txt' 1`] = `
+Object {
+  "result": Object {
+    "data": Object {
+      "amount": Object {
+        "currency": "EUR",
+        "value": 25,
+      },
+      "date": 2018-08-10T22:00:00.000Z,
+      "header": Array [
+        "Bolero Braunschweig GmbH",
+        "Lange Str. 60",
+        "38100 Braunschweig",
+      ],
+      "paymentMethod": "CREDIT",
+      "phone": "0531- 6180168",
+      "time": Object {
+        "hour": 19,
+        "minute": 42,
+        "second": 48,
+      },
+      "timestamp": 2018-08-11T17:42:48.000Z,
+    },
+    "state": "ready",
+  },
+}
+`;
+
+exports[`Extract receipt cloud function (offline) for "ec" receipts should successfully extract info from 'bs-c1-cinema.txt' 1`] = `
+Object {
+  "result": Object {
+    "data": Object {
+      "amount": Object {
+        "currency": "EUR",
+        "value": 14,
+      },
+      "date": 2018-08-26T22:00:00.000Z,
+      "header": Array [
+        "Cl Cinema",
+        "Lange Str. 60",
+        "38100 Braunschweig",
+      ],
+      "paymentMethod": "CREDIT",
+      "phone": null,
+      "time": Object {
+        "hour": 20,
+        "minute": 43,
+        "second": null,
+      },
+      "timestamp": 2018-08-27T18:43:00.000Z,
+    },
+    "state": "ready",
+  },
+}
+`;
+
+exports[`Extract receipt cloud function (offline) for "ec" receipts should successfully extract info from 'bs-c1-cinema-drink.txt' 1`] = `
+Object {
+  "result": Object {
+    "data": Object {
+      "amount": Object {
+        "currency": "EUR",
+        "value": 5,
+      },
+      "date": 2019-05-05T22:00:00.000Z,
+      "header": Array [
+        "C1 Cinema",
+        "Lange Straße 60",
+        "38100 Braunschweg",
+      ],
+      "paymentMethod": "CREDIT",
+      "phone": null,
+      "time": Object {
+        "hour": 20,
+        "minute": 33,
+        "second": 32,
+      },
+      "timestamp": 2019-05-06T18:33:32.000Z,
+    },
+    "state": "ready",
+  },
+}
+`;
+
+exports[`Extract receipt cloud function (offline) for "ec" receipts should successfully extract info from 'bs-elbenwald.txt' 1`] = `
+Object {
+  "result": Object {
+    "data": Object {
+      "amount": Object {
+        "currency": "EUR",
+        "value": 10,
+      },
+      "date": 2018-12-19T23:00:00.000Z,
+      "header": Array [
+        "ELBENWALD",
+        "Braunschwei",
+        "Schloss Arkaden",
+      ],
+      "paymentMethod": "CREDIT",
+      "phone": null,
+      "time": Object {
+        "hour": 15,
+        "minute": 57,
+        "second": null,
+      },
+      "timestamp": 2018-12-20T14:57:00.000Z,
+    },
+    "state": "ready",
+  },
+}
+`;
+
+exports[`Extract receipt cloud function (offline) for "ec" receipts should successfully extract info from 'bs-oil_and_vinegar.txt' 1`] = `
+Object {
+  "result": Object {
+    "data": Object {
+      "amount": Object {
+        "currency": "EUR",
+        "value": 15.95,
+      },
+      "date": 2018-12-19T23:00:00.000Z,
+      "header": Array [
+        "0il&Vinegar Braunschwei",
+        "Platz am Ritterbrunnen",
+        "38100 Braunschweig",
+      ],
+      "paymentMethod": "CREDIT",
+      "phone": null,
+      "time": Object {
+        "hour": 16,
+        "minute": 37,
+        "second": null,
+      },
+      "timestamp": 2018-12-20T15:37:00.000Z,
+    },
+    "state": "ready",
+  },
+}
+`;
+
+exports[`Extract receipt cloud function (offline) for "ec" receipts should successfully extract info from 'bs-sausalitos.txt' 1`] = `
+Object {
+  "result": Object {
+    "data": Object {
+      "amount": null,
+      "date": 2018-06-16T22:00:00.000Z,
+      "header": Array [
+        "Sausalitos GmbH",
+        "Betrieb Braunschweig",
+        "Hagenmarkt 2",
+        "38100 Braunschweig",
+      ],
+      "paymentMethod": "CREDIT",
+      "phone": "0531/ 123 30 87",
+      "time": Object {
+        "hour": 1,
+        "minute": 20,
+        "second": 48,
+      },
+      "timestamp": 2018-06-16T23:20:48.000Z,
+    },
+    "state": "partial",
+  },
+}
+`;
+
 exports[`Extract receipt cloud function (offline) for "ec" receipts should successfully extract info from 'dresden-figaro-salon.txt' 1`] = `
 Object {
   "result": Object {
@@ -829,7 +1023,6 @@ Object {
         "Schloss Arkaden",
         "Platz am Ritterbrunnen",
         "38100 Braunschweig",
-        "www.elbenwald.de",
       ],
       "paymentMethod": "DEBIT",
       "phone": "0531 21965536",
@@ -1516,10 +1709,10 @@ Object {
       "phone": "05331/2818",
       "time": Object {
         "hour": 15,
-        "minute": 46,
-        "second": null,
+        "minute": 47,
+        "second": 42,
       },
-      "timestamp": 2017-09-28T13:46:00.000Z,
+      "timestamp": 2017-09-28T13:47:42.000Z,
     },
     "state": "ready",
   },
@@ -2066,6 +2259,63 @@ Object {
         "second": null,
       },
       "timestamp": 2019-04-03T18:19:00.000Z,
+    },
+    "state": "ready",
+  },
+}
+`;
+
+exports[`Extract receipt cloud function (offline) for "normal" receipts should successfully extract info from 'wob-subway.txt' 1`] = `
+Object {
+  "result": Object {
+    "data": Object {
+      "amount": Object {
+        "currency": "EUR",
+        "value": 12,
+      },
+      "date": 2018-10-19T22:00:00.000Z,
+      "header": Array [
+        "Subway Nr.35257-0",
+        "Porschestraße 21a",
+        "Wolfsburg, Niedersachsen, 38440",
+      ],
+      "paymentMethod": "CREDIT",
+      "phone": "+49 536 1846394",
+      "time": Object {
+        "hour": 18,
+        "minute": 14,
+        "second": 5,
+      },
+      "timestamp": 2018-10-20T16:14:05.000Z,
+    },
+    "state": "ready",
+  },
+}
+`;
+
+exports[`Extract receipt cloud function (offline) for "normal" receipts should successfully extract info from 'wob-vw-arena-weihnachtsessen.txt' 1`] = `
+Object {
+  "result": Object {
+    "data": Object {
+      "amount": Object {
+        "currency": "EUR",
+        "value": 29.95,
+      },
+      "date": 2018-12-12T23:00:00.000Z,
+      "header": Array [
+        "Volkswagen AG",
+        "K-SF-G-5/7 Club 45",
+        "Berliner Ring 2",
+        "38436 Wolfsburg",
+      ],
+      "paymentMethod": "DEBIT",
+      "phone": "05361-861516",
+      "time": Object {
+        "hour": 21,
+        "minute": 32,
+        "second": 11,
+      },
+      "timestamp": 2018-12-13T20:32:11.000Z,
     },
     "state": "ready",
   },

@@ -6,14 +6,15 @@ const irrelevantLines = [
   /^Uhrzeit:?/i,
   /^Beleg\s?(\-?\s?Nr\.?|nummer)/i,
   /^Trace(\s*\-?\s*Nr\.?|nummer)/i,
-  /kundenbele[gqa]/i,
-  /K-U-N-D-E-N-B-E-L-E-[gqa]/i,
+  /K\s?\-?\s?U\s?\-?\s?N\s?\-?\s?D\s?\-?\s?E\s?\-?\s?N\s?\-?\s?B\s?\-?\s?E\s?\-?\s?L\s?\-?\s?E\s?\-?\s?[gqa]/i,
   /h(ae|ä)ndlerbeleg/i,
   /zwischensumme/i,
   /^Fax[.:]?\s/i, // TODO: just not is the first line, it could be the name of the store
-  /^Terminal\-?ID/i,
+  /^Term(inal)?[\-\s]?ID/i,
   /^TA\-?Nr/i,
   /^\(?\s?[O0]rtstarif\s?\)?$/i,
+  /^UID$/i,
+  /^Bedient von:?$/i,
 ];
 
 export class HeaderExtractor extends Extractor<string[]> {
@@ -41,7 +42,10 @@ export class HeaderExtractor extends Extractor<string[]> {
       }
       headerLines.push(HeaderExtractor.trim(line));
     }
-    return [...new Set(headerLines)];
+    const wrapper = { header: [...new Set(headerLines)] };
+    cleanHeaders(wrapper, /Bedient von: [a-z]+/i);
+    cleanHeaders(wrapper, /www\s?\.\s?[a-z\-]+\s?\.\s?[a-z]+/i);
+    return wrapper.header;
   }
 
   static isIrrelevantLine(line: string): boolean {
@@ -67,7 +71,8 @@ export class HeaderExtractor extends Extractor<string[]> {
       !!line.match(/^UID\sNr/i) ||
       !!line.match(/^\s*EUR\s*$/i) ||
       !!line.match(/^\s*\d+[,.]\d\d\s*$/i) ||
-      !!line.match(/^\s*St\.?Nr\.?/i)
+      !!line.match(/^\s*St\.?Nr\.?/i) ||
+      !!line.match(/^Kartenzahlung$/i)
     );
   }
 

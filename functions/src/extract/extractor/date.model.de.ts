@@ -1,32 +1,12 @@
 export default [
-  {
-    format: 'dd.MM.yy HH:mm',
-  },
-  {
-    format: 'dd.MM.yyyy',
-  },
-  {
-    format: 'dd.MM.yy',
-  },
-  {
-    format: 'dd-MM-yyyy',
-  },
-  {
-    format: 'd-M-yyyy',
-  },
-  {
-    format: 'dd/MM/yyyy',
-  },
-  {
-    format: 'ddMM-yyyy',
-  },
-  {
-    format: 'ddMMyyyy',
-  },
-  {
-    format: 'd.MM.yyyy',
-  },
-  {
-    format: 'd.MM.yy',
-  },
+  'dd.MM.yy HH:mm',
+  'dd.MM.yyyy',
+  'dd.MM.yy',
+  'dd-MM-yyyy',
+  'd-M-yyyy',
+  'dd/MM/yyyy',
+  'ddMM-yyyy',
+  'ddMMyyyy',
+  'd.MM.yyyy',
+  'd.MM.yy',
 ];
