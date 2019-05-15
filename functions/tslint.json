@@ -2,7 +2,12 @@
   "linterOptions": {
     "exclude": ["**/*.spec.ts", "test/**"]
   },
-  "extends": ["tslint:recommended", "tslint-eslint-rules", "tslint-sonarts"],
+  "extends": [
+    "tslint:recommended",
+    "tslint-eslint-rules",
+    "tslint-sonarts",
+    "tslint-config-prettier"
+  ],
   "rulesDirectory": ["node_modules/tslint-microsoft-contrib"],
   "rules": {
     "quotemark": [true, "single", "avoid-escape"],
