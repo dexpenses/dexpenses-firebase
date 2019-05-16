@@ -13,7 +13,7 @@ export enum PaymentMethod {
 
 const paymentMethodIdentifiers = {
   [PaymentMethod.DEBIT]: [
-    /[g9]irocar\s?d/i,
+    /(^|\s)[g9]irocar\s?(c|c?d)(\s|$)/i,
     /zahlart[:\s]\s*EC/i,
     /Euro\s?ELV/i,
     /EC Kartenzahlung/i,

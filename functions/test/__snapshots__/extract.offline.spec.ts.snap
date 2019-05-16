@@ -172,7 +172,10 @@ exports[`Extract receipt cloud function (offline) for "ec" receipts should succe
 Object {
   "result": Object {
     "data": Object {
-      "amount": null,
+      "amount": Object {
+        "currency": "EUR",
+        "value": 44,
+      },
       "date": 2018-06-16T22:00:00.000Z,
       "header": Array [
         "Sausalitos GmbH",
@@ -189,7 +192,7 @@ Object {
       },
       "timestamp": 2018-06-16T23:20:48.000Z,
     },
-    "state": "partial",
+    "state": "ready",
   },
 }
 `;
@@ -323,8 +326,6 @@ Object {
         "An der Werrabrücke",
         "Lange Str. 1",
         "34346 Hann o Münden",
-        "Vielen Dank",
-        "T(",
       ],
       "paymentMethod": "DEBIT",
       "phone": null,
@@ -334,6 +335,57 @@ Object {
         "second": 6,
       },
       "timestamp": 2019-04-13T13:01:06.000Z,
+    },
+    "state": "ready",
+  },
+}
+`;
+
+exports[`Extract receipt cloud function (offline) for "ec" receipts should successfully extract info from 'hmue-carmines-pizza.txt' 1`] = `
+Object {
+  "result": Object {
+    "data": Object {
+      "amount": Object {
+        "currency": "EUR",
+        "value": 11,
+      },
+      "date": 2019-04-19T22:00:00.000Z,
+      "header": Array [
+        "Carmies P1zza",
+        "Hann. Munden",
+      ],
+      "paymentMethod": "DEBIT",
+      "phone": "05541/90 333 22",
+      "time": null,
+      "timestamp": 2019-04-19T22:00:00.000Z,
+    },
+    "state": "ready",
+  },
+}
+`;
+
+exports[`Extract receipt cloud function (offline) for "ec" receipts should successfully extract info from 'hmue-radziwinski.txt' 1`] = `
+Object {
+  "result": Object {
+    "data": Object {
+      "amount": Object {
+        "currency": "EUR",
+        "value": 167.85,
+      },
+      "date": 2018-08-04T22:00:00.000Z,
+      "header": Array [
+        "MAENNERMODE RADZIWINSK",
+        "LANGE STR. 71",
+        "34346 HANN, MUENDEN",
+      ],
+      "paymentMethod": "DEBIT",
+      "phone": "05541/2873",
+      "time": Object {
+        "hour": 15,
+        "minute": 38,
+        "second": 23,
+      },
+      "timestamp": 2018-08-05T13:38:23.000Z,
     },
     "state": "ready",
   },
@@ -351,7 +403,6 @@ Object {
       "date": 2018-05-22T22:00:00.000Z,
       "header": Array [
         "K t",
-        "Vielen Dank , dass Sie",
         "sich entschieden haben",
         "gesund & lecker zu essen",
         "Wir freuen uns auf Ihren",
@@ -365,6 +416,34 @@ Object {
         "second": 48,
       },
       "timestamp": 2018-05-23T16:58:48.000Z,
+    },
+    "state": "ready",
+  },
+}
+`;
+
+exports[`Extract receipt cloud function (offline) for "ec" receipts should successfully extract info from 'wf-barrique.txt' 1`] = `
+Object {
+  "result": Object {
+    "data": Object {
+      "amount": Object {
+        "currency": "EUR",
+        "value": 21.9,
+      },
+      "date": 2018-08-27T22:00:00.000Z,
+      "header": Array [
+        "Barrique",
+        "Lange-Herzoastr.58",
+        "38300 Wolfenbuettel",
+      ],
+      "paymentMethod": "DEBIT",
+      "phone": "05331/984942",
+      "time": Object {
+        "hour": 18,
+        "minute": 2,
+        "second": 51,
+      },
+      "timestamp": 2018-08-28T16:02:51.000Z,
     },
     "state": "ready",
   },
@@ -393,6 +472,35 @@ Object {
 }
 `;
 
+exports[`Extract receipt cloud function (offline) for "ec" receipts should successfully extract info from 'wf-buergeramt.txt' 1`] = `
+Object {
+  "result": Object {
+    "data": Object {
+      "amount": Object {
+        "currency": "EUR",
+        "value": 37.5,
+      },
+      "date": 2018-12-12T23:00:00.000Z,
+      "header": Array [
+        "Stadt Wolfenbuettel",
+        "Buergeramt",
+        "Stadtmarkt 3-6",
+        "38300 Wolfenbuettel",
+      ],
+      "paymentMethod": "DEBIT",
+      "phone": null,
+      "time": Object {
+        "hour": 7,
+        "minute": 45,
+        "second": null,
+      },
+      "timestamp": 2018-12-13T06:45:00.000Z,
+    },
+    "state": "ready",
+  },
+}
+`;
+
 exports[`Extract receipt cloud function (offline) for "ec" receipts should successfully extract info from 'wf-haargenau.txt' 1`] = `
 Object {
   "result": Object {
@@ -410,6 +518,93 @@ Object {
       "phone": "05331 33838",
       "time": null,
       "timestamp": 2017-08-30T22:00:00.000Z,
+    },
+    "state": "ready",
+  },
+}
+`;
+
+exports[`Extract receipt cloud function (offline) for "ec" receipts should successfully extract info from 'wf-landkreis.txt' 1`] = `
+Object {
+  "result": Object {
+    "data": Object {
+      "amount": Object {
+        "currency": "EUR",
+        "value": 15,
+      },
+      "date": 2018-12-12T23:00:00.000Z,
+      "header": Array [
+        "Landkreis Wolfenbuettel",
+        "- Abt. Straßenverkehr",
+      ],
+      "paymentMethod": "DEBIT",
+      "phone": "05331 / 84 562",
+      "time": Object {
+        "hour": 8,
+        "minute": 12,
+        "second": 46,
+      },
+      "timestamp": 2018-12-13T07:12:46.000Z,
+    },
+    "state": "ready",
+  },
+}
+`;
+
+exports[`Extract receipt cloud function (offline) for "ec" receipts should successfully extract info from 'wob-burger-king.txt' 1`] = `
+Object {
+  "result": Object {
+    "data": Object {
+      "amount": Object {
+        "currency": "EUR",
+        "value": 9.98,
+      },
+      "date": 2018-12-15T23:00:00.000Z,
+      "header": Array [
+        "BURGER",
+        "ING",
+        "Burger King",
+        "Deuts chland GmbH",
+        "Heinrich Nordhoff -Straße",
+        "38440 Wolfsburg",
+      ],
+      "paymentMethod": "CREDIT",
+      "phone": null,
+      "time": Object {
+        "hour": 17,
+        "minute": 36,
+        "second": 47,
+      },
+      "timestamp": 2018-12-16T16:36:47.000Z,
+    },
+    "state": "ready",
+  },
+}
+`;
+
+exports[`Extract receipt cloud function (offline) for "ec" receipts should successfully extract info from 'wob-daenisches-bettenlager.txt' 1`] = `
+Object {
+  "result": Object {
+    "data": Object {
+      "amount": Object {
+        "currency": "EUR",
+        "value": 294.54,
+      },
+      "date": 2018-12-14T23:00:00.000Z,
+      "header": Array [
+        "Dänisches",
+        "Bettenlager",
+        "Brandgehäge 5",
+        "38440 Wolfsburg",
+      ],
+      "paymentMethod": "DEBIT",
+      "phone": null,
+      "time": Object {
+        "hour": 18,
+        "minute": 10,
+        "second": 31,
+      },
+      "timestamp": 2018-12-15T17:10:31.000Z,
     },
     "state": "ready",
   },
@@ -439,6 +634,63 @@ Object {
         "second": null,
       },
       "timestamp": 2017-08-28T18:33:00.000Z,
+    },
+    "state": "ready",
+  },
+}
+`;
+
+exports[`Extract receipt cloud function (offline) for "ec" receipts should successfully extract info from 'wob-sausalitos-2018.txt' 1`] = `
+Object {
+  "result": Object {
+    "data": Object {
+      "amount": Object {
+        "currency": "EUR",
+        "value": 23,
+      },
+      "date": 2018-08-29T22:00:00.000Z,
+      "header": Array [
+        "Sausalitos Holding GmbH",
+        "Betrieb Wolfsburg",
+        "Porschestr. 32",
+        "38440 Wolfsburg",
+      ],
+      "paymentMethod": "CREDIT",
+      "phone": null,
+      "time": Object {
+        "hour": 20,
+        "minute": 28,
+        "second": 35,
+      },
+      "timestamp": 2018-08-30T18:28:35.000Z,
+    },
+    "state": "ready",
+  },
+}
+`;
+
+exports[`Extract receipt cloud function (offline) for "ec" receipts should successfully extract info from 'wob-smileys.txt' 1`] = `
+Object {
+  "result": Object {
+    "data": Object {
+      "amount": Object {
+        "currency": "EUR",
+        "value": 14,
+      },
+      "date": 2019-03-13T23:00:00.000Z,
+      "header": Array [
+        "Smileys Pizza Wolfsbur g",
+        "Kantallee 1a",
+        "38440 Wolfs burg",
+      ],
+      "paymentMethod": "DEBIT",
+      "phone": "05361 -272666",
+      "time": Object {
+        "hour": 18,
+        "minute": 53,
+        "second": null,
+      },
+      "timestamp": 2019-03-14T17:53:00.000Z,
     },
     "state": "ready",
   },

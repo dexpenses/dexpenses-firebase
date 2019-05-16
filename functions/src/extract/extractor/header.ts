@@ -14,7 +14,22 @@ const irrelevantLines = [
   /^TA\-?Nr/i,
   /^\(?\s?[O0]rtstarif\s?\)?$/i,
   /^UID$/i,
-  /^Bedient von:?$/i,
+  /^Vielen Dank/i,
+  /^[a-z][^a-z\d]$/i, // indicate wrongly detected text
+  /^\d{1,4}$/,
+];
+
+const irrelevantPatterns = [
+  /Bedient von: [a-z]+/i,
+  /www\s?\.\s?[a-z\-]+\s?\.\s?[a-z]+/i,
+  /Vielen Dank/i,
+];
+
+const fixes = [
+  {
+    pattern: /(^|\s)6mbH(\s|$)/i,
+    replaceWith: '$1GmbH$2',
+  },
 ];
 
 export class HeaderExtractor extends Extractor<string[]> {
@@ -43,9 +58,15 @@ export class HeaderExtractor extends Extractor<string[]> {
       headerLines.push(HeaderExtractor.trim(line));
     }
     const wrapper = { header: [...new Set(headerLines)] };
-    cleanHeaders(wrapper, /Bedient von: [a-z]+/i);
-    cleanHeaders(wrapper, /www\s?\.\s?[a-z\-]+\s?\.\s?[a-z]+/i);
-    return wrapper.header;
+    for (const irrelevantPattern of irrelevantPatterns) {
+      cleanHeaders(wrapper, irrelevantPattern);
+    }
+    return wrapper.header.map((line) => {
+      for (const fix of fixes) {
+        line = line.replace(fix.pattern, fix.replaceWith);
+      }
+      return line;
+    });
   }
 
   static isIrrelevantLine(line: string): boolean {

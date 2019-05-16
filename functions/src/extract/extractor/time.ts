@@ -25,6 +25,7 @@ export class TimeExtractor extends Extractor<Time> {
   public extract(text: string, lines: string[], extracted: Receipt) {
     return this.matcher.exec(text).then((res) => {
       const [fullTime, hour, minute, second] = res.regexMatch;
+      cleanHeaders(extracted, new RegExp(`${fullTime} Uhr`));
       cleanHeaders(extracted, fullTime);
       return {
         hour: parseInt(hour, 10),
