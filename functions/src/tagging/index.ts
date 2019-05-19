@@ -2,7 +2,7 @@ import * as admin from 'firebase-admin';
 import * as functions from 'firebase-functions';
 import { FieldValue } from '@google-cloud/firestore';
 import TaggingEngine from './TaggingEngine';
-import { Receipt } from '@dexpenses/rule-conditions';
+import { Receipt } from '@dexpenses/core';
 
 export interface TaggingMessage {
   userId: string;

@@ -1,11 +1,11 @@
 import { DateTime } from 'luxon';
-import { Receipt } from '../../model/receipt';
+import { Receipt } from '@dexpenses/core';
 import PostProcessor from './PostProcessor';
 
 export default class DateTimePostProcessor extends PostProcessor {
   public touch(extracted: Receipt) {
     if (extracted.date) {
-      let timestamp = DateTime.fromJSDate(extracted.date).setZone(
+      let timestamp = DateTime.fromJSDate(Receipt.getDate(extracted)!).setZone(
         'Europe/Berlin'
       );
       if (extracted.time) {

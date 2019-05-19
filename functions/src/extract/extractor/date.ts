@@ -3,7 +3,7 @@ import model from './date.model.de';
 import { DependsOn } from '../DependsOn';
 import { Extractor } from './extractor';
 import { cleanHeaders, HeaderExtractor } from './header';
-import { Receipt } from '../../model/receipt';
+import { Receipt } from '@dexpenses/core';
 import {
   createMatcher,
   Matcher,

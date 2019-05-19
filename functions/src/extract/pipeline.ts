@@ -4,12 +4,27 @@ import { HeaderExtractor } from './extractor/header';
 import { PaymentMethodExtractor } from './extractor/paymentMethod';
 import { PhoneNumberExtractor } from './extractor/phone';
 import DateTimePostProcessor from './postprocess/DateTimePostProcessor';
-import { Receipt, ReceiptResult } from '../model/receipt';
 import { TimeExtractor } from './extractor/time';
 import { PlaceExtractor } from './extractor/place';
 import PlacePostProcessor from './postprocess/PlacePostProcessor';
 import cleanUp from './clean-up';
 import HeaderCleanUpPostProcessor from './postprocess/HeaderCleanUpPostProcessor';
+import { Receipt } from '@dexpenses/core';
+
+export type ReceiptResultState =
+  | 'pending'
+  | 'no-text'
+  | 'bad-image'
+  | 'error'
+  | 'unreadable'
+  | 'partial'
+  | 'ready';
+
+export interface ReceiptResult {
+  state: ReceiptResultState;
+  data?: Receipt;
+  error?: any;
+}
 
 export const extractorPipeline = [
   new HeaderExtractor(),

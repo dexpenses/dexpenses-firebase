@@ -1,6 +1,6 @@
 import * as admin from 'firebase-admin';
-import { Receipt } from '../model/receipt';
-import placeTypes from './place-types';
+import { Receipt } from '@dexpenses/core';
+import { placeTypeMappings } from '@dexpenses/core';
 import { Rule } from './rules/Rule';
 import ruleEngine from './rules/engine';
 import { parseCondition } from '@dexpenses/rule-conditions';
@@ -12,7 +12,7 @@ export default class TaggingEngine {
     const tags = new Set();
     if (receipt.place && receipt.place.types) {
       receipt.place.types.forEach((placeType) => {
-        const tag = placeTypes[placeType];
+        const tag = placeTypeMappings[placeType];
         if (!tag) {
           return;
         }

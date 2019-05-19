@@ -1,7 +1,7 @@
 import { DependsOn } from '../DependsOn';
 import { Extractor } from './extractor';
 import { HeaderExtractor, cleanHeaders } from './header';
-import { Receipt } from '../../model/receipt';
+import { Receipt } from '@dexpenses/core';
 
 const phoneRegex = /(?:^|[.,:\s])(\(?(?=\+49|\(?0)((\([\d \-\–\+\/]+\)|[\d \-\–\+\/])+){6,}\)?([ \-–\/]?)([\doO]+))/;
 const prefixRegex = /(?:Tel(?:efon)?|Fon|(?:^|\s)el)\.?:?/i;

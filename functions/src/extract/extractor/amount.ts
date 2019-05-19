@@ -1,5 +1,5 @@
 import { Extractor } from './extractor';
-import { Receipt, Amount } from '../../model/receipt';
+import { Receipt, Amount } from '@dexpenses/core';
 import { DependsOn } from '../DependsOn';
 import { PaymentMethodExtractor } from './paymentMethod';
 import {

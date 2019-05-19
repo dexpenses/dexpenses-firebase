@@ -1,11 +1,10 @@
-import { Receipt } from '../../model/receipt';
+import { Receipt, Address } from '@dexpenses/core';
 import PostProcessor from './PostProcessor';
 import {
   AddressComponent,
   AddressType,
   GeocodingAddressComponentType,
 } from '@google/maps';
-import { Address } from '../../model/receipt';
 
 export default class PlacePostProcessor extends PostProcessor {
   public touch(extracted: Receipt) {

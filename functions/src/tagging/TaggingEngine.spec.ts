@@ -1,5 +1,5 @@
 import TaggingEngine from './TaggingEngine';
-import DateCondition from '@dexpenses/rule-conditions/lib/DateCondition';
+import DateCondition from '@dexpenses/rule-conditions/lib/condition/DateCondition';
 import { DateTime } from 'luxon';
 
 describe('TaggingEngine', () => {

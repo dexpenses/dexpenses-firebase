@@ -3,7 +3,7 @@ import * as admin from 'firebase-admin';
 import { firestore, updateFn } from './firebase-stubs';
 import { TaggingMessage } from '../src/tagging';
 import TaggingEngine from '../src/tagging/TaggingEngine';
-import HeaderCondition from '@dexpenses/rule-conditions/lib/HeaderCondition';
+import HeaderCondition from '@dexpenses/rule-conditions/lib/condition/HeaderCondition';
 
 const test = firebaseFunctionsTest();
 

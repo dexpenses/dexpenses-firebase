@@ -1,7 +1,7 @@
 import { DependsOn } from '../DependsOn';
 import { Extractor } from './extractor';
 import { cleanHeaders, HeaderExtractor } from './header';
-import { Receipt, Time } from '../../model/receipt';
+import { Receipt, Time } from '@dexpenses/core';
 import { statically, createMatcher, Matcher } from './util/matcher';
 
 const matchers = {
@@ -27,11 +27,7 @@ export class TimeExtractor extends Extractor<Time> {
       const [fullTime, hour, minute, second] = res.regexMatch;
       cleanHeaders(extracted, new RegExp(`${fullTime} Uhr`));
       cleanHeaders(extracted, fullTime);
-      return {
-        hour: parseInt(hour, 10),
-        minute: parseInt(minute, 10),
-        second: !second ? null : parseInt(second, 10),
-      };
+      return Time.fromStrings(hour, minute, second);
     });
   }
 }

@@ -1,14 +1,14 @@
 import ruleEngine from './engine';
-import AndCondition from '@dexpenses/rule-conditions/lib/AndCondition';
-import HeaderCondition from '@dexpenses/rule-conditions/lib/HeaderCondition';
-import AmountCondition from '@dexpenses/rule-conditions/lib/AmountCondition';
-import CurrencyCondition from '@dexpenses/rule-conditions/lib/CurrencyCondition';
-import OrCondition from '@dexpenses/rule-conditions/lib/OrCondition';
-import DateCondition from '@dexpenses/rule-conditions/lib/DateCondition';
-import NotCondition from '@dexpenses/rule-conditions/lib/NotCondition';
-import PaymentMethodCondition from '@dexpenses/rule-conditions/lib/PaymentMethodCondition';
-import TimeCondition from '@dexpenses/rule-conditions/lib/TimeCondition';
-import { Receipt } from '../../model/receipt';
+import AndCondition from '@dexpenses/rule-conditions/lib/condition/bool/AndCondition';
+import HeaderCondition from '@dexpenses/rule-conditions/lib/condition/HeaderCondition';
+import AmountCondition from '@dexpenses/rule-conditions/lib/condition/AmountCondition';
+import CurrencyCondition from '@dexpenses/rule-conditions/lib/condition/CurrencyCondition';
+import OrCondition from '@dexpenses/rule-conditions/lib/condition/bool/OrCondition';
+import DateCondition from '@dexpenses/rule-conditions/lib/condition/DateCondition';
+import NotCondition from '@dexpenses/rule-conditions/lib/condition/bool/NotCondition';
+import PaymentMethodCondition from '@dexpenses/rule-conditions/lib/condition/PaymentMethodCondition';
+import TimeCondition from '@dexpenses/rule-conditions/lib/condition/TimeCondition';
+import { Receipt } from '@dexpenses/core';
 import { DateTime } from 'luxon';
 
 describe('RuleEngine', () => {
@@ -22,7 +22,7 @@ describe('RuleEngine', () => {
         new DateCondition('weekday', '==', 7),
       ]),
       new NotCondition(new PaymentMethodCondition('DEBIT')),
-      new TimeCondition({ hour: 16, minute: 0 }, 'after'),
+      new TimeCondition({ hour: 16, minute: 0, second: null }, 'after'),
     ]);
     const rule = {
       condition,
@@ -72,7 +72,9 @@ describe('RuleEngine', () => {
       []
     );
     expect(
-      ruleEngine({ ...receipt, time: { hour: 15, minute: 59 } }, [rule])
+      ruleEngine({ ...receipt, time: { hour: 15, minute: 59, second: 59 } }, [
+        rule,
+      ])
     ).toEqual([]);
   });
 });

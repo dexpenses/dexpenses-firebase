@@ -1,4 +1,4 @@
-import { Receipt } from '../../model/receipt';
+import { Receipt } from '@dexpenses/core';
 import PostProcessor from './PostProcessor';
 import { HeaderExtractor } from '../extractor/header';
 

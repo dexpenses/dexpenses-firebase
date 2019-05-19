@@ -1,5 +1,5 @@
 import { Extractor } from './extractor';
-import { Receipt } from '../../model/receipt';
+import { Receipt } from '@dexpenses/core';
 
 const irrelevantLines = [
   /^Datum:?/i,
