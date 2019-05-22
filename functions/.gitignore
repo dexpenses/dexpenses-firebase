@@ -1,6 +1,6 @@
 ## Compiled JavaScript files
 **/*.js
-!sonar.js
+!test/gen-bq-data.js
 !jest.config.js
 **/*.js.map
 lib/
