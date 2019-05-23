@@ -13,3 +13,4 @@ export {
   receiptsToBigQuery,
   recurringPaymentsToBigQuery,
 } from './big-query-export';
+export * from './big-query';
