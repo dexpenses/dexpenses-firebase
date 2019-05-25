@@ -61,3 +61,23 @@ export const aggregateTotalOverTimePeriod = functions.https.onCall(
     return result;
   }
 );
+
+export const aggregateByTags = functions.https.onCall(async (data, context) => {
+  const params = {
+    user_id: 'test',
+    start: data.start || new Date(0),
+    end: data.end || new Date(),
+  };
+  const query = `
+  SELECT tag, round(sum(r.amount), 2) as total
+  FROM \`dexpenses-207219.dexpenses_bi.actual_receipts\` as r
+  cross join UNNEST(r.tags) as tag
+  where user_id = @user_id
+  and r.timestamp >= @start
+  and r.timestamp <= @end
+  group by tag
+  order by total desc
+  `;
+  const [result] = await new BigQuery().query({ query, params });
+  return result;
+});
