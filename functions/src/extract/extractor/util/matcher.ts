@@ -34,17 +34,6 @@ export function buildMatcherDef(
   format: string
 ): MatcherDef {
   const tokens = tokenize(matcherChars, format);
-  if (format === '^HH mm:ss') {
-    console.log(
-      new RegExp(
-        tokens
-          .map((token) =>
-            matchers[token] ? matchers[token].source : escape(token)
-          )
-          .join('')
-      ).source
-    );
-  }
   return {
     format,
     tokens,
