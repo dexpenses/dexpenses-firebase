@@ -1,5 +1,5 @@
 import * as functions from 'firebase-functions';
-import dataset from '../big-query-export/dataset';
+import { BigQuery } from '@google-cloud/bigquery';
 
 export const aggregateTotal = functions.https.onCall(async (data, context) => {
   const query = `SELECT round(sum(amount), 2) as total
@@ -7,12 +7,10 @@ export const aggregateTotal = functions.https.onCall(async (data, context) => {
   WHERE user_id = @user_id
   AND timestamp >= @start
   AND timestamp <= @end`;
-  const [[result]] = await dataset.query({
+  const [[result]] = await new BigQuery().query({
     query,
-    location: 'EU',
     params: {
       user_id: 'test',
-      // user_id: context.auth!.uid,
       start: data.start,
       end: data.end || new Date(),
     },
@@ -37,10 +35,8 @@ export const aggregateTotalOverTimePeriod = functions.https.onCall(
         `invalid period: must be one of ${VALID_PERIODS}`
       );
     }
-    let query: string;
     const params = {
       user_id: 'test',
-      // user_id: context.auth!.uid,
       start,
       end,
     };
@@ -49,8 +45,7 @@ export const aggregateTotalOverTimePeriod = functions.https.onCall(
       .map((a) => PERIODS_TO_FIELD[a]);
     const extractorAs = (a: string) => `extract(${a} from timestamp) as ${a}`;
     const asc = (a: string) => `${a} asc`;
-    // tslint:disable-next-line:no-nested-template-literals
-    query = `SELECT ${aggregations
+    const query = `SELECT ${aggregations
       .map(extractorAs)
       .join(', ')}, round(sum(amount), 2) as total
     FROM \`dexpenses-207219.dexpenses_bi.actual_receipts\`
@@ -59,9 +54,8 @@ export const aggregateTotalOverTimePeriod = functions.https.onCall(
     and timestamp <= @end
     group by ${aggregations.join(', ')}
     order by ${aggregations.map(asc).join(', ')}`;
-    const [result] = await dataset.query({
+    const [result] = await new BigQuery().query({
       query,
-      location: 'EU',
       params,
     });
     return result;
