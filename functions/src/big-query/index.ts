@@ -62,12 +62,19 @@ export const aggregateTotalOverTimePeriod = functions.https.onCall(
   }
 );
 
-export const aggregateByTags = functions.https.onCall(async (data, context) => {
-  const params = {
+function parseParams(
+  data: { start?: string; end?: string },
+  context: functions.https.CallableContext
+) {
+  return {
     user_id: 'test',
     start: data.start || new Date(0),
     end: data.end || new Date(),
   };
+}
+
+export const aggregateByTags = functions.https.onCall(async (data, context) => {
+  const params = parseParams(data, context);
   const query = `
   SELECT tag, round(sum(r.amount), 2) as total
   FROM \`dexpenses-207219.dexpenses_bi.actual_receipts\` as r
@@ -81,3 +88,19 @@ export const aggregateByTags = functions.https.onCall(async (data, context) => {
   const [result] = await new BigQuery().query({ query, params });
   return result;
 });
+
+export const aggregateByPaymentMethod = functions.https.onCall(
+  async (data, context) => {
+    const params = parseParams(data, context);
+    const query = `
+    select payment_method, round(sum(amount),2) as total
+    from \`dexpenses-207219.dexpenses_bi.actual_receipts\` as r
+    where user_id = @user_id
+    and r.timestamp >= @start
+    and r.timestamp <= @end
+    group by payment_method
+    order by total desc`;
+    const [result] = await new BigQuery().query({ query, params });
+    return result;
+  }
+);
