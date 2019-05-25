@@ -7,7 +7,7 @@
     "sourceMap": true,
     "strict": true,
     "noImplicitAny": false,
-    "target": "es2017",
+    "target": "es2018",
     "experimentalDecorators": true,
     "lib": ["esnext"],
     "types": ["jest"]
