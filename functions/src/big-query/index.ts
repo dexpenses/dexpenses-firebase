@@ -1,22 +1,6 @@
 import * as functions from 'firebase-functions';
 import { BigQuery } from '@google-cloud/bigquery';
-
-export const aggregateTotal = functions.https.onCall(async (data, context) => {
-  const query = `SELECT round(sum(amount), 2) as total
-  FROM \`dexpenses-207219.dexpenses_bi.actual_receipts\`
-  WHERE user_id = @user_id
-  AND timestamp >= @start
-  AND timestamp <= @end`;
-  const [[result]] = await new BigQuery().query({
-    query,
-    params: {
-      user_id: 'test',
-      start: data.start,
-      end: data.end || new Date(),
-    },
-  });
-  return { value: result.total };
-});
+import { parseTimePeriodParams } from './util';
 
 const PERIODS_TO_FIELD = {
   hourly: 'hour',
@@ -62,19 +46,8 @@ export const aggregateTotalOverTimePeriod = functions.https.onCall(
   }
 );
 
-function parseParams(
-  data: { start?: string; end?: string },
-  context: functions.https.CallableContext
-) {
-  return {
-    user_id: 'test',
-    start: data.start || new Date(0),
-    end: data.end || new Date(),
-  };
-}
-
 export const aggregateByTags = functions.https.onCall(async (data, context) => {
-  const params = parseParams(data, context);
+  const params = parseTimePeriodParams(data, context);
   const query = `
   SELECT tag, round(sum(r.amount), 2) as total
   FROM \`dexpenses-207219.dexpenses_bi.actual_receipts\` as r
@@ -91,7 +64,7 @@ export const aggregateByTags = functions.https.onCall(async (data, context) => {
 
 export const aggregateByPaymentMethod = functions.https.onCall(
   async (data, context) => {
-    const params = parseParams(data, context);
+    const params = parseTimePeriodParams(data, context);
     const query = `
     select payment_method, round(sum(amount),2) as total
     from \`dexpenses-207219.dexpenses_bi.actual_receipts\` as r
@@ -104,3 +77,6 @@ export const aggregateByPaymentMethod = functions.https.onCall(
     return result;
   }
 );
+
+export * from './kpis';
+export * from './find';
