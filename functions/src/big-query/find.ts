@@ -1,10 +1,10 @@
-import * as functions from 'firebase-functions';
+import * as https from '../https';
 import { BigQuery } from '@google-cloud/bigquery';
 
-export const findByBoundingBox = functions.https.onCall(
+export const findByBoundingBox = https.onAuthenticatedCall(
   async (data, context) => {
     const params = {
-      user_id: context.auth!.uid,
+      user_id: context.auth.uid,
       sw_lng: data.southWest.lng,
       sw_lat: data.southWest.lat,
       ne_lng: data.northEast.lng,

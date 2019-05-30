@@ -1,6 +1,10 @@
 import * as functions from 'firebase-functions';
 import { BigQuery } from '@google-cloud/bigquery';
-import { parseTimePeriodParams } from './util';
+import {
+  parseTimePeriodParams,
+  bigQueryCallable,
+  ResultTransformers,
+} from './util';
 
 export const aggregateTotal = functions.https.onCall(async (data, context) => {
   const query = `SELECT round(sum(amount), 2) as total
@@ -13,6 +17,16 @@ export const aggregateTotal = functions.https.onCall(async (data, context) => {
     params: parseTimePeriodParams(data, context),
   });
   return { value: result.total };
+});
+
+export const aggregateTotal2 = bigQueryCallable({
+  query: `SELECT round(sum(amount), 2) as total
+  FROM \`dexpenses-207219.dexpenses_bi.actual_receipts\`
+  WHERE user_id = @user_id
+  AND timestamp >= @start
+  AND timestamp <= @end`,
+  parseParams: parseTimePeriodParams,
+  resultTransformer: ResultTransformers.SINGLE_VALUE,
 });
 
 export const aggregateAverageTotal = functions.https.onCall(
