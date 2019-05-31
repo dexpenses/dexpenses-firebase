@@ -1,9 +1,13 @@
 import * as functions from 'firebase-functions';
 
+export type AuthenticatedCallableContext = Required<
+  functions.https.CallableContext
+>;
+
 export function onAuthenticatedCall(
   handler: (
     data: any,
-    context: Required<functions.https.CallableContext>
+    context: AuthenticatedCallableContext
   ) => any | Promise<any>
 ) {
   return functions.https.onCall(async (data, context) => {
