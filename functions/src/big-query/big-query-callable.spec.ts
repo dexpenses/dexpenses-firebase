@@ -1,6 +1,7 @@
 import bigQueryCallable, {
   BigQueryFunction,
   ResultTransformers,
+  Validate,
 } from './big-query-callable';
 import { BigQuery } from '@google-cloud/bigquery';
 
@@ -96,4 +97,25 @@ describe('ResultTransformers.SINGLE_VALUE', () => {
       ResultTransformers.SINGLE_VALUE([{ c0: 0, c1: 0 }])
     ).toThrowError();
   });
+});
+
+describe('Validate.required', () => {
+  it('should throw for undefined', () => {
+    expect(() => Validate.required({}, 'foo')).toThrowError();
+    expect(() => Validate.required({ foo: undefined }, 'foo')).toThrowError();
+  });
+
+  it('should throw for null', () => {
+    expect(() => Validate.required({ foo: null }, 'foo')).toThrowError();
+  });
+
+  it('should not throw for 0', () => {
+    expect(() => Validate.required({ foo: 0 }, 'foo')).not.toThrowError();
+  });
+
+  it('should not throw for an empty string', () => {
+    expect(() => Validate.required({ foo: '' }, 'foo')).not.toThrowError();
+  });
+
+  // what about NaN ?
 });
