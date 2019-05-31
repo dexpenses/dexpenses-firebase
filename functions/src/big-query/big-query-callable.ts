@@ -57,7 +57,15 @@ export const Validate = {
 };
 
 export const ResultTransformers: { [key: string]: (rows: any[]) => any } = {
-  SINGLE_VALUE: (rows) => ({ value: Object.values(rows[0])[0] }),
+  SINGLE_VALUE: (rows) => {
+    if (!rows || rows.length !== 1 || Object.values(rows[0]).length !== 1) {
+      throw new functions.https.HttpsError(
+        'internal',
+        'single result expected'
+      );
+    }
+    return { value: Object.values(rows[0])[0] };
+  },
 };
 
 export default function bigQueryCallable(def: BigQueryFunction) {
