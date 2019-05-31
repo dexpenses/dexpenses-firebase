@@ -1,0 +1,177 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`bigQueryFunction aggregateAverageTotal should generate the correct SQL 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      Object {
+        "params": Object {
+          "end": 2018-12-31T23:00:00.000Z,
+          "start": 1970-01-01T00:00:00.000Z,
+          "user_id": "test",
+        },
+        "query": "select round(avg(total), 2) as avg_monthly_total from (
+      SELECT
+      extract(year from timestamp) as year,
+      extract(month from timestamp) as month,
+      sum(amount) as total
+      FROM \`dexpenses-207219.dexpenses_bi.actual_receipts\`
+      where user_id = @user_id
+      and timestamp >= @start
+      and timestamp <= @end
+      group by year, month
+  )",
+      },
+    ],
+  ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": Promise {},
+    },
+  ],
+}
+`;
+
+exports[`bigQueryFunction aggregateByPaymentMethod should generate the correct SQL 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      Object {
+        "params": Object {
+          "end": 2018-12-31T23:00:00.000Z,
+          "start": 1970-01-01T00:00:00.000Z,
+          "user_id": "test",
+        },
+        "query": "select payment_method, round(sum(amount),2) as total
+  from \`dexpenses-207219.dexpenses_bi.actual_receipts\` as r
+  where user_id = @user_id
+  and r.timestamp >= @start
+  and r.timestamp <= @end
+  group by payment_method
+  order by total desc",
+      },
+    ],
+  ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": Promise {},
+    },
+  ],
+}
+`;
+
+exports[`bigQueryFunction aggregateByTags should generate the correct SQL 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      Object {
+        "params": Object {
+          "end": 2018-12-31T23:00:00.000Z,
+          "start": 1970-01-01T00:00:00.000Z,
+          "user_id": "test",
+        },
+        "query": "SELECT tag, round(sum(r.amount), 2) as total
+  FROM \`dexpenses-207219.dexpenses_bi.actual_receipts\` as r
+  cross join UNNEST(r.tags) as tag
+  where user_id = @user_id
+  and r.timestamp >= @start
+  and r.timestamp <= @end
+  group by tag
+  order by total desc
+  ",
+      },
+    ],
+  ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": Promise {},
+    },
+  ],
+}
+`;
+
+exports[`bigQueryFunction aggregateTotal should generate the correct SQL 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      Object {
+        "params": Object {
+          "end": 2018-12-31T23:00:00.000Z,
+          "start": 1970-01-01T00:00:00.000Z,
+          "user_id": "test",
+        },
+        "query": "SELECT round(sum(amount), 2) as total
+  FROM \`dexpenses-207219.dexpenses_bi.actual_receipts\`
+  WHERE user_id = @user_id
+  AND timestamp >= @start
+  AND timestamp <= @end",
+      },
+    ],
+  ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": Promise {},
+    },
+  ],
+}
+`;
+
+exports[`bigQueryFunction aggregateTotalOverTimePeriod should generate the correct SQL 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      Object {
+        "params": Object {
+          "end": "2019-12-31 23:59:59.999999",
+          "start": "2018-01-01",
+          "user_id": "test",
+        },
+        "query": "SELECT extract(year from timestamp) as year, round(sum(amount), 2) as total
+    FROM \`dexpenses-207219.dexpenses_bi.actual_receipts\`
+    where user_id = @user_id
+    and timestamp >= @start
+    and timestamp <= @end
+    group by year
+    order by year asc",
+      },
+    ],
+  ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": Promise {},
+    },
+  ],
+}
+`;
+
+exports[`bigQueryFunction findByBoundingBox should generate the correct SQL 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      Object {
+        "params": Object {
+          "ne_lat": 3,
+          "ne_lng": 2,
+          "sw_lat": 1,
+          "sw_lng": 0,
+          "user_id": "test",
+        },
+        "query": "select * from \`dexpenses-207219.dexpenses_bi.actual_receipts\`
+  WHERE (user_id = @user_id OR user_id = 'test')
+  AND ST_INTERSECTSBOX(location, @sw_lng, @sw_lat, @ne_lng, @ne_lat)",
+      },
+    ],
+  ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": Promise {},
+    },
+  ],
+}
+`;

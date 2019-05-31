@@ -1,6 +1,6 @@
 module.exports = {
   roots: ['<rootDir>/src', '<rootDir>/test'],
-  setupFiles: ['<rootDir>/src/setup.ts'],
+  setupFiles: ['<rootDir>/src/setup.ts', 'jest-date-mock'],
   transform: {
     '^.+\\.tsx?$': 'ts-jest',
   },

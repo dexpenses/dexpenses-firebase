@@ -47,7 +47,7 @@ export interface BigQueryFunction {
 
 export const Validate = {
   required(v: any, key: string) {
-    if (!v[key]) {
+    if (v[key] === undefined || v[key] === null) {
       throw new functions.https.HttpsError(
         'failed-precondition',
         `required property '${key}' missing`
