@@ -28,13 +28,11 @@
     "luxon": "^1.15.0"
   },
   "devDependencies": {
-    "@types/gapi.client.vision": "^1.0.1",
     "@types/google__maps": "^0.5.5",
     "@types/jest": "^24.0.13",
     "@types/luxon": "^1.13.0",
     "chance": "^1.0.18",
     "firebase-functions-test": "^0.1.6",
-    "firebase-mock": "^2.2.10",
     "jest": "^24.8.0",
     "jest-date-mock": "^1.0.7",
     "source-map-support": "^0.5.12",
