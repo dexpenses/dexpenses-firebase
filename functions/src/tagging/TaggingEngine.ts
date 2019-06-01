@@ -9,7 +9,7 @@ export default class TaggingEngine {
   constructor(private rules: Rule[]) {}
 
   tag(receipt: Receipt): string[] {
-    const tags = new Set();
+    const tags = new Set<string>();
     if (receipt.place && receipt.place.types) {
       receipt.place.types.forEach((placeType) => {
         const tag = placeTypeMappings[placeType];
