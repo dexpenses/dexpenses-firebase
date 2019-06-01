@@ -38,7 +38,7 @@ describe.each(Object.entries(bigQueryFunctions))(
   (name, func: any) => {
     beforeEach(() => {
       (BigQuery.prototype.query as any).mockClear();
-      mockDate.advanceTo(new Date(2019, 0, 1, 0, 0, 0, 0));
+      mockDate.advanceTo(new Date('2019-01-01T00:00:00.000Z'));
     });
 
     it('should generate the correct SQL', async () => {
