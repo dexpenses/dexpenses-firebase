@@ -15,21 +15,11 @@ interface BigQueryRecurringPayment extends BigQueryRow {
   due?: string;
 }
 
-function resolvePaymentPeriod(period?: string): number | undefined {
-  if (!period) {
-    return undefined;
-  }
-  switch (period) {
-    case 'Monthly':
-      return 1;
-    case 'Quarterly':
-      return 4;
-    case 'Yearly':
-      return 12;
-    default:
-      return undefined;
-  }
-}
+const numericPaymentPeriodMapping = {
+  Monthly: 1,
+  Quarterly: 4,
+  Yearly: 12,
+};
 
 export const recurringPaymentsToBigQuery = functions.firestore
   .document('recurringPaymentsByUser/{userId}/recurringPayments/{paymentId}')
@@ -51,7 +41,7 @@ export const recurringPaymentsToBigQuery = functions.firestore
         currency: (data.amount || {}).currency,
         payment_method: data.paymentMethod,
         period: data.period,
-        c_period: resolvePaymentPeriod(data.period),
+        c_period: numericPaymentPeriodMapping[data.period],
       };
     }
 
