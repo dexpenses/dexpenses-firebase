@@ -26,15 +26,12 @@ export default class TaggingEngine {
   static async loadForUser(userId: string) {
     const rules = await admin
       .firestore()
-      .collection('rulesByUser')
-      .doc(userId)
-      .collection('rules')
+      .collection(`rulesByUser/${userId}/rules`)
       .get();
     return new TaggingEngine(
-      rules.docs.map((rule) => {
-        const r = rule.data();
-        r.condition = parseCondition(r.condition);
-        return r as Rule;
+      rules.docs.map((ruleDoc) => {
+        const rule = ruleDoc.data();
+        return { ...rule, condition: parseCondition(rule.condition) } as Rule;
       })
     );
   }

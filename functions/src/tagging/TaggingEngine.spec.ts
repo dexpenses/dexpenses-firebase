@@ -1,6 +1,8 @@
 import TaggingEngine from './TaggingEngine';
 import DateCondition from '@dexpenses/rule-conditions/lib/condition/DateCondition';
 import { DateTime } from 'luxon';
+import * as admin from 'firebase-admin';
+import HeaderCondition from '@dexpenses/rule-conditions/lib/condition/HeaderCondition';
 
 describe('TaggingEngine', () => {
   it('should not fail if place type not found', () => {
@@ -50,5 +52,37 @@ describe('TaggingEngine', () => {
         }).toJSDate(),
       })
     ).toEqual(['tag']);
+  });
+
+  it('should load user engine correctly', async () => {
+    const rules = {
+      docs: [
+        {
+          data() {
+            return {
+              condition: {
+                header: ['header', false],
+              },
+            };
+          },
+        } as any,
+      ],
+    };
+    const collectionFn = jest
+      .fn()
+      .mockReturnValue({ get: jest.fn().mockResolvedValue(rules) });
+    jest.spyOn(admin, 'firestore' as any, 'get').mockReturnValue(() => ({
+      collection: collectionFn,
+    }));
+    const engine = await TaggingEngine.loadForUser('test');
+    expect(collectionFn).toHaveBeenCalledWith('rulesByUser/test/rules');
+
+    expect((engine as any).rules).toEqual([
+      { condition: new HeaderCondition('header', false) },
+    ]);
+  });
+
+  beforeEach(() => {
+    jest.spyOn(admin, 'firestore' as any, 'get').mockRestore();
   });
 });
