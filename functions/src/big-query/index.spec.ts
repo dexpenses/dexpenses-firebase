@@ -1,4 +1,7 @@
-import * as bigQueryFunctions from './index';
+import * as fbTest from 'firebase-functions-test';
+
+const test = fbTest();
+
 import { BigQuery } from '@google-cloud/bigquery';
 import * as mockDate from 'jest-date-mock';
 
@@ -11,9 +14,6 @@ jest.mock('@google-cloud/bigquery', () => {
     BigQuery,
   };
 });
-jest.mock('../https', () => ({
-  onAuthenticatedCall: (handler) => handler,
-}));
 
 const testData = {
   aggregateTotalOverTimePeriod: {
@@ -33,21 +33,19 @@ const testData = {
   },
 };
 
-describe.each(Object.entries(bigQueryFunctions))(
+describe.each(Object.entries(require('./index')))(
   'bigQueryFunction %s',
-  (name, func: any) => {
+  (name, actualFunc: any) => {
     beforeEach(() => {
-      (BigQuery.prototype.query as any).mockClear();
+      jest.clearAllMocks();
       mockDate.advanceTo(new Date('2019-01-01T00:00:00.000Z'));
     });
 
     it('should generate the correct SQL', async () => {
-      expect.assertions(2);
-      try {
-        await func(testData[name] || {}, { auth: { uid: 'test' } });
-      } catch {
-        fail(`invocation should not fail`);
-      }
+      const func = test.wrap(actualFunc);
+      await expect(
+        func(testData[name] || {}, { auth: { uid: 'test' } })
+      ).resolves.toBeDefined();
       expect(BigQuery.prototype.query).toHaveBeenCalledTimes(1);
       expect(BigQuery.prototype.query).toMatchSnapshot();
     });
