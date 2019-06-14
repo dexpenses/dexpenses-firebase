@@ -29,7 +29,7 @@
   },
   "devDependencies": {
     "@types/google__maps": "^0.5.5",
-    "@types/jest": "^24.0.13",
+    "@types/jest": "^24.0.14",
     "@types/luxon": "^1.15.1",
     "chance": "^1.0.18",
     "firebase-functions-test": "^0.1.6",
