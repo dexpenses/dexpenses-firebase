@@ -11,3 +11,4 @@ export * from './delete-image-on-receipt-delete';
 export * from './tagging';
 export * from './big-query-export';
 export * from './big-query';
+export * from './search';
