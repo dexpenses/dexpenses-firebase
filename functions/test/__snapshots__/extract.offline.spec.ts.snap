@@ -16,6 +16,7 @@ Object {
       ],
       "paymentMethod": "DEBIT",
       "phone": "+49951208322",
+      "place": null,
       "time": Object {
         "hour": 19,
         "minute": 0,
@@ -44,6 +45,7 @@ Object {
       ],
       "paymentMethod": "CREDIT",
       "phone": "0531- 6180168",
+      "place": null,
       "time": Object {
         "hour": 19,
         "minute": 42,
@@ -72,6 +74,7 @@ Object {
       ],
       "paymentMethod": "CREDIT",
       "phone": null,
+      "place": null,
       "time": Object {
         "hour": 20,
         "minute": 43,
@@ -100,6 +103,7 @@ Object {
       ],
       "paymentMethod": "CREDIT",
       "phone": null,
+      "place": null,
       "time": Object {
         "hour": 20,
         "minute": 33,
@@ -128,6 +132,7 @@ Object {
       ],
       "paymentMethod": "CREDIT",
       "phone": null,
+      "place": null,
       "time": Object {
         "hour": 15,
         "minute": 57,
@@ -156,6 +161,7 @@ Object {
       ],
       "paymentMethod": "CREDIT",
       "phone": null,
+      "place": null,
       "time": Object {
         "hour": 16,
         "minute": 37,
@@ -185,6 +191,7 @@ Object {
       ],
       "paymentMethod": "CREDIT",
       "phone": "0531/ 123 30 87",
+      "place": null,
       "time": Object {
         "hour": 1,
         "minute": 20,
@@ -214,6 +221,7 @@ Object {
       ],
       "paymentMethod": "DEBIT",
       "phone": "0351-47 11 295",
+      "place": null,
       "time": Object {
         "hour": 11,
         "minute": 56,
@@ -243,6 +251,7 @@ Object {
       ],
       "paymentMethod": "DEBIT",
       "phone": null,
+      "place": null,
       "time": Object {
         "hour": 19,
         "minute": 47,
@@ -271,6 +280,7 @@ Object {
       ],
       "paymentMethod": "DEBIT",
       "phone": "05541/6241",
+      "place": null,
       "time": Object {
         "hour": 13,
         "minute": 3,
@@ -300,6 +310,7 @@ Object {
       ],
       "paymentMethod": "DEBIT",
       "phone": null,
+      "place": null,
       "time": Object {
         "hour": 14,
         "minute": 3,
@@ -329,6 +340,7 @@ Object {
       ],
       "paymentMethod": "DEBIT",
       "phone": null,
+      "place": null,
       "time": Object {
         "hour": 15,
         "minute": 1,
@@ -356,6 +368,7 @@ Object {
       ],
       "paymentMethod": "DEBIT",
       "phone": "05541/90 333 22",
+      "place": null,
       "time": null,
       "timestamp": 2019-04-19T22:00:00.000Z,
     },
@@ -380,6 +393,7 @@ Object {
       ],
       "paymentMethod": "DEBIT",
       "phone": "05541/2873",
+      "place": null,
       "time": Object {
         "hour": 15,
         "minute": 38,
@@ -410,6 +424,7 @@ Object {
       ],
       "paymentMethod": "DEBIT",
       "phone": null,
+      "place": null,
       "time": Object {
         "hour": 18,
         "minute": 58,
@@ -438,6 +453,7 @@ Object {
       ],
       "paymentMethod": "DEBIT",
       "phone": "05331/984942",
+      "place": null,
       "time": Object {
         "hour": 18,
         "minute": 2,
@@ -465,6 +481,7 @@ Object {
       ],
       "paymentMethod": "DEBIT",
       "phone": "05331/84942",
+      "place": null,
       "time": null,
     },
     "state": "partial",
@@ -489,6 +506,7 @@ Object {
       ],
       "paymentMethod": "DEBIT",
       "phone": null,
+      "place": null,
       "time": Object {
         "hour": 7,
         "minute": 45,
@@ -516,6 +534,7 @@ Object {
       ],
       "paymentMethod": "DEBIT",
       "phone": "05331 33838",
+      "place": null,
       "time": null,
       "timestamp": 2017-08-30T22:00:00.000Z,
     },
@@ -539,6 +558,7 @@ Object {
       ],
       "paymentMethod": "DEBIT",
       "phone": "05331 / 84 562",
+      "place": null,
       "time": Object {
         "hour": 8,
         "minute": 12,
@@ -570,6 +590,7 @@ Object {
       ],
       "paymentMethod": "CREDIT",
       "phone": null,
+      "place": null,
       "time": Object {
         "hour": 17,
         "minute": 36,
@@ -599,6 +620,7 @@ Object {
       ],
       "paymentMethod": "DEBIT",
       "phone": null,
+      "place": null,
       "time": Object {
         "hour": 18,
         "minute": 10,
@@ -628,6 +650,7 @@ Object {
       ],
       "paymentMethod": "CREDIT",
       "phone": null,
+      "place": null,
       "time": Object {
         "hour": 20,
         "minute": 33,
@@ -657,6 +680,7 @@ Object {
       ],
       "paymentMethod": "CREDIT",
       "phone": null,
+      "place": null,
       "time": Object {
         "hour": 20,
         "minute": 28,
@@ -685,6 +709,7 @@ Object {
       ],
       "paymentMethod": "DEBIT",
       "phone": "05361 -272666",
+      "place": null,
       "time": Object {
         "hour": 18,
         "minute": 53,
@@ -715,6 +740,7 @@ Object {
       ],
       "paymentMethod": "DKV_CARD",
       "phone": "05384/96660",
+      "place": null,
       "time": Object {
         "hour": 9,
         "minute": 14,
@@ -744,6 +770,7 @@ Object {
       ],
       "paymentMethod": "DKV_CARD",
       "phone": "05306 9309007",
+      "place": null,
       "time": Object {
         "hour": 6,
         "minute": 24,
@@ -774,6 +801,7 @@ Object {
       ],
       "paymentMethod": "DKV_CARD",
       "phone": "05361 39000",
+      "place": null,
       "time": Object {
         "hour": 17,
         "minute": 37,
@@ -802,6 +830,7 @@ Object {
       ],
       "paymentMethod": "CASH",
       "phone": "0951-18557292",
+      "place": null,
       "time": null,
       "timestamp": 2019-01-17T23:00:00.000Z,
     },
@@ -825,6 +854,7 @@ Object {
       ],
       "paymentMethod": "CASH",
       "phone": "0951/9230775",
+      "place": null,
       "time": Object {
         "hour": 16,
         "minute": 16,
@@ -854,6 +884,7 @@ Object {
       ],
       "paymentMethod": null,
       "phone": "0951/ 21655",
+      "place": null,
       "time": null,
       "timestamp": 2019-04-26T22:00:00.000Z,
     },
@@ -878,6 +909,7 @@ Object {
       ],
       "paymentMethod": "DEBIT",
       "phone": null,
+      "place": null,
       "time": Object {
         "hour": 13,
         "minute": 54,
@@ -907,6 +939,7 @@ Object {
       ],
       "paymentMethod": "DEBIT",
       "phone": "0951 2080125",
+      "place": null,
       "time": Object {
         "hour": 16,
         "minute": 14,
@@ -935,6 +968,7 @@ Object {
       ],
       "paymentMethod": "CREDIT",
       "phone": "0951 30900892",
+      "place": null,
       "time": Object {
         "hour": 15,
         "minute": 26,
@@ -964,6 +998,7 @@ Object {
       ],
       "paymentMethod": "DEBIT",
       "phone": null,
+      "place": null,
       "time": Object {
         "hour": 10,
         "minute": 59,
@@ -992,6 +1027,7 @@ Object {
       ],
       "paymentMethod": "DEBIT",
       "phone": "0211 542569-0",
+      "place": null,
       "time": Object {
         "hour": 12,
         "minute": 1,
@@ -1019,6 +1055,7 @@ Object {
       ],
       "paymentMethod": "CASH",
       "phone": "+49 951/5193936-0",
+      "place": null,
       "time": Object {
         "hour": 9,
         "minute": 32,
@@ -1045,6 +1082,7 @@ Object {
       ],
       "paymentMethod": "DEBIT",
       "phone": "+49 951 297925 0",
+      "place": null,
       "time": Object {
         "hour": 11,
         "minute": 8,
@@ -1073,6 +1111,7 @@ Object {
       ],
       "paymentMethod": "DEBIT",
       "phone": null,
+      "place": null,
       "time": Object {
         "hour": 15,
         "minute": 22,
@@ -1104,6 +1143,7 @@ Object {
       ],
       "paymentMethod": "DEBIT",
       "phone": "0951 50904990",
+      "place": null,
       "time": Object {
         "hour": 14,
         "minute": 14,
@@ -1134,6 +1174,7 @@ Object {
       ],
       "paymentMethod": "CASH",
       "phone": null,
+      "place": null,
       "time": Object {
         "hour": 14,
         "minute": 30,
@@ -1164,6 +1205,7 @@ Object {
       ],
       "paymentMethod": "CASH",
       "phone": "0951-202173",
+      "place": null,
       "time": null,
       "timestamp": 2018-11-26T23:00:00.000Z,
     },
@@ -1188,6 +1230,7 @@ Object {
       ],
       "paymentMethod": "CASH",
       "phone": "0951-9179681",
+      "place": null,
       "time": Object {
         "hour": 11,
         "minute": 55,
@@ -1218,6 +1261,7 @@ Object {
       ],
       "paymentMethod": null,
       "phone": "0951 2082466",
+      "place": null,
       "time": Object {
         "hour": 20,
         "minute": 54,
@@ -1247,6 +1291,7 @@ Object {
       ],
       "paymentMethod": null,
       "phone": "0521-96 79 79 79",
+      "place": null,
       "time": Object {
         "hour": 20,
         "minute": 1,
@@ -1278,6 +1323,7 @@ Object {
       ],
       "paymentMethod": "DEBIT",
       "phone": "0531 21965536",
+      "place": null,
       "time": Object {
         "hour": 15,
         "minute": 58,
@@ -1306,6 +1352,7 @@ Object {
       ],
       "paymentMethod": "CREDIT",
       "phone": "06192 /93 999 99",
+      "place": null,
       "time": Object {
         "hour": 10,
         "minute": 14,
@@ -1336,6 +1383,7 @@ Object {
       ],
       "paymentMethod": "CASH",
       "phone": "+49 (0)531 26152500",
+      "place": null,
       "time": Object {
         "hour": 16,
         "minute": 37,
@@ -1364,6 +1412,7 @@ Object {
       ],
       "paymentMethod": "CREDIT",
       "phone": null,
+      "place": null,
       "time": Object {
         "hour": 12,
         "minute": 13,
@@ -1392,6 +1441,7 @@ Object {
       ],
       "paymentMethod": "CREDIT",
       "phone": "0531/55472",
+      "place": null,
       "time": Object {
         "hour": 19,
         "minute": 43,
@@ -1420,6 +1470,7 @@ Object {
       ],
       "paymentMethod": "CREDIT",
       "phone": null,
+      "place": null,
       "time": Object {
         "hour": 15,
         "minute": 59,
@@ -1448,6 +1499,7 @@ Object {
       ],
       "paymentMethod": "CREDIT",
       "phone": "0531-12949-0",
+      "place": null,
       "time": Object {
         "hour": 16,
         "minute": 31,
@@ -1475,6 +1527,7 @@ Object {
       ],
       "paymentMethod": "DEBIT",
       "phone": "0531/6183036",
+      "place": null,
       "time": Object {
         "hour": 16,
         "minute": 44,
@@ -1504,6 +1557,7 @@ Object {
       ],
       "paymentMethod": "CREDIT",
       "phone": "+49 (0) 531 618 3341",
+      "place": null,
       "time": Object {
         "hour": 15,
         "minute": 39,
@@ -1532,6 +1586,7 @@ Object {
       ],
       "paymentMethod": null,
       "phone": null,
+      "place": null,
       "time": Object {
         "hour": 20,
         "minute": 3,
@@ -1561,6 +1616,7 @@ Object {
       ],
       "paymentMethod": "DEBIT",
       "phone": "+49 351 49768812",
+      "place": null,
       "time": Object {
         "hour": 13,
         "minute": 9,
@@ -1590,6 +1646,7 @@ Object {
       ],
       "paymentMethod": null,
       "phone": null,
+      "place": null,
       "time": Object {
         "hour": 18,
         "minute": 35,
@@ -1620,6 +1677,7 @@ Object {
       ],
       "paymentMethod": "DEBIT",
       "phone": "+49 (551) 44035",
+      "place": null,
       "time": Object {
         "hour": 12,
         "minute": 23,
@@ -1650,6 +1708,7 @@ Object {
       ],
       "paymentMethod": "DEBIT",
       "phone": "0511/23523333",
+      "place": null,
       "time": Object {
         "hour": 15,
         "minute": 23,
@@ -1680,6 +1739,7 @@ Object {
       ],
       "paymentMethod": "CASH",
       "phone": "+49 511 977 2509",
+      "place": null,
       "time": Object {
         "hour": 10,
         "minute": 6,
@@ -1707,6 +1767,7 @@ Object {
       ],
       "paymentMethod": null,
       "phone": "06192/93999",
+      "place": null,
       "time": Object {
         "hour": 14,
         "minute": 38,
@@ -1735,6 +1796,7 @@ Object {
       ],
       "paymentMethod": null,
       "phone": "+49 341 9954 250",
+      "place": null,
       "time": Object {
         "hour": 16,
         "minute": 20,
@@ -1764,6 +1826,7 @@ Object {
       ],
       "paymentMethod": "DEBIT",
       "phone": "05331/72817",
+      "place": null,
       "time": Object {
         "hour": 17,
         "minute": 16,
@@ -1792,6 +1855,7 @@ Object {
       ],
       "paymentMethod": "CASH",
       "phone": "05331 984942",
+      "place": null,
       "time": Object {
         "hour": 10,
         "minute": 48,
@@ -1822,6 +1886,7 @@ Object {
       ],
       "paymentMethod": "DEBIT",
       "phone": "05331-98890",
+      "place": null,
       "time": null,
       "timestamp": 2018-08-27T22:00:00.000Z,
     },
@@ -1849,6 +1914,7 @@ Object {
       ],
       "paymentMethod": "CREDIT",
       "phone": "+49 5331 856 029 1",
+      "place": null,
       "time": Object {
         "hour": 10,
         "minute": 35,
@@ -1877,6 +1943,7 @@ Object {
       ],
       "paymentMethod": "CREDIT",
       "phone": "05331/9028264",
+      "place": null,
       "time": Object {
         "hour": 17,
         "minute": 21,
@@ -1906,6 +1973,7 @@ Object {
       ],
       "paymentMethod": "DEBIT",
       "phone": "05331/90570",
+      "place": null,
       "time": Object {
         "hour": 12,
         "minute": 5,
@@ -1935,6 +2003,7 @@ Object {
       ],
       "paymentMethod": "CASH",
       "phone": "05331 - 71845",
+      "place": null,
       "time": null,
       "timestamp": 2017-09-22T22:00:00.000Z,
     },
@@ -1959,6 +2028,7 @@ Object {
       ],
       "paymentMethod": "CASH",
       "phone": "05331/2818",
+      "place": null,
       "time": Object {
         "hour": 15,
         "minute": 47,
@@ -1989,6 +2059,7 @@ Object {
       ],
       "paymentMethod": "CREDIT",
       "phone": "05331/900810",
+      "place": null,
       "time": Object {
         "hour": 12,
         "minute": 17,
@@ -2017,6 +2088,7 @@ Object {
       ],
       "paymentMethod": null,
       "phone": null,
+      "place": null,
       "time": Object {
         "hour": 12,
         "minute": 39,
@@ -2045,6 +2117,7 @@ Object {
       ],
       "paymentMethod": "CREDIT",
       "phone": null,
+      "place": null,
       "time": Object {
         "hour": 12,
         "minute": 42,
@@ -2075,6 +2148,7 @@ Object {
       ],
       "paymentMethod": "DEBIT",
       "phone": "0 53 31/9 35 91 28",
+      "place": null,
       "time": Object {
         "hour": 17,
         "minute": 23,
@@ -2104,6 +2178,7 @@ Object {
       ],
       "paymentMethod": "CASH",
       "phone": "05331-8560085",
+      "place": null,
       "time": Object {
         "hour": 18,
         "minute": 3,
@@ -2131,6 +2206,7 @@ Object {
       ],
       "paymentMethod": null,
       "phone": null,
+      "place": null,
       "time": null,
       "timestamp": 2018-07-27T22:00:00.000Z,
     },
@@ -2155,6 +2231,7 @@ Object {
       ],
       "paymentMethod": "CREDIT",
       "phone": "05331/907026",
+      "place": null,
       "time": Object {
         "hour": 17,
         "minute": 7,
@@ -2184,6 +2261,7 @@ Object {
       ],
       "paymentMethod": "CASH",
       "phone": "05331-8560268",
+      "place": null,
       "time": Object {
         "hour": 12,
         "minute": 43,
@@ -2212,6 +2290,7 @@ Object {
       ],
       "paymentMethod": "ONLINE",
       "phone": "(05361) 22 192 22",
+      "place": null,
       "time": Object {
         "hour": 18,
         "minute": 56,
@@ -2243,6 +2322,7 @@ Object {
       ],
       "paymentMethod": "DEBIT",
       "phone": "05308 93030",
+      "place": null,
       "time": Object {
         "hour": 18,
         "minute": 10,
@@ -2276,6 +2356,7 @@ Object {
       ],
       "paymentMethod": "CREDIT",
       "phone": null,
+      "place": null,
       "time": Object {
         "hour": 16,
         "minute": 58,
@@ -2307,6 +2388,7 @@ Object {
       ],
       "paymentMethod": "CREDIT",
       "phone": "05308 9332-0",
+      "place": null,
       "time": Object {
         "hour": 17,
         "minute": 46,
@@ -2336,6 +2418,7 @@ Object {
       ],
       "paymentMethod": "CREDIT",
       "phone": "05308-701",
+      "place": null,
       "time": Object {
         "hour": 17,
         "minute": 18,
@@ -2363,6 +2446,7 @@ Object {
       ],
       "paymentMethod": null,
       "phone": "050/ 111 523 280",
+      "place": null,
       "time": Object {
         "hour": 14,
         "minute": 25,
@@ -2392,6 +2476,7 @@ Object {
       ],
       "paymentMethod": "ONLINE",
       "phone": "05361 275 12 50",
+      "place": null,
       "time": Object {
         "hour": 18,
         "minute": 34,
@@ -2421,6 +2506,7 @@ Object {
       ],
       "paymentMethod": "DEBIT",
       "phone": null,
+      "place": null,
       "time": Object {
         "hour": 19,
         "minute": 10,
@@ -2449,6 +2535,7 @@ Object {
       ],
       "paymentMethod": null,
       "phone": "0 53 08 40 46 30",
+      "place": null,
       "time": Object {
         "hour": 20,
         "minute": 11,
@@ -2476,6 +2563,7 @@ Object {
       ],
       "paymentMethod": "DEBIT",
       "phone": "05361 272 666",
+      "place": null,
       "time": Object {
         "hour": 18,
         "minute": 27,
@@ -2505,6 +2593,7 @@ Object {
       ],
       "paymentMethod": "PAYPAL",
       "phone": "05361 272 666",
+      "place": null,
       "time": Object {
         "hour": 20,
         "minute": 19,
@@ -2533,6 +2622,7 @@ Object {
       ],
       "paymentMethod": "CREDIT",
       "phone": "+49 536 1846394",
+      "place": null,
       "time": Object {
         "hour": 18,
         "minute": 14,
@@ -2562,6 +2652,7 @@ Object {
       ],
       "paymentMethod": "DEBIT",
       "phone": "05361-861516",
+      "place": null,
       "time": Object {
         "hour": 21,
         "minute": 32,

@@ -26,9 +26,9 @@ export interface ReceiptResult {
   error?: any;
 }
 
-export const extractorPipeline = [
+export const extractorPipelineFactory = (userData: UserData) => [
   new HeaderExtractor(),
-  new PhoneNumberExtractor(),
+  new PhoneNumberExtractor(userData.phoneNumber),
   new DateExtractor(),
   new TimeExtractor(),
   new PaymentMethodExtractor(),
@@ -46,13 +46,21 @@ export function isReady({ header, date, amount }: Receipt): boolean {
   return !!header && header.length > 0 && !!date && !!amount;
 }
 
-export default async function(text: string): Promise<ReceiptResult> {
+interface UserData {
+  phoneNumber?: string;
+}
+
+export default async function(
+  text: string,
+  userData: UserData
+): Promise<ReceiptResult> {
   if (!text) {
     return {
       state: 'no-text',
     };
   }
   text = cleanUp(text);
+  const extractorPipeline = extractorPipelineFactory(userData);
   const lines = text.split('\n');
   const extracted: Receipt = {};
   let anySuccess = false;

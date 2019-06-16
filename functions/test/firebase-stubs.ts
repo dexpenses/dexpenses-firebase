@@ -1,9 +1,17 @@
 export const firestoreDb = {};
 export const updateFn = jest.fn();
+
+// TODO full stub structure
 export function rootCollectionRef(rootCollection: string) {
   return {
     doc(rootDoc: string) {
       return {
+        get() {
+          return {
+            exists: !!firestoreDb[`${rootCollection}/${rootDoc}`],
+            data: () => firestoreDb[`${rootCollection}/${rootDoc}`],
+          };
+        },
         collection(collection: string) {
           return {
             doc(doc: string) {
@@ -16,12 +24,13 @@ export function rootCollectionRef(rootCollection: string) {
                 },
                 update: updateFn,
                 get() {
+                  const got =
+                    firestoreDb[
+                      `${rootCollection}/${rootDoc}/${collection}/${doc}`
+                    ];
                   return {
-                    exists: true,
-                    data:
-                      firestoreDb[
-                        `${rootCollection}/${rootDoc}/${collection}/${doc}`
-                      ],
+                    exists: !!got,
+                    data: () => got,
                   };
                 },
               };

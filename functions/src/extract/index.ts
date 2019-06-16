@@ -13,8 +13,14 @@ export const extractReceipt = functions.pubsub
       console.error('Got invalid message:', data);
       return;
     }
+    const userData = await admin
+      .firestore()
+      .collection('users')
+      .doc(data.userId)
+      .get();
+
     const receiptId = data.fileName;
-    const result = await extractorPipeline(data.text);
+    const result = await extractorPipeline(data.text, userData.data() || {});
     await admin
       .firestore()
       .collection('receiptsByUser')

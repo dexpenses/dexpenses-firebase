@@ -3,17 +3,19 @@ import * as admin from 'firebase-admin';
 import * as pubsub from '@google-cloud/pubsub';
 import * as fs from 'fs';
 import * as path from 'path';
-import { firestore } from './firebase-stubs';
-import { extractorPipeline } from '../src/extract/pipeline';
-import { PlaceExtractor } from '../src/extract/extractor/place';
+import { firestore, firestoreDb } from './firebase-stubs';
 
 /*
  * Skip Geo Coding API call during testing
  */
-extractorPipeline.splice(
-  extractorPipeline.findIndex((e) => e instanceof PlaceExtractor),
-  1
-);
+jest.mock('../src/extract/extractor/place', () => {
+  return {
+    PlaceExtractor: jest.fn().mockImplementation(() => ({
+      field: 'place',
+      extract: () => null,
+    })),
+  };
+});
 
 const test = firebaseFunctionsTest();
 
@@ -32,6 +34,10 @@ pubsub.PubSub.prototype.topic = jest.fn().mockReturnValue({
 });
 
 const userId = test.auth.exampleUserRecord().uid;
+
+firestoreDb[`users/${userId}`] = {
+  phoneNumber: '+491234567890',
+};
 
 afterAll(() => {
   firestoreStub.mockRestore();
@@ -56,6 +62,7 @@ for (const entry of fs.readdirSync(dir)) {
   }
 }
 
+// TODO use describe.each and it.each
 for (const [suite, files] of Object.entries(testSuites)) {
   describe(`Extract receipt cloud function (offline) for "${suite}" receipts`, () => {
     for (const textFile of files) {
@@ -81,7 +88,7 @@ for (const [suite, files] of Object.entries(testSuites)) {
           .doc(receiptId)
           .get();
         expect(result.exists).toBeTruthy();
-        expect(result.data).toMatchSnapshot();
+        expect(result.data()).toMatchSnapshot();
       });
     }
   });
