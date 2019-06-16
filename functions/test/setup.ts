@@ -3,4 +3,4 @@
  * initialization is stubbed during tests, so the env var is not
  * required
  */
-process.env.FIREBASE_CONFIG = '*';
+process.env.FIREBASE_CONFIG = '{}'; // must be valid json
