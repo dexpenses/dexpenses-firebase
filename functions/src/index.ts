@@ -12,3 +12,4 @@ export * from './tagging';
 export * from './big-query-export';
 export * from './big-query';
 export * from './search';
+export * from './admin';
