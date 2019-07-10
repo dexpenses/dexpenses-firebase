@@ -45,17 +45,6 @@ export interface BigQueryFunction {
   resultTransformer?(rows: any[]): any;
 }
 
-export const Validate = {
-  required(v: any, key: string) {
-    if (v[key] === undefined || v[key] === null) {
-      throw new functions.https.HttpsError(
-        'failed-precondition',
-        `required property '${key}' missing`
-      );
-    }
-  },
-};
-
 export const ResultTransformers: { [key: string]: (rows: any[]) => any } = {
   SINGLE_VALUE: (rows) => {
     if (!rows || rows.length !== 1 || Object.values(rows[0]).length !== 1) {

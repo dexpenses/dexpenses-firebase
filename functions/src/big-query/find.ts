@@ -1,9 +1,10 @@
-import bigQueryCallable, { Validate } from './big-query-callable';
+import bigQueryCallable from './big-query-callable';
+import { validateRequired } from '../validation';
 
 function validateLngLat(v: any, lngLatKey: string) {
-  Validate.required(v, lngLatKey);
-  Validate.required(v[lngLatKey], 'lng');
-  Validate.required(v[lngLatKey], 'lat');
+  validateRequired(v[lngLatKey], lngLatKey);
+  validateRequired(v[lngLatKey].lng, 'lng');
+  validateRequired(v[lngLatKey].lat, 'lat');
 }
 
 export const findByBoundingBox = bigQueryCallable({

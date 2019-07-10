@@ -1,5 +1,6 @@
 import * as functions from 'firebase-functions';
-import bigQueryCallable, { Validate } from './big-query-callable';
+import bigQueryCallable from './big-query-callable';
+import { validateRequired } from '../validation';
 
 const PERIODS_TO_FIELD = {
   hourly: 'hour',
@@ -11,8 +12,8 @@ const VALID_PERIODS = Object.keys(PERIODS_TO_FIELD);
 
 export const aggregateTotalOverTimePeriod = bigQueryCallable({
   validate(data) {
-    Validate.required(data, 'start');
-    Validate.required(data, 'end');
+    validateRequired(data.start, 'start');
+    validateRequired(data.start, 'end');
     if (!data.period || !VALID_PERIODS.includes(data.period)) {
       throw new functions.https.HttpsError(
         'failed-precondition',
