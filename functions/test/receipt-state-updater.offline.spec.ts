@@ -1,7 +1,7 @@
 import * as firebaseFunctionsTest from 'firebase-functions-test';
 import * as admin from 'firebase-admin';
 import { updateFn, firestore } from './firebase-stubs';
-import * as extractor from '../src/extract/pipeline';
+import * as extractor from '@dexpenses/extract/lib/pipeline';
 
 const test = firebaseFunctionsTest();
 

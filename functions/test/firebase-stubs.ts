@@ -1,4 +1,4 @@
-export const firestoreDb = {};
+export let firestoreDb = {};
 export const updateFn = jest.fn();
 
 // TODO full stub structure
@@ -44,6 +44,9 @@ export function rootCollectionRef(rootCollection: string) {
 export const firestore = {
   collection(rootCollection: string) {
     return rootCollectionRef(rootCollection);
+  },
+  clear() {
+    firestoreDb = {};
   },
 } as any;
 

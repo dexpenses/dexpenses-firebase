@@ -1,6 +1,6 @@
 import * as admin from 'firebase-admin';
 import * as functions from 'firebase-functions';
-import extractorPipeline from './pipeline';
+import extractorPipeline from '@dexpenses/extract';
 import { PubSub } from '@google-cloud/pubsub';
 import { TextDetectionResultMessage } from '../detectText';
 import { TaggingMessage } from '../tagging';
@@ -20,7 +20,10 @@ export const extractReceipt = functions.pubsub
       .get();
 
     const receiptId = data.fileName;
-    const result = await extractorPipeline(data.text, userData.data() || {});
+    const result = await extractorPipeline(functions.config())(
+      data.text,
+      userData.data() || {}
+    );
     await admin
       .firestore()
       .collection('receiptsByUser')

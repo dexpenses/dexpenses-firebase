@@ -1,6 +1,6 @@
 import * as admin from 'firebase-admin';
 import * as functions from 'firebase-functions';
-import { isReady } from './extract/pipeline';
+import { isReady } from '@dexpenses/extract/lib/pipeline';
 
 export const receiptStateUpdater = functions.firestore
   .document('receiptsByUser/{userId}/receipts/{receiptId}')
