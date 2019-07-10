@@ -17,6 +17,10 @@
     {
       "target": "public",
       "rules": "storage.public.rules"
+    },
+    {
+      "target": "test-images",
+      "rules": "storage.test-images.rules"
     }
   ]
 }

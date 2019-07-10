@@ -10,6 +10,9 @@
         ],
         "public": [
           "dexpenses-207219-public"
+        ],
+         "test-images": [
+          "dexpenses-207219-test-images"
         ]
       }
     }
