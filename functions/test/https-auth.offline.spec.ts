@@ -8,7 +8,7 @@ const test = fbTest();
  */
 describe.each(
   Object.entries<CloudFunction<any>>(require('../src')).filter(
-    ([name, func]) => func.__trigger.httpsTrigger
+    ([name, func]) => func.__trigger && func.__trigger.httpsTrigger
   )
 )('HTTPS Function %s', (name, actualFunc: any) => {
   beforeEach(() => {
