@@ -2,7 +2,7 @@ import * as admin from 'firebase-admin';
 import * as functions from 'firebase-functions';
 import extractorPipeline from '@dexpenses/extract';
 import { PubSub } from '@google-cloud/pubsub';
-import { TextDetectionResultMessage } from '../detectText';
+import { TextDetectionResultMessage } from '../detect-text';
 import { TaggingMessage } from '../tagging';
 
 export const extractReceipt = functions.pubsub

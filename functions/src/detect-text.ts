@@ -49,16 +49,20 @@ function processVisionResult(
   };
 }
 
+export async function runTextDetection(gsUrl: string) {
+  const client = new ImageAnnotatorClient();
+  const [annotateImageResponse] = await client.textDetection(gsUrl);
+  return processVisionResult(annotateImageResponse);
+}
+
 export const detectText = functions.storage
   .object()
   .onFinalize(async (object) => {
     const userId = basename(dirname(object.name!));
     const fileName = basename(object.name!);
-    const client = new ImageAnnotatorClient();
-    const [annotateImageResponse] = await client.textDetection(
+    const result = await runTextDetection(
       `gs://${object.bucket}/${object.name}`
     );
-    const result = processVisionResult(annotateImageResponse);
     if (result.state !== 'success') {
       return admin
         .firestore()

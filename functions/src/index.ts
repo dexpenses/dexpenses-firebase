@@ -4,7 +4,7 @@ import * as admin from 'firebase-admin';
 
 admin.initializeApp();
 
-export * from './detectText';
+export * from './detect-text';
 export * from './extract';
 export * from './receipt-state-updater';
 export * from './delete-image-on-receipt-delete';

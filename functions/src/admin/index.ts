@@ -2,6 +2,7 @@ import * as functions from 'firebase-functions';
 import * as Octokit from '@octokit/rest';
 import { onAuthorizedCall, anyOf } from '../https';
 import { validateNotBlank } from '../validation';
+import { runTextDetection } from '../detect-text';
 
 export const addTestDataFile = onAuthorizedCall(anyOf('contributor'))(
   async (data, context) => {
@@ -39,5 +40,12 @@ export const addTestDataFile = onAuthorizedCall(anyOf('contributor'))(
     });
     console.log(`Added ${identifier} test file`);
     return { success: true };
+  }
+);
+
+export const manualTextDetection = onAuthorizedCall(anyOf('contributor'))(
+  async (data, context) => {
+    validateNotBlank(data.url, 'url');
+    return await runTextDetection(data.url);
   }
 );
