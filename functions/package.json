@@ -15,9 +15,9 @@
     "node": "10"
   },
   "dependencies": {
-    "@dexpenses/core": "^1.2.1",
+    "@dexpenses/core": "^1.2.2",
     "@dexpenses/extract": "^1.0.1",
-    "@dexpenses/rule-conditions": "^1.2.1",
+    "@dexpenses/rule-conditions": "^1.2.3",
     "@google-cloud/bigquery": "^4.1.4",
     "@google-cloud/pubsub": "^0.29.1",
     "@google-cloud/storage": "^3.0.2",
