@@ -21,12 +21,12 @@ jobs:
     - stage: sonar
       env: TZ=UTC
       node_js:
-        - '11'
+        - '10'
       addons:
         sonarcloud:
-          organization: dexmo007-github
+          organization: dexpenses
           token:
-            secure: FpyRNF03R5xrDQ306UyzGUkwy3cn4e9gtP5KjalGDK43yKEfxRYnAXQmlMoEH556/bHQZU8oTLaDwrPtErlzlHJwemmyfS4ODKJPp5jEaK3lMbZepX+o8cYb/9froq1O7y9dathFUsrPyAc0+mDq4Thei/+ng17ks2K0P41jqGEUu+SIxhCgv0mhsXk9X4XvBGcWUbn6/OFgz3e+bLzWOYDe7Knd1pDsues/rYCtQa5iQ8XVi67AoOCNnlFUoqf1ZtnmS/ys4A6YHjh24THv8W5O+ZS3PWF3/bD00KKlFeueRo4FzZv7E+TdFLSpg6GAXU5CmOVSA4Be+gpBl67SCDbYk9i1HpYqGL05kXtaMSthhdrT1GpPnLDLQrrMpY/xbwbM3GyqYsW7FAot9BE+4v6XCwxtHQbLyV34FvPgA3JeIH6nGcArrTjXINmNQSV7S4FnEODAUdp15SKtWoCu1aX/MBcLvFoCeSRJt14A/lF0E0MjcJNyA71CvM3kku5zsZnR9YJIQX+e4jQK19/Bv7oIoor/tx38/tqPrq11Wnts8gE2zRGNETweM9qpgUwHKmLi74H0nqCDajcpAh9qTaY20w2ulvUjMZM5T/wGbr05w7dBL3Wa5NxGK5FsbOZHWxuMvTl9GZ0k/3STaze8a5cdrQyJ1bFVj/+l1jYzU88=
+            secure: uGsYIcQyCEV7wr5xdBuCJLEw80sFOmmvaDucQs5g4tpPqnbU/t8MmSxE+3G31bo8atWZgYs7VfHAjtZuIkaFmP5rj2Pb2K/B8MsgfacUXhiVQRwIiLh7EcF4IoYFVkqLRiFM0zFy2hrHYzH010P1wUuvxpLQJ2FUm7MLKmPgRhRH+GeViRJXT3qp7tGn2qd+2tyoKAzSTNbm68z41kcBmwR+0nF/SLWq5YiXD0x1RFRW4FDRmCGt7BcJcH9ODwuRO0m/cZBwq4oyRK32+SSo6iE9Iz884y0i29xgWMQozT37Y9dx9E6bj9a/J3n0sw1aKE3LiyZUhE6cGyjH56HyaTOPRJPZVCC+kvE0ZUr3sQZ0sm/tT3JVFcBz9xC4scN48nOik9edOXhyscgwTnv9Ii1seOX4BOG647tihdsIERbu/HllLGQb4jTnb3ZxeUXwvslkJxyvGL9Q3qDDDDsew6a+kA2bR9J2n41rMv2BloLT6HexAc0O5u+riCxcOWd+1JNeRN9t2d3h1B9rbhAK/bSKOqaXvwBztmHqvbmSyn2FhM3CPODkh4OmrRKD8zK963Gi0bekqZKtmXBEEaAC+4TLyzb7ge5BPSTwEPdBrCZSZwE0eMADBwG/SAHyj1PMYL0fY1NhPYB7JHdyn7sNT47SpGwzjRGC8lvPgeclt14=
       script:
         - npm run test:coverage
         - npm run lint:sonar
@@ -43,4 +43,4 @@ jobs:
         skip_cleanup: true
         provider: firebase
         token:
-          secure: XjSN2VHONxN5/b/wFPCyBdTrdsb1D9ydcqi/NUMqii7s23nCYfHLlgVcadXlqdXV6LrgU3chwXHjgE3LIDH3mW10qIT3TipSQSemHFA4Hp69b622AuzDZmWsTSEeWa5kePc/p/bKrLQo4AJLL29/fVcVe2RmT806aKJz5K8zAY2GDBnmGqQkNnWpT6crmZaz1vtn9LduaWDCSfJiFzKo1WDumi9BcVnjKlmJNpLBCaLvIe1Hsx6G7Xfal7jHpEwzdDBWAtBAnqwKjN6I0w4nV9QTeN5rqPw8jbPW8IF8K+vH/bxfjhc2zeP+qhWJIgU2+afBnqDEV5jk9J1a1ph+Mpia1bUOWLndQOtct7rJOMNT6S2kl/9Cs9dL30UIUA5FUBmVJ2IYrdKrTPt4gTqe+QvulAVDdszyThwoxI2/f90TH3BsYjsKcmJO95eanlXU24skTMCQwbBzrYP2C8P/Q/gyR9+McVYZO4UDDkLNt9KBVDPEo11vRrI6Qrdh8zzScq1figEg3AE5s9AhkHCR5itlTxaCWfApQHdP9kJnJijxGjdzY6eNKV80v9rfsxpyNu+/+30W+RBPaw+tTwkmoxMJU3RT2FjAAEknt5tHrXcdErS0CWhpjbrsmREXTbGRMVWVZNsp65AQfIHOezyQ5lMz1vul5ieHC0IFHppXQv4=
+          secure: KBGAqJhUiKtxUvZgZ18TT9a4jCO19KL+/a2g5tluEuVt7lBsFNtFmi4pAyBqohVrfEU8Y0y7/nnCt6xtW+q5GeFCs2jzVGVNShoeiQFed5hUUCy+EsY3s4rkX96p4v8Y2B2roo97AK4fogt3bLhUcItjOSQER4Cm8nJ2q5aTqU129r7D//R87pzy9KLREyrdhQhKveYAmNHhxmj05Lsg9uljysg+X7u8K823sDtCdBC7bljFfUqNILzsPic0rRo7tc8Itb/eDq6/84HigHUD7XA//HKHRay5RB6SK+Oe5xp+9rT9TpLffKlbJ2yzn0Mod9RIKXMo6WbH2AkWZLQUEmOzViCxLC78p2KgOEezfKRoXKdIZk+i9HyJ+hvNFzkiniU+Ys1PSTscD14TbPkfIsV5ISmKfUBGzokewIsgIyaxrKaUYynmL6n6P7GwB2C+6p7jqTRkWoX97pUghFIwydYRDzXsjWhZ2jUoI+g3Mv0ilrV5jPMgcAOoYnZ3hj6wdqu3B5kMjeRAFnQTR0XKRh/T6SBJv4PZ8nqE61LPgAJJvn0bt37cTr3xWJBEL1/Cka+kG+9WF64qwXwc3NlwizT6QgfCtdFPp7SkMQh0kjcL8vWYp33efjJmpKem8Kkn3r5xXEsgaRFFT9wL5oseXm0CoQQTNAyxdRB5quYh62o=

@@ -20,5 +20,9 @@ service cloud.firestore {
     match /dashboardsByUser/{userId}/dashboards/{id} {
       allow read, write: if request.auth.uid == userId;
     }
+
+    match /testData/{id} {
+      allow read, write: if "contributor" in get(/databases/$(database)/documents/auth/$(request.auth.uid)).data.roles;
+    }
   }
 }

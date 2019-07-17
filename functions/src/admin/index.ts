@@ -1,27 +1,48 @@
 import * as functions from 'firebase-functions';
 import * as Octokit from '@octokit/rest';
 import { onAuthorizedCall, anyOf } from '../https';
-import { validateNotBlank } from '../validation';
+import { validateNotBlank, validateRequired } from '../validation';
 import { runTextDetection } from '../detect-text';
+
+interface TestDataInfo {
+  category: string;
+  cityCode: string;
+  name: string;
+  classifier?: string;
+  paymentMethod: string;
+}
+
+function validateTestDataInfo(info: Partial<TestDataInfo>): TestDataInfo {
+  validateRequired(info);
+  validateNotBlank(info.category, 'category');
+  validateNotBlank(info.cityCode, 'cityCode');
+  validateNotBlank(info.name, 'name');
+  validateNotBlank(info.paymentMethod, 'paymentMethod');
+  return info as TestDataInfo;
+}
+
+export function buildIdentifier(info: TestDataInfo): string {
+  return [info.cityCode, info.name, info.classifier, info.paymentMethod]
+    .map((s) => s && s.trim())
+    .filter((p) => !!p)
+    .map((s) => s!.toLowerCase().replace(/\s+/g, '-'))
+    .join('-');
+}
 
 export const addTestDataFile = onAuthorizedCall(anyOf('contributor'))(
   async (data, context) => {
-    const auth = functions.config().github['dexpenses-extract'].key;
+    const auth = functions.config().github.bot.key;
     const octokit = new Octokit({
       auth,
     });
+    validateNotBlank(data.content, 'content');
     const {
-      content,
       category,
       cityCode,
       name,
       classifier,
       paymentMethod,
-    } = data;
-    validateNotBlank(content, 'content');
-    validateNotBlank(category, 'category');
-    validateNotBlank(cityCode, 'cityCode');
-    validateNotBlank(name, 'name');
+    } = validateTestDataInfo(data);
 
     let suffix = '';
     if (classifier) {
@@ -34,7 +55,7 @@ export const addTestDataFile = onAuthorizedCall(anyOf('contributor'))(
     await octokit.repos.createOrUpdateFile({
       owner: 'dexpenses',
       repo: 'dexpenses-extract',
-      content: Buffer.from(content).toString('base64'),
+      content: Buffer.from(data.content).toString('base64'),
       path: `test/data/${identifier}.txt.inactive`,
       message: `🤖 Added ${identifier} test file`,
     });
