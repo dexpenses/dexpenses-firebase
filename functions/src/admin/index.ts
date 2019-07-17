@@ -4,7 +4,7 @@ import { onAuthorizedCall, anyOf } from '../https';
 import { validateNotBlank, validateRequired } from '../validation';
 import { runTextDetection } from '../detect-text';
 
-interface TestDataInfo {
+export interface TestDataInfo {
   category: string;
   cityCode: string;
   name: string;
@@ -22,36 +22,28 @@ function validateTestDataInfo(info: Partial<TestDataInfo>): TestDataInfo {
 }
 
 export function buildIdentifier(info: TestDataInfo): string {
-  return [info.cityCode, info.name, info.classifier, info.paymentMethod]
-    .map((s) => s && s.trim())
-    .filter((p) => !!p)
-    .map((s) => s!.toLowerCase().replace(/\s+/g, '-'))
-    .join('-');
+  return (
+    info.category +
+    '/' +
+    [info.cityCode, info.name, info.classifier, info.paymentMethod]
+      .map((s) => s && s.trim())
+      .filter((p) => !!p)
+      .map((s) => s!.toLowerCase().replace(/\s+/g, '-'))
+      .join('-')
+  );
 }
 
 export const addTestDataFile = onAuthorizedCall(anyOf('contributor'))(
   async (data, context) => {
+    validateNotBlank(data.content, 'content');
+    const info = validateTestDataInfo(data);
+
     const auth = functions.config().github.bot.key;
     const octokit = new Octokit({
       auth,
     });
-    validateNotBlank(data.content, 'content');
-    const {
-      category,
-      cityCode,
-      name,
-      classifier,
-      paymentMethod,
-    } = validateTestDataInfo(data);
 
-    let suffix = '';
-    if (classifier) {
-      suffix += '-' + classifier.toLowerCase();
-    }
-    if (paymentMethod) {
-      suffix += '-' + paymentMethod.toLowerCase();
-    }
-    const identifier = `${category.toLowerCase()}/${cityCode.toLowerCase()}-${name.toLowerCase()}${suffix}`;
+    const identifier = buildIdentifier(info);
     await octokit.repos.createOrUpdateFile({
       owner: 'dexpenses',
       repo: 'dexpenses-extract',

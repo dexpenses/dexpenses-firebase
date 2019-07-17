@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`admin functions/addTestDataFile should send correct request to GitHub 1`] = `
+Array [
+  Object {
+    "content": "Y29udGVudA==",
+    "message": "🤖 Added ec/wob-name-credit test file",
+    "owner": "dexpenses",
+    "path": "test/data/ec/wob-name-credit.txt.inactive",
+    "repo": "dexpenses-extract",
+  },
+]
+`;
