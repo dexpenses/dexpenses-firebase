@@ -1,3 +1,5 @@
+import { extname } from 'path';
+import * as admin from 'firebase-admin';
 import * as functions from 'firebase-functions';
 import * as Octokit from '@octokit/rest';
 import { onAuthorizedCall, anyOf } from '../https';
@@ -60,5 +62,20 @@ export const manualTextDetection = onAuthorizedCall(anyOf('contributor'))(
   async (data, context) => {
     validateNotBlank(data.url, 'url');
     return await runTextDetection(data.url);
+  }
+);
+
+export const moveTestDataImage = onAuthorizedCall(anyOf('contributor'))(
+  async (data, context) => {
+    validateNotBlank(data.source, 'source');
+    const info = validateTestDataInfo(data);
+    const identifier = buildIdentifier(info);
+    const [res] = await admin
+      .storage()
+      .bucket('dexpenses-207219-test-images')
+      .file(data.source)
+      .move(`${identifier}${extname(data.source)}`);
+    console.log(res);
+    return { success: true };
   }
 );

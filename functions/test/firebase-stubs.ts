@@ -50,12 +50,30 @@ export const firestore = {
   },
 } as any;
 
+export const storageOperation = jest.fn().mockResolvedValue(true);
+const ok = {};
 export const storage = {
-  bucket() {
+  bucket(bucket?: string) {
     return {
-      file(name) {
+      file(file: string) {
         return {
-          delete: jest.fn().mockImplementation(async () => {}),
+          delete() {
+            storageOperation({
+              bucket,
+              file,
+              type: 'delete',
+            });
+            return [ok];
+          },
+          move(destination: string) {
+            storageOperation({
+              bucket,
+              file,
+              type: 'move',
+              destination,
+            });
+            return [ok];
+          },
         };
       },
     };
