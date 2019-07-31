@@ -16,10 +16,14 @@ jest.spyOn(functions, 'config').mockReturnValue({
 });
 
 const mockCreateOrUpdateFile = jest.fn();
+const mockCreateIssue = jest.fn();
 jest.mock('@octokit/rest', () =>
   jest.fn().mockImplementation(() => ({
     repos: {
       createOrUpdateFile: mockCreateOrUpdateFile,
+    },
+    issues: {
+      create: mockCreateIssue,
     },
   }))
 );
@@ -47,12 +51,13 @@ describe('admin functions/addTestDataFile', () => {
       )
     ).rejects.toThrowError(/permission-denied/);
   });
-  const validData: { content: string } & TestDataInfo = {
+  const validData: { content: string; path: string } & TestDataInfo = {
     content: 'content',
     category: 'ec',
     cityCode: 'wob',
     name: 'name',
     paymentMethod: 'credit',
+    path: 'ec/wob-name-credit.jpg',
   };
 
   it('should throw error if content is missing or blank', async () => {
@@ -141,11 +146,25 @@ describe('admin functions/addTestDataFile', () => {
     ).rejects.toThrowError(/paymentMethod/);
   });
 
+  it('should throw error if path is missing', async () => {
+    await expect(
+      addTestDataFile(
+        { ...validData, path: '  ' },
+        {
+          auth: {
+            uid: 'test',
+          },
+        }
+      )
+    ).rejects.toThrowError(/path/);
+  });
+
   it('should send correct request to GitHub', async () => {
     await expect(
       addTestDataFile(validData, { auth: { uid: 'test' } })
     ).resolves.toEqual({ success: true });
 
     expect(mockCreateOrUpdateFile.mock.calls[0]).toMatchSnapshot();
+    expect(mockCreateIssue.mock.calls[0]).toMatchSnapshot();
   });
 });

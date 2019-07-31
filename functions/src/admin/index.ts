@@ -6,6 +6,8 @@ import { onAuthorizedCall, anyOf } from '../https';
 import { validateNotBlank, validateRequired } from '../validation';
 import { runTextDetection } from '../detect-text';
 
+const testImageBucket = 'dexpenses-207219-test-images';
+
 export interface TestDataInfo {
   category: string;
   cityCode: string;
@@ -38,20 +40,33 @@ export function buildIdentifier(info: TestDataInfo): string {
 export const addTestDataFile = onAuthorizedCall(anyOf('contributor'))(
   async (data, context) => {
     validateNotBlank(data.content, 'content');
+    validateNotBlank(data.path, 'path');
     const info = validateTestDataInfo(data);
 
     const auth = functions.config().github.bot.key;
     const octokit = new Octokit({
       auth,
     });
-
+    const owner = 'dexpenses';
+    const repo = 'dexpenses-extract';
     const identifier = buildIdentifier(info);
     await octokit.repos.createOrUpdateFile({
-      owner: 'dexpenses',
-      repo: 'dexpenses-extract',
+      owner,
+      repo,
       content: Buffer.from(data.content).toString('base64'),
       path: `test/data/${identifier}.txt.inactive`,
       message: `🤖 Added ${identifier} test file`,
+    });
+    const imageUrl = `https://firebasestorage.googleapis.com/v0/b/${testImageBucket}/o/${encodeURIComponent(
+      identifier
+    )}.${extname(data.path)}?alt=media`;
+    await octokit.issues.create({
+      owner,
+      repo,
+      title: `Implement test receipt ${identifier}`,
+      body:
+        'Receipt to implement:\n' +
+        `![${identifier}](${imageUrl} "${identifier}")`,
     });
     console.log(`Added ${identifier} test file`);
     return { success: true };
@@ -70,12 +85,11 @@ export const moveTestDataImage = onAuthorizedCall(anyOf('contributor'))(
     validateNotBlank(data.source, 'source');
     const info = validateTestDataInfo(data);
     const identifier = buildIdentifier(info);
-    const [res] = await admin
+    await admin
       .storage()
-      .bucket('dexpenses-207219-test-images')
+      .bucket(testImageBucket)
       .file(data.source)
       .move(`${identifier}${extname(data.source)}`);
-    console.log(res);
     return { success: true };
   }
 );
