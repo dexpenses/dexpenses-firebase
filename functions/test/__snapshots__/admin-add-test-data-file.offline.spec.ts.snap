@@ -16,7 +16,11 @@ exports[`admin functions/addTestDataFile should send correct request to GitHub 2
 Array [
   Object {
     "body": "Receipt to implement:
-![ec/wob-name-credit](https://firebasestorage.googleapis.com/v0/b/dexpenses-207219-test-images/o/ec%2Fwob-name-credit..jpg?alt=media \\"ec/wob-name-credit\\")",
+![ec/wob-name-credit](https://firebasestorage.googleapis.com/v0/b/dexpenses-207219-test-images/o/ec%2Fwob-name-credit.jpg?alt=media \\"ec/wob-name-credit\\")",
+    "labels": Array [
+      "enhancement",
+      "test-data",
+    ],
     "owner": "dexpenses",
     "repo": "dexpenses-extract",
     "title": "Implement test receipt ec/wob-name-credit",

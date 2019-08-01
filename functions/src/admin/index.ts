@@ -59,11 +59,12 @@ export const addTestDataFile = onAuthorizedCall(anyOf('contributor'))(
     });
     const imageUrl = `https://firebasestorage.googleapis.com/v0/b/${testImageBucket}/o/${encodeURIComponent(
       identifier
-    )}.${extname(data.path)}?alt=media`;
+    )}${extname(data.path)}?alt=media`;
     await octokit.issues.create({
       owner,
       repo,
       title: `Implement test receipt ${identifier}`,
+      labels: ['enhancement', 'test-data'],
       body:
         'Receipt to implement:\n' +
         `![${identifier}](${imageUrl} "${identifier}")`,
