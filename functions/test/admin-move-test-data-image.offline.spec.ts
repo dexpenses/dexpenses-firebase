@@ -27,7 +27,7 @@ const validData: { source: string } & TestDataInfo = {
   category: 'ec',
   cityCode: 'wob',
   name: 'name',
-  paymentMethod: 'credit',
+  paymentMethod: 'CREDIT',
 };
 
 describe('admin functions/moveTestDataImage', () => {
