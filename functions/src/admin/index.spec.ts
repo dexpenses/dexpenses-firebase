@@ -7,19 +7,40 @@ describe('admin functions / test data / identifier builder', () => {
         category: 'ec',
         cityCode: 'wob',
         name: 'test',
-        paymentMethod: 'credit',
+        paymentMethod: 'CREDIT',
       })
     ).toBe('ec/wob-test-credit');
   });
 
-  it('should build the correct name with a classifier', () => {
+  it('should build the correct name without a payment method', () => {
     expect(
       buildIdentifier({
         category: 'ec',
         cityCode: 'wob',
         name: 'test',
         classifier: 'classifier',
-        paymentMethod: 'credit',
+      })
+    ).toBe('ec/wob-test-classifier');
+  });
+
+  it('should build the correct name without classifier and payment method', () => {
+    expect(
+      buildIdentifier({
+        category: 'ec',
+        cityCode: 'wob',
+        name: 'test',
+      })
+    ).toBe('ec/wob-test');
+  });
+
+  it('should build the correct name with all info', () => {
+    expect(
+      buildIdentifier({
+        category: 'ec',
+        cityCode: 'wob',
+        name: 'test',
+        classifier: 'classifier',
+        paymentMethod: 'CREDIT',
       })
     ).toBe('ec/wob-test-classifier-credit');
   });
@@ -30,7 +51,7 @@ describe('admin functions / test data / identifier builder', () => {
         category: 'ec',
         cityCode: ' wob ',
         name: ' test ',
-        paymentMethod: ' credit ',
+        paymentMethod: ' credit ' as any,
       })
     ).toBe('ec/wob-test-credit');
   });
@@ -52,7 +73,7 @@ describe('admin functions / test data / identifier builder', () => {
         category: 'ec',
         cityCode: 'wob',
         name: ' something with spaces ',
-        paymentMethod: 'credit',
+        paymentMethod: 'CREDIT',
       })
     ).toBe('ec/wob-something-with-spaces-credit');
   });

@@ -5,6 +5,7 @@ import * as Octokit from '@octokit/rest';
 import { onAuthorizedCall, anyOf } from '../https';
 import { validateNotBlank, validateRequired } from '../validation';
 import { runTextDetection } from '../detect-text';
+import { PaymentMethod, paymentMethods } from '@dexpenses/core';
 
 const testImageBucket = 'dexpenses-207219-test-images';
 
@@ -13,15 +14,27 @@ export interface TestDataInfo {
   cityCode: string;
   name: string;
   classifier?: string;
-  paymentMethod: string;
+  paymentMethod?: PaymentMethod;
 }
 
-function validateTestDataInfo(info: Partial<TestDataInfo>): TestDataInfo {
+function validateTestDataInfo(
+  info: Partial<TestDataInfo> & { paymentMethod?: string }
+): TestDataInfo {
   validateRequired(info);
   validateNotBlank(info.category, 'category');
   validateNotBlank(info.cityCode, 'cityCode');
   validateNotBlank(info.name, 'name');
-  validateNotBlank(info.paymentMethod, 'paymentMethod');
+  if (
+    info.paymentMethod &&
+    !paymentMethods.includes(
+      info.paymentMethod.trim().toUpperCase() as PaymentMethod
+    )
+  ) {
+    throw new functions.https.HttpsError(
+      'failed-precondition',
+      'invalid payment method'
+    );
+  }
   return info as TestDataInfo;
 }
 

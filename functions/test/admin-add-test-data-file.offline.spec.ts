@@ -51,19 +51,20 @@ describe('admin functions/addTestDataFile', () => {
       )
     ).rejects.toThrowError(/permission-denied/);
   });
-  const validData: { content: string; path: string } & TestDataInfo = {
+  const fullInfo: { content: string; path: string } & TestDataInfo = {
     content: 'content',
     category: 'ec',
     cityCode: 'wob',
     name: 'name',
-    paymentMethod: 'credit',
+    classifier: 'classifier',
+    paymentMethod: 'CREDIT',
     path: 'ec/wob-name-credit.jpg',
   };
 
   it('should throw error if content is missing or blank', async () => {
     await expect(
       addTestDataFile(
-        { ...validData, content: undefined },
+        { ...fullInfo, content: undefined },
         {
           auth: {
             uid: 'test',
@@ -73,7 +74,7 @@ describe('admin functions/addTestDataFile', () => {
     ).rejects.toThrowError(/content/);
     await expect(
       addTestDataFile(
-        { ...validData, content: '' },
+        { ...fullInfo, content: '' },
         {
           auth: {
             uid: 'test',
@@ -84,7 +85,7 @@ describe('admin functions/addTestDataFile', () => {
 
     await expect(
       addTestDataFile(
-        { ...validData, content: '  ' },
+        { ...fullInfo, content: '  ' },
         {
           auth: {
             uid: 'test',
@@ -97,7 +98,7 @@ describe('admin functions/addTestDataFile', () => {
   it('should throw error if category is missing', async () => {
     await expect(
       addTestDataFile(
-        { ...validData, category: '  ' },
+        { ...fullInfo, category: '  ' },
         {
           auth: {
             uid: 'test',
@@ -110,7 +111,7 @@ describe('admin functions/addTestDataFile', () => {
   it('should throw error if cityCode is missing', async () => {
     await expect(
       addTestDataFile(
-        { ...validData, cityCode: '  ' },
+        { ...fullInfo, cityCode: '  ' },
         {
           auth: {
             uid: 'test',
@@ -123,7 +124,7 @@ describe('admin functions/addTestDataFile', () => {
   it('should throw error if name is missing', async () => {
     await expect(
       addTestDataFile(
-        { ...validData, name: '  ' },
+        { ...fullInfo, name: '  ' },
         {
           auth: {
             uid: 'test',
@@ -133,23 +134,23 @@ describe('admin functions/addTestDataFile', () => {
     ).rejects.toThrowError(/name/);
   });
 
-  it('should throw error if paymentMethod is missing', async () => {
+  it('should throw error if payment method is invalid', async () => {
     await expect(
       addTestDataFile(
-        { ...validData, paymentMethod: '  ' },
+        { ...fullInfo, paymentMethod: 'invalid' },
         {
           auth: {
             uid: 'test',
           },
         }
       )
-    ).rejects.toThrowError(/paymentMethod/);
+    ).rejects.toThrowError(/payment method/);
   });
 
   it('should throw error if path is missing', async () => {
     await expect(
       addTestDataFile(
-        { ...validData, path: '  ' },
+        { ...fullInfo, path: '  ' },
         {
           auth: {
             uid: 'test',
@@ -159,9 +160,33 @@ describe('admin functions/addTestDataFile', () => {
     ).rejects.toThrowError(/path/);
   });
 
-  it('should send correct request to GitHub', async () => {
+  it('should execute correctly if paymentMethod is missing', async () => {
     await expect(
-      addTestDataFile(validData, { auth: { uid: 'test' } })
+      addTestDataFile(
+        { ...fullInfo, paymentMethod: undefined },
+        { auth: { uid: 'test' } }
+      )
+    ).resolves.toEqual({ success: true });
+
+    expect(mockCreateOrUpdateFile.mock.calls[0]).toMatchSnapshot();
+    expect(mockCreateIssue.mock.calls[0]).toMatchSnapshot();
+  });
+
+  it('should execute correctly if classifier is missing', async () => {
+    await expect(
+      addTestDataFile(
+        { ...fullInfo, classifier: undefined },
+        { auth: { uid: 'test' } }
+      )
+    ).resolves.toEqual({ success: true });
+
+    expect(mockCreateOrUpdateFile.mock.calls[0]).toMatchSnapshot();
+    expect(mockCreateIssue.mock.calls[0]).toMatchSnapshot();
+  });
+
+  it('should execute correctly if all info is provided', async () => {
+    await expect(
+      addTestDataFile(fullInfo, { auth: { uid: 'test' } })
     ).resolves.toEqual({ success: true });
 
     expect(mockCreateOrUpdateFile.mock.calls[0]).toMatchSnapshot();

@@ -1,6 +1,34 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`admin functions/addTestDataFile should send correct request to GitHub 1`] = `
+exports[`admin functions/addTestDataFile should execute correctly if all info is provided 1`] = `
+Array [
+  Object {
+    "content": "Y29udGVudA==",
+    "message": "🤖 Added ec/wob-name-classifier-credit test file",
+    "owner": "dexpenses",
+    "path": "test/data/ec/wob-name-classifier-credit.txt.inactive",
+    "repo": "dexpenses-extract",
+  },
+]
+`;
+
+exports[`admin functions/addTestDataFile should execute correctly if all info is provided 2`] = `
+Array [
+  Object {
+    "body": "Receipt to implement:
+![ec/wob-name-classifier-credit](https://firebasestorage.googleapis.com/v0/b/dexpenses-207219-test-images/o/ec%2Fwob-name-classifier-credit.jpg?alt=media \\"ec/wob-name-classifier-credit\\")",
+    "labels": Array [
+      "enhancement",
+      "test-data",
+    ],
+    "owner": "dexpenses",
+    "repo": "dexpenses-extract",
+    "title": "Implement test receipt ec/wob-name-classifier-credit",
+  },
+]
+`;
+
+exports[`admin functions/addTestDataFile should execute correctly if classifier is missing 1`] = `
 Array [
   Object {
     "content": "Y29udGVudA==",
@@ -12,7 +40,7 @@ Array [
 ]
 `;
 
-exports[`admin functions/addTestDataFile should send correct request to GitHub 2`] = `
+exports[`admin functions/addTestDataFile should execute correctly if classifier is missing 2`] = `
 Array [
   Object {
     "body": "Receipt to implement:
@@ -24,6 +52,34 @@ Array [
     "owner": "dexpenses",
     "repo": "dexpenses-extract",
     "title": "Implement test receipt ec/wob-name-credit",
+  },
+]
+`;
+
+exports[`admin functions/addTestDataFile should execute correctly if paymentMethod is missing 1`] = `
+Array [
+  Object {
+    "content": "Y29udGVudA==",
+    "message": "🤖 Added ec/wob-name-classifier test file",
+    "owner": "dexpenses",
+    "path": "test/data/ec/wob-name-classifier.txt.inactive",
+    "repo": "dexpenses-extract",
+  },
+]
+`;
+
+exports[`admin functions/addTestDataFile should execute correctly if paymentMethod is missing 2`] = `
+Array [
+  Object {
+    "body": "Receipt to implement:
+![ec/wob-name-classifier](https://firebasestorage.googleapis.com/v0/b/dexpenses-207219-test-images/o/ec%2Fwob-name-classifier.jpg?alt=media \\"ec/wob-name-classifier\\")",
+    "labels": Array [
+      "enhancement",
+      "test-data",
+    ],
+    "owner": "dexpenses",
+    "repo": "dexpenses-extract",
+    "title": "Implement test receipt ec/wob-name-classifier",
   },
 ]
 `;
