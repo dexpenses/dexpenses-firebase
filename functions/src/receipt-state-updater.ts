@@ -1,6 +1,6 @@
 import * as admin from 'firebase-admin';
 import * as functions from 'firebase-functions';
-import { isReady } from '@dexpenses/extract/lib/pipeline';
+import { isReceiptReady } from '@dexpenses/extract';
 
 export const receiptStateUpdater = functions.firestore
   .document('receiptsByUser/{userId}/receipts/{receiptId}')
@@ -15,7 +15,7 @@ export const receiptStateUpdater = functions.firestore
     ) {
       return;
     }
-    const newState = isReady(receipt.result.data) ? 'ready' : 'partial';
+    const newState = isReceiptReady(receipt.result.data) ? 'ready' : 'partial';
     if (receipt.result.state === newState) {
       return;
     }

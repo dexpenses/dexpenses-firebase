@@ -2,12 +2,15 @@ import * as firebaseFunctionsTest from 'firebase-functions-test';
 import * as admin from 'firebase-admin';
 import * as pubsub from '@google-cloud/pubsub';
 import { firestore, firestoreDb } from './firebase-stubs';
+import extractorPipeline, { Config } from '@dexpenses/extract';
+import { UserData } from '@dexpenses/core';
 
-/*
- * Skip Geo Coding API call during testing
- */
 jest.mock('@dexpenses/extract', () => {
-  return { default: () => jest.fn().mockReturnValue('result') };
+  return {
+    default: ((c: Config) => (ud: UserData) => async (text: string) => ({
+      state: 'result',
+    })) as typeof extractorPipeline,
+  };
 });
 
 const test = firebaseFunctionsTest();
@@ -57,6 +60,6 @@ describe(`Extract receipt cloud function (offline)`, () => {
       .doc(receiptId)
       .get();
     expect(result.exists).toBeTruthy();
-    expect(result.data()).toEqual({ result: 'result' });
+    expect(result.data()).toEqual({ result: { state: 'result' } });
   });
 });

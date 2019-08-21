@@ -1,7 +1,7 @@
 import * as firebaseFunctionsTest from 'firebase-functions-test';
 import * as admin from 'firebase-admin';
 import { updateFn, firestore } from './firebase-stubs';
-import * as extractor from '@dexpenses/extract/lib/pipeline';
+import * as extractor from '@dexpenses/extract';
 
 const test = firebaseFunctionsTest();
 
@@ -17,7 +17,7 @@ describe('Receipt state updater cloud function (offline)', () => {
      * require actual firestore instance
      */
     jest.spyOn(admin, 'firestore' as any, 'get').mockRestore();
-    jest.spyOn(extractor, 'isReady').mockRestore();
+    jest.spyOn(extractor, 'isReceiptReady').mockRestore();
   });
 
   it.each([
@@ -42,7 +42,7 @@ describe('Receipt state updater cloud function (offline)', () => {
   });
 
   it('should update state if receipt becomes ready', async () => {
-    jest.spyOn(extractor, 'isReady').mockReturnValue(true);
+    jest.spyOn(extractor, 'isReceiptReady').mockReturnValue(true);
 
     await changeEvent({
       before: {},
@@ -52,7 +52,7 @@ describe('Receipt state updater cloud function (offline)', () => {
   });
 
   it('should update state if receipt becomes partial', async () => {
-    jest.spyOn(extractor, 'isReady').mockReturnValue(false);
+    jest.spyOn(extractor, 'isReceiptReady').mockReturnValue(false);
 
     await changeEvent({
       before: {},
