@@ -4,7 +4,7 @@ node_js:
   - '10'
   - '11'
 cache:
-  npm: true
+  yarn: true
 env:
   matrix:
     - TZ=UTC
@@ -12,10 +12,10 @@ env:
 before_install:
   - cd functions
 install:
-  - npm install
+  - yarn install
 script:
-  - npm run test -- --silent
-  - npm run build
+  - yarn test --silent
+  - yarn build
 jobs:
   include:
     - stage: sonar
@@ -28,8 +28,8 @@ jobs:
           token:
             secure: uGsYIcQyCEV7wr5xdBuCJLEw80sFOmmvaDucQs5g4tpPqnbU/t8MmSxE+3G31bo8atWZgYs7VfHAjtZuIkaFmP5rj2Pb2K/B8MsgfacUXhiVQRwIiLh7EcF4IoYFVkqLRiFM0zFy2hrHYzH010P1wUuvxpLQJ2FUm7MLKmPgRhRH+GeViRJXT3qp7tGn2qd+2tyoKAzSTNbm68z41kcBmwR+0nF/SLWq5YiXD0x1RFRW4FDRmCGt7BcJcH9ODwuRO0m/cZBwq4oyRK32+SSo6iE9Iz884y0i29xgWMQozT37Y9dx9E6bj9a/J3n0sw1aKE3LiyZUhE6cGyjH56HyaTOPRJPZVCC+kvE0ZUr3sQZ0sm/tT3JVFcBz9xC4scN48nOik9edOXhyscgwTnv9Ii1seOX4BOG647tihdsIERbu/HllLGQb4jTnb3ZxeUXwvslkJxyvGL9Q3qDDDDsew6a+kA2bR9J2n41rMv2BloLT6HexAc0O5u+riCxcOWd+1JNeRN9t2d3h1B9rbhAK/bSKOqaXvwBztmHqvbmSyn2FhM3CPODkh4OmrRKD8zK963Gi0bekqZKtmXBEEaAC+4TLyzb7ge5BPSTwEPdBrCZSZwE0eMADBwG/SAHyj1PMYL0fY1NhPYB7JHdyn7sNT47SpGwzjRGC8lvPgeclt14=
       script:
-        - npm run test:coverage
-        - npm run lint:sonar
+        - yarn test:coverage
+        - yarn lint:sonar
         - sonar-scanner
     - stage: deploy
       script: skip
