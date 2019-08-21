@@ -68,7 +68,7 @@ export const addTestDataFile = onAuthorizedCall(anyOf('contributor'))(
       repo,
       content: Buffer.from(data.content).toString('base64'),
       path: `test/data/${identifier}.txt.inactive`,
-      message: `🤖 Added ${identifier} test file`,
+      message: `[skip ci] 🤖 Added ${identifier} test file`,
     });
     const imageUrl = `https://firebasestorage.googleapis.com/v0/b/${testImageBucket}/o/${encodeURIComponent(
       identifier

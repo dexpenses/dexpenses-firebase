@@ -4,7 +4,7 @@ exports[`admin functions/addTestDataFile should execute correctly if all info is
 Array [
   Object {
     "content": "Y29udGVudA==",
-    "message": "🤖 Added ec/wob-name-classifier-credit test file",
+    "message": "[skip ci] 🤖 Added ec/wob-name-classifier-credit test file",
     "owner": "dexpenses",
     "path": "test/data/ec/wob-name-classifier-credit.txt.inactive",
     "repo": "dexpenses-extract",
@@ -32,7 +32,7 @@ exports[`admin functions/addTestDataFile should execute correctly if classifier 
 Array [
   Object {
     "content": "Y29udGVudA==",
-    "message": "🤖 Added ec/wob-name-credit test file",
+    "message": "[skip ci] 🤖 Added ec/wob-name-credit test file",
     "owner": "dexpenses",
     "path": "test/data/ec/wob-name-credit.txt.inactive",
     "repo": "dexpenses-extract",
@@ -60,7 +60,7 @@ exports[`admin functions/addTestDataFile should execute correctly if paymentMeth
 Array [
   Object {
     "content": "Y29udGVudA==",
-    "message": "🤖 Added ec/wob-name-classifier test file",
+    "message": "[skip ci] 🤖 Added ec/wob-name-classifier test file",
     "owner": "dexpenses",
     "path": "test/data/ec/wob-name-classifier.txt.inactive",
     "repo": "dexpenses-extract",
