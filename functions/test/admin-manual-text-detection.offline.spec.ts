@@ -2,6 +2,7 @@ import * as fbTest from 'firebase-functions-test';
 import * as admin from 'firebase-admin';
 import { firestore, firestoreDb } from './firebase-stubs';
 import { runTextDetection } from '../src/detect-text';
+import { testImageBucket } from '../src/admin';
 
 const test = fbTest();
 
@@ -32,10 +33,46 @@ describe('admin functions/manualTextDetection', () => {
       )
     ).rejects.toThrowError(/permission-denied/);
   });
+  it('should only permit test image bucket', async () => {
+    await expect(
+      manualTextDetection(
+        { url: 'gs://other-bucket/file' },
+        {
+          auth: {
+            uid: 'test',
+          },
+        }
+      )
+    ).rejects.toThrowError(/permission-denied/);
+  });
   it('should throw error if url is missing', async () => {
     await expect(
       manualTextDetection(
         {},
+        {
+          auth: {
+            uid: 'test',
+          },
+        }
+      )
+    ).rejects.toThrowError(/url/);
+  });
+  it('should throw error if url is invalid', async () => {
+    await expect(
+      manualTextDetection(
+        { url: 'http://foo.bar' },
+        {
+          auth: {
+            uid: 'test',
+          },
+        }
+      )
+    ).rejects.toThrowError(/url/);
+  });
+  it('should throw error if url is a directory', async () => {
+    await expect(
+      manualTextDetection(
+        { url: `gs://${testImageBucket}/directory/` },
         {
           auth: {
             uid: 'test',
@@ -49,7 +86,7 @@ describe('admin functions/manualTextDetection', () => {
     (runTextDetection as jest.Mock<any>).mockReturnValue({ result: 'text' });
     await expect(
       manualTextDetection(
-        { url: 'gs://bucket/image' },
+        { url: `gs://${testImageBucket}/image` },
         { auth: { uid: 'test' } }
       )
     ).resolves.toEqual({ result: 'text' });

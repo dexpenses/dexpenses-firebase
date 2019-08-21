@@ -6,8 +6,9 @@ import { onAuthorizedCall, anyOf } from '../https';
 import { validateNotBlank, validateRequired } from '../validation';
 import { runTextDetection } from '../detect-text';
 import { PaymentMethod, paymentMethods } from '@dexpenses/core';
+import { parseGSUrl } from '../util/gsutil';
 
-const testImageBucket = 'dexpenses-207219-test-images';
+export const testImageBucket = 'dexpenses-207219-test-images';
 
 export interface TestDataInfo {
   category: string;
@@ -87,9 +88,26 @@ export const addTestDataFile = onAuthorizedCall(anyOf('contributor'))(
   }
 );
 
+function validateGSUrl(uid: string, rawUrl: string) {
+  const url = parseGSUrl(rawUrl);
+  if (!url || !url.filename) {
+    throw new functions.https.HttpsError(
+      'failed-precondition',
+      'invalid GS url'
+    );
+  }
+  if (url.bucket !== testImageBucket) {
+    throw new functions.https.HttpsError(
+      'permission-denied',
+      'permission-denied'
+    );
+  }
+}
+
 export const manualTextDetection = onAuthorizedCall(anyOf('contributor'))(
   async (data, context) => {
     validateNotBlank(data.url, 'url');
+    validateGSUrl(context.auth.uid, data.url);
     return await runTextDetection(data.url);
   }
 );
