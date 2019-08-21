@@ -144,10 +144,10 @@
   resolved "https://registry.yarnpkg.com/@dexpenses/core/-/core-1.3.1.tgz#974ea4ed5c6877c68ccdf931f2c740d0fd8de4fb"
   integrity sha512-mbyYCUq8CFIdg44mSUjYVfz0q9u1/5mz9F6p28zPCsJoGzeheOtiJHitxlCF9ga7J4FoazQacfTGd3AtnH/iTA==
 
-"@dexpenses/extract@1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@dexpenses/extract/-/extract-1.0.2.tgz#ff1a2c004450e374dad106db056e34e612d51141"
-  integrity sha512-odQ0r08jrZsxKpEWAVahMw7zgFP94kKuVXFpkD0AIfKRFAtU+ysxqL+fjm2ALXKsgcwjJ6h2aqThaowTHB2wTA==
+"@dexpenses/extract@1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@dexpenses/extract/-/extract-1.1.0.tgz#90ad6afa0358dfbda0cf163d796b1e56b39010ac"
+  integrity sha512-SWK95oLAIhQQ1Gi5bGPbcQNWNRjCKyaF0MHgpLnNOELNTgpm13CInrXHKoKme7W3UuoLKPS6kHKXWiW1NzyCww==
   dependencies:
     "@dexpenses/core" "^1.2.2"
     "@google/maps" "^0.5.5"
