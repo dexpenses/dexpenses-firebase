@@ -20,7 +20,9 @@ export const extractReceipt = functions.pubsub
       .get();
 
     const receiptId = data.fileName;
-    const result = await extractorPipeline(functions.config() as Config)(userData.data() || {})(data.text);
+    const result = await extractorPipeline(functions.config() as Config)(
+      userData.data() || {}
+    )(data.text);
     await admin
       .firestore()
       .collection('receiptsByUser')
@@ -35,14 +37,12 @@ export const extractReceipt = functions.pubsub
           merge: true,
         }
       );
-    // TODO: only if extraction was successful
-    return new PubSub().topic('tagging').publish(
-      Buffer.from(
-        JSON.stringify({
-          userId: data.userId,
-          receiptId,
-          result,
-        } as TaggingMessage)
-      )
-    );
+    if (result.state !== 'ready' && result.state !== 'partial') {
+      return; // skip tagging for unsuccessful extraction
+    }
+    return new PubSub().topic('tagging').publishJSON({
+      userId: data.userId,
+      receiptId,
+      result,
+    } as TaggingMessage);
   });

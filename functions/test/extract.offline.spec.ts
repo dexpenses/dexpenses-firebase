@@ -5,11 +5,11 @@ import { firestore, firestoreDb } from './firebase-stubs';
 import extractorPipeline, { Config } from '@dexpenses/extract';
 import { UserData } from '@dexpenses/core';
 
+const mockExtractorPipeline = jest.fn();
 jest.mock('@dexpenses/extract', () => {
   return {
-    default: ((c: Config) => (ud: UserData) => async (text: string) => ({
-      state: 'result',
-    })) as typeof extractorPipeline,
+    default: ((c: Config) => (ud: UserData) =>
+      mockExtractorPipeline) as typeof extractorPipeline,
   };
 });
 
@@ -24,9 +24,7 @@ initializeAppStub.mockRestore();
 
 jest.mock('@google-cloud/pubsub');
 pubsub.PubSub.prototype.topic = jest.fn().mockReturnValue({
-  publish: jest
-    .fn()
-    .mockImplementation((buffer) => JSON.parse(buffer.toString())),
+  publishJSON: jest.fn().mockImplementation((json) => json),
 });
 
 const userId = test.auth.exampleUserRecord().uid;
@@ -41,11 +39,17 @@ afterAll(() => {
 });
 
 describe(`Extract receipt cloud function (offline)`, () => {
-  it(`should successfully run for sample`, async () => {
-    const text = `
-    some receipt
-    `;
-    const receiptId = 'some-receipt.jpg';
+  beforeEach(() => {
+    jest.clearAllMocks();
+    mockExtractorPipeline.mockResolvedValue({ state: 'ready' });
+  });
+
+  const text = `
+  some receipt
+  `;
+  const receiptId = 'some-receipt.jpg';
+
+  it(`should save result and publish tagging msg after successful extraction`, async () => {
     await extractReceipt({
       json: {
         text,
@@ -60,6 +64,39 @@ describe(`Extract receipt cloud function (offline)`, () => {
       .doc(receiptId)
       .get();
     expect(result.exists).toBeTruthy();
-    expect(result.data()).toEqual({ result: { state: 'result' } });
+    expect(result.data()).toEqual({ result: { state: 'ready' } });
+
+    expect(pubsub.PubSub.prototype.topic).toHaveBeenCalledWith('tagging');
+    expect(
+      pubsub.PubSub.prototype.topic('tagging').publishJSON
+    ).toHaveBeenCalledWith({
+      userId,
+      receiptId,
+      result: { state: 'ready' },
+    });
+  });
+
+  it(`should save result but not publish tagging msg after erroneous extraction`, async () => {
+    mockExtractorPipeline.mockResolvedValue({ state: 'error' });
+    await extractReceipt({
+      json: {
+        text,
+        userId,
+        fileName: receiptId,
+      },
+    });
+    const result = firestore
+      .collection('receiptsByUser')
+      .doc(userId)
+      .collection('receipts')
+      .doc(receiptId)
+      .get();
+    expect(result.exists).toBeTruthy();
+    expect(result.data()).toEqual({ result: { state: 'error' } });
+
+    expect(pubsub.PubSub.prototype.topic).not.toHaveBeenCalled();
+    expect(
+      pubsub.PubSub.prototype.topic('tagging').publishJSON
+    ).not.toHaveBeenCalled();
   });
 });
