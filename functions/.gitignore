@@ -1,7 +1,7 @@
 ## Compiled JavaScript files
 **/*.js
-!test/gen-bq-data.js
-!test/algolia_import.js
+!scripts/gen-bq-data.js
+!scripts/algolia_import.js
 !jest.config.js
 **/*.js.map
 lib/
