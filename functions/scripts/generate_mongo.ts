@@ -29,14 +29,10 @@ function toMongo(receipt: GeneratedReceipt) {
       user: 'test',
       receipt: receipt.id,
     },
-    result: {
-      state: 'ready',
-      data: receipt.data,
-    },
+    state: 'ready',
+    ...receipt.data,
     tags: receipt.tags,
-    transformed: {
-      location: toGeoJson(receipt.data.place.geometry.location),
-    },
+    location: toGeoJson(receipt.data.place.geometry.location),
   };
 }
 console.log('Connecting to MongoDB cluster');
