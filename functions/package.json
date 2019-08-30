@@ -31,7 +31,7 @@
     "luxon": "^1.17.2"
   },
   "devDependencies": {
-    "@types/algoliasearch": "^3.30.16",
+    "@types/algoliasearch": "^3.30.18",
     "@types/google__maps": "^0.5.5",
     "@types/jest": "^24.0.16",
     "@types/luxon": "^1.15.2",
