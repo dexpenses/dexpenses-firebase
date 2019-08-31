@@ -35,7 +35,7 @@
     "@types/google__maps": "^0.5.5",
     "@types/jest": "^24.0.16",
     "@types/luxon": "^1.15.2",
-    "chance": "^1.0.18",
+    "chance": "^1.1.0",
     "firebase-functions-test": "^0.1.6",
     "jest": "^24.8.0",
     "jest-date-mock": "^1.0.7",
