@@ -3,9 +3,10 @@ service firebase.storage {
   match /b/{bucket}/o {
     match /images/{userId}/{imageId} {
       allow read: if request.auth.uid == userId;
-      allow write: if request.auth.uid == userId
+      allow create: if request.auth.uid == userId
                     && request.resource.size < 5 * 1024 * 1024
-                    && request.resource.contentType.matches('image/.*')
+                    && request.resource.contentType.matches('image/.*');
+      allow delete: if request.auth.uid == userId;
     }
   }
 }

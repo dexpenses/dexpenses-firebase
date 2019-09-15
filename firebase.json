@@ -21,6 +21,10 @@
     {
       "target": "test-images",
       "rules": "storage.test-images.rules"
+    },
+    {
+      "target": "test-image-upload",
+      "rules": "storage.test-image-upload.rules"
     }
   ]
 }

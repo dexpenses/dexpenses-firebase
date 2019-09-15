@@ -11,8 +11,11 @@
         "public": [
           "dexpenses-207219-public"
         ],
-         "test-images": [
+        "test-images": [
           "dexpenses-207219-test-images"
+        ],
+        "test-image-upload": [
+          "dexpenses-207219-test-image-upload"
         ]
       }
     }

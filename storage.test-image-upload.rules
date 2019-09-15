@@ -1,16 +1,12 @@
 rules_version = '2';
 service firebase.storage {
   match /b/{bucket}/o {
-    match /{category}/{file} {
-      allow read;
-      allow create: if hasContributorRole()
-                    && isCategoryValid(category)
+    match /{userId}/{allPaths=**} {
+      allow read: if hasContributorRole() && request.auth.uid == userId;
+      allow create: if hasContributorRole() && request.auth.uid == userId
                     && request.resource.size < 5 * 1024 * 1024
                     && request.resource.contentType.matches('image/.*');
-    }
-
-    function isCategoryValid(category) {
-      return category in ['bills','ec','gas_station','normal','parking'];
+      allow delete: if hasContributorRole() && request.auth.uid == userId;
     }
 
     function hasContributorRole() {

@@ -7,6 +7,7 @@ import {
   storageOperation,
 } from './firebase-stubs';
 import { TestDataInfo } from '../src/admin';
+import { File } from '@google-cloud/storage';
 
 const test = fbTest();
 
@@ -105,11 +106,13 @@ describe('admin functions/moveTestDataImage', () => {
       moveTestDataImage(validData, { auth: { uid: 'test' } })
     ).resolves.toEqual({ success: true });
 
-    expect(storageOperation).toHaveBeenCalledWith({
-      type: 'move',
-      bucket: 'dexpenses-207219-test-images',
-      file: validData.source,
-      destination: 'ec/wob-name-credit.jpg',
-    });
+    const [
+      { bucket, type, file, destination },
+    ] = storageOperation.mock.calls[0];
+    expect(type).toBe('move');
+    expect(bucket).toBe('dexpenses-207219-test-image-upload');
+    expect(file).toBe(validData.source);
+    expect((destination as File).bucket).toBe('dexpenses-207219-test-images');
+    expect((destination as File).name).toBe('ec/wob-name-credit.jpg');
   });
 });

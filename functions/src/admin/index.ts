@@ -9,6 +9,7 @@ import { PaymentMethod, paymentMethods } from '@dexpenses/core';
 import { parseGSUrl } from '../util/gsutil';
 
 export const testImageBucket = 'dexpenses-207219-test-images';
+export const testImageUploadBucket = 'dexpenses-207219-test-image-upload';
 
 export interface TestDataInfo {
   category: string;
@@ -119,9 +120,9 @@ export const moveTestDataImage = onAuthorizedCall(anyOf('contributor'))(
     const identifier = buildIdentifier(info);
     await admin
       .storage()
-      .bucket(testImageBucket)
+      .bucket(testImageUploadBucket)
       .file(data.source)
-      .move(`${identifier}${extname(data.source)}`);
+      .move(admin.storage().bucket(testImageBucket).file(`${identifier}${extname(data.source)}`));
     return { success: true };
   }
 );

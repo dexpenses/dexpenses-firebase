@@ -74,6 +74,8 @@ export const storage = {
             });
             return [ok];
           },
+          bucket,
+          name: file,
         };
       },
     };
