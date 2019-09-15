@@ -1,4 +1,5 @@
 import { Receipt as BaseReceipt } from '@dexpenses/core';
+import * as functions from 'firebase-functions';
 
 export interface BaseParams {
   userId: string;
@@ -22,9 +23,6 @@ export interface Bounds {
 export interface Receipt extends BaseReceipt {
   tags?: string[];
 }
-// interface Contract {
-//   [query: string]: <T extends BaseParams>(p: T) => any;
-// }
 
 export type TimePeriod = 'hour' | 'day' | 'month' | 'year';
 
@@ -48,9 +46,9 @@ export interface QueryContract {
 
 export function createFunctions(prefix: string, queries: QueryContract) {
   return Object.entries(queries)
-    .map(([name, fn]) => [(prefix || '') + name, fn])
+    .map(([name, fn]) => [(prefix || '') + name, functions.https.onCall(fn)])
     .reduce((acc, [name, fn]) => {
-      acc[name] = fn;
+      acc[name as string] = fn;
       return acc;
     }, {});
 }

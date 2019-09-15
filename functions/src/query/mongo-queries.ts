@@ -1,5 +1,5 @@
 import * as functions from 'firebase-functions';
-import { MongoClient } from 'mongodb';
+import { MongoClient, Collection } from 'mongodb';
 import {
   QueryContract,
   createFunctions,
@@ -9,7 +9,8 @@ import {
 function $match(params: TimeSpanParams) {
   return {
     $match: {
-      '_id.user': params.userId,
+      // '_id.user': params.userId,
+      '_id.user': 'test',
       timestamp: {
         $gte: params.start || new Date(0),
         $lte: params.end || new Date(),
@@ -17,42 +18,64 @@ function $match(params: TimeSpanParams) {
     },
   };
 }
-const password = process.env.MONGO_PASSWORD;
-if (!password) {
-  console.error('MONGO_PASSWORD env var missing');
-  process.exit(1);
-}
-const uri = `mongodb+srv://admin:${password}@cluster0-w7mu7.gcp.mongodb.net/test?retryWrites=true&w=majority`;
-// const uri = functions.config().mongo.uri;
-// const client = new MongoClient(uri, { useNewUrlParser: true });
+const uri = functions.config().mongo.uri;
 
+async function exec(handler: (collection: Collection) => Promise<any>) {
+  const client = await MongoClient.connect(uri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
+  try {
+    return handler(client.db('dexpenses').collection('receipts'));
+  } catch (e) {
+    console.error(e);
+  } finally {
+    await client.close();
+  }
+}
+
+async function aggregate(
+  pipeline: any[],
+  resultTransformer?: (result: any) => any
+) {
+  return exec(async (collection) => {
+    const result = await collection.aggregate(pipeline).toArray();
+
+    if (result && resultTransformer) {
+      return resultTransformer(result);
+    }
+    return result;
+  });
+}
+
+async function query(q: any) {
+  return exec((collection) =>
+    collection
+      .find(q)
+      .limit(50)
+      .toArray()
+  );
+}
+
+const timeUnits = ['hour', 'day', 'month', 'year'];
+
+/* tslint:disable:no-duplicate-string */
 const mongoQueries: QueryContract = {
   async aggregateTotal(params) {
-    const client = await MongoClient.connect(uri, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
-    try {
-      const { total } = await client
-        .db('dexpenses')
-        .collection('receipts')
-        .aggregate([
-          $match(params),
-          {
-            $group: {
-              _id: null,
-              total: {
-                $sum: '$amount.value',
-              },
+    return aggregate(
+      [
+        $match(params),
+        {
+          $group: {
+            _id: null,
+            total: {
+              $sum: '$amount.value',
             },
           },
-        ])
-        .next();
-      return total;
-    } finally {
-      console.log('trying to close');
-      client.close();
-    }
+        },
+      ],
+      ([{ total }]) => total
+    );
   },
   async aggregateAverageTotal(params) {
     const pipeline = [
@@ -81,22 +104,17 @@ const mongoQueries: QueryContract = {
         },
       },
     ];
-    return 12;
+    return aggregate(pipeline, ([{ avgTotal }]) => avgTotal);
   },
   async aggregateTotalOverTimePeriod(params) {
-    // for unit month
+    const units = timeUnits.slice(timeUnits.indexOf(params.period)).reverse();
     const pipeline = [
       $match(params),
       {
         $group: {
-          _id: {
-            year: {
-              $year: '$timestamp',
-            },
-            month: {
-              $month: '$timestamp',
-            },
-          },
+          _id: Object.fromEntries(
+            units.map((unit) => [unit, { [`$${unit}`]: '$timestamp' }])
+          ),
           total: {
             $sum: '$amount.value',
           },
@@ -104,12 +122,18 @@ const mongoQueries: QueryContract = {
       },
       {
         $sort: {
-          '_id.year': 1,
-          '_id.month': 1,
+          ...Object.fromEntries(units.map((unit) => [`_id.${unit}`, 1])),
         },
       },
     ];
-    return [[new Date(), 13]];
+    console.log(JSON.stringify(pipeline));
+
+    return aggregate(pipeline, (results) =>
+      results.map(({ _id, total }) => [
+        /* maybe transform to date */ _id,
+        total,
+      ])
+    );
   },
   async findByBoundingBox(params) {
     /*
@@ -125,11 +149,19 @@ const mongoQueries: QueryContract = {
       }
 
       Note: If you use longitude and latitude, specify longitude first.
+      E.g. [[-178.2, 6.6], [-49.0, 83.3]]
      */
-    const query = {
-      location: { $geoWithin: { $box: [[-178.2, 6.6], [-49.0, 83.3]] } },
+    const q = {
+      location: {
+        $geoWithin: {
+          $box: [
+            [params.southWest.lng, params.southWest.lat],
+            [params.northEach.lng, params.northEach.lat],
+          ],
+        },
+      },
     };
-    return [];
+    return query(q);
   },
   async groupByPaymentMethod(params) {
     const pipeline = [
@@ -143,7 +175,7 @@ const mongoQueries: QueryContract = {
         },
       },
     ];
-    return [];
+    return aggregate(pipeline);
   },
   async groupByTags(params) {
     const pipeline = [
@@ -160,16 +192,13 @@ const mongoQueries: QueryContract = {
         },
       },
     ];
-    return [];
+    return aggregate(pipeline);
   },
 };
 
-mongoQueries
-  .aggregateTotal({
-    start: new Date('2018-01-01'),
-    userId: 'test',
-  })
-  .then(console.log)
-  .catch(console.error);
-
 module.exports = createFunctions('mongo_', mongoQueries);
+export const dummy = {};
+
+// export const mongo_aggregateTotal = functions.https.onCall(
+//   mongoQueries.aggregateTotal
+// );
