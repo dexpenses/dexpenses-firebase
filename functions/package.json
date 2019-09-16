@@ -32,7 +32,7 @@
   },
   "devDependencies": {
     "@types/algoliasearch": "^3.30.16",
-    "@types/google__maps": "^0.5.5",
+    "@types/google__maps": "^0.5.8",
     "@types/jest": "^24.0.16",
     "@types/luxon": "^1.15.2",
     "chance": "^1.0.18",
