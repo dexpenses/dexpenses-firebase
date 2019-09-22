@@ -5,23 +5,33 @@ import {
   createFunctions,
   TimeSpanParams,
 } from './QueryContract';
+import { DateTime } from 'luxon';
+
+// tslint:disable-next-line: max-union-size
+function parseDate(date: string | Date | undefined | null, defaultValue: Date) {
+  if (!date) {
+    return defaultValue;
+  }
+  if (typeof date === 'string') {
+    return DateTime.fromSQL(date).toJSDate();
+  }
+  return date;
+}
 
 function $match(params: TimeSpanParams) {
   return {
     $match: {
-      // '_id.user': params.userId,
-      '_id.user': 'test',
+      $or: [{ '_id.user': 'test' }, { '_id.user': params.userId }],
       timestamp: {
-        $gte: params.start || new Date(0),
-        $lte: params.end || new Date(),
+        $gte: parseDate(params.start, new Date(0)),
+        $lte: parseDate(params.end, new Date()),
       },
     },
   };
 }
-const uri = functions.config().mongo.uri;
 
 async function exec(handler: (collection: Collection) => Promise<any>) {
-  const client = await MongoClient.connect(uri, {
+  const client = await MongoClient.connect(functions.config().mongo.uri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
@@ -41,7 +51,7 @@ async function aggregate(
   return exec(async (collection) => {
     const result = await collection.aggregate(pipeline).toArray();
 
-    if (result && resultTransformer) {
+    if (result.length > 0 && resultTransformer) {
       return resultTransformer(result);
     }
     return result;
@@ -68,13 +78,13 @@ const mongoQueries: QueryContract = {
         {
           $group: {
             _id: null,
-            total: {
+            value: {
               $sum: '$amount.value',
             },
           },
         },
       ],
-      ([{ total }]) => total
+      ([{ value }]) => ({ value })
     );
   },
   async aggregateAverageTotal(params) {
@@ -98,13 +108,13 @@ const mongoQueries: QueryContract = {
       {
         $group: {
           _id: null,
-          avgTotal: {
+          value: {
             $avg: '$total',
           },
         },
       },
     ];
-    return aggregate(pipeline, ([{ avgTotal }]) => avgTotal);
+    return aggregate(pipeline, ([{ value }]) => ({ value }));
   },
   async aggregateTotalOverTimePeriod(params) {
     const units = timeUnits.slice(timeUnits.indexOf(params.period)).reverse();
@@ -152,11 +162,12 @@ const mongoQueries: QueryContract = {
       E.g. [[-178.2, 6.6], [-49.0, 83.3]]
      */
     const q = {
+      $or: [{ '_id.user': 'test' }, { '_id.user': params.userId }],
       location: {
         $geoWithin: {
           $box: [
             [params.southWest.lng, params.southWest.lat],
-            [params.northEach.lng, params.northEach.lat],
+            [params.northEast.lng, params.northEast.lat],
           ],
         },
       },
@@ -169,9 +180,16 @@ const mongoQueries: QueryContract = {
       {
         $group: {
           _id: '$paymentMethod',
-          total: {
+          value: {
             $sum: '$amount.value',
           },
+        },
+      },
+      {
+        $project: {
+          _id: 0,
+          key: '$_id',
+          value: 1,
         },
       },
     ];
@@ -186,9 +204,16 @@ const mongoQueries: QueryContract = {
       {
         $group: {
           _id: '$tags',
-          total: {
+          value: {
             $sum: '$amount.value',
           },
+        },
+      },
+      {
+        $project: {
+          _id: 0,
+          key: '$_id',
+          value: 1,
         },
       },
     ];
@@ -196,9 +221,5 @@ const mongoQueries: QueryContract = {
   },
 };
 
-module.exports = createFunctions('mongo_', mongoQueries);
+module.exports = createFunctions('', mongoQueries);
 export const dummy = {};
-
-// export const mongo_aggregateTotal = functions.https.onCall(
-//   mongoQueries.aggregateTotal
-// );

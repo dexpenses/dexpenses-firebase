@@ -1,5 +1,5 @@
 import { Receipt as BaseReceipt } from '@dexpenses/core';
-import * as functions from 'firebase-functions';
+import * as https from '../https';
 
 export interface BaseParams {
   userId: string;
@@ -17,7 +17,7 @@ export interface LatLng {
 
 export interface Bounds {
   southWest: LatLng;
-  northEach: LatLng;
+  northEast: LatLng;
 }
 
 export interface Receipt extends BaseReceipt {
@@ -26,14 +26,20 @@ export interface Receipt extends BaseReceipt {
 
 export type TimePeriod = 'hour' | 'day' | 'month' | 'year';
 
+export interface Kpi<T> {
+  value: T;
+}
+
+export type GroupByResult<K, V> = Array<{ key: K; value: V }>;
+
 export interface QueryContract {
-  aggregateTotal(params: TimeSpanParams): Promise<number>;
-  aggregateAverageTotal(params: TimeSpanParams & Bounds): Promise<number>;
+  aggregateTotal(params: TimeSpanParams): Promise<Kpi<number>>;
+  aggregateAverageTotal(params: TimeSpanParams & Bounds): Promise<Kpi<number>>;
   findByBoundingBox(params: TimeSpanParams & Bounds): Promise<Receipt[]>;
-  groupByTags(params: TimeSpanParams): Promise<Array<[string, number]>>;
+  groupByTags(params: TimeSpanParams): Promise<GroupByResult<string, number>>;
   groupByPaymentMethod(
     params: TimeSpanParams
-  ): Promise<Array<[string, number]>>;
+  ): Promise<GroupByResult<string, number>>;
   /**
    * Aggregates the total expenses
    * @param params params
@@ -41,12 +47,12 @@ export interface QueryContract {
    */
   aggregateTotalOverTimePeriod(
     params: Required<TimeSpanParams> & { period: TimePeriod }
-  ): Promise<Array<[Date, number]>>;
+  ): Promise<GroupByResult<Date, number>>;
 }
 
 export function createFunctions(prefix: string, queries: QueryContract) {
   return Object.entries(queries)
-    .map(([name, fn]) => [(prefix || '') + name, functions.https.onCall(fn)])
+    .map(([name, fn]) => [(prefix || '') + name, https.onAuthenticatedCall(fn)])
     .reduce((acc, [name, fn]) => {
       acc[name as string] = fn;
       return acc;
