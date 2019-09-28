@@ -12,6 +12,6 @@ export * from './tagging';
 export * from './big-query-export';
 // export * from './big-query';
 
-export * from './query/mongo-queries';
+export * from './query';
 export * from './search';
 export * from './admin';

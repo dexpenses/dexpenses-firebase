@@ -1,27 +1,15 @@
 import * as functions from 'firebase-functions';
 import { MongoClient, Collection } from 'mongodb';
-import { QueryContract } from './QueryContract';
-import { DateTime } from 'luxon';
-import TimeSpanParams from './params/TimeSpanParams';
+import { InternalQueryContract, QueryHandler } from './contract/QueryContract';
+import { InternalTimeSpanParams } from './params/TimeSpanParams';
 
-// tslint:disable-next-line: max-union-size
-function parseDate(date: string | Date | undefined | null, defaultValue: Date) {
-  if (!date) {
-    return defaultValue;
-  }
-  if (typeof date === 'string') {
-    return DateTime.fromSQL(date).toJSDate();
-  }
-  return date;
-}
-
-function $match(params: TimeSpanParams) {
+function $match(params: InternalTimeSpanParams) {
   return {
     $match: {
       $or: [{ '_id.user': 'test' }, { '_id.user': params.userId }],
       timestamp: {
-        $gte: parseDate(params.start, new Date(0)),
-        $lte: parseDate(params.end, new Date()),
+        $gte: params.start,
+        $lte: params.end,
       },
     },
   };
@@ -65,9 +53,12 @@ async function query(q: any) {
 }
 
 const timeUnits = ['hour', 'day', 'month', 'year'];
+const timeUnitOperators = {
+  day: 'dayOfMonth',
+};
 
 /* tslint:disable:no-duplicate-string */
-const mongoQueries: QueryContract = {
+const mongoQueries: InternalQueryContract = {
   async aggregateTotal(params) {
     return aggregate(
       [
@@ -120,7 +111,10 @@ const mongoQueries: QueryContract = {
       {
         $group: {
           _id: Object.fromEntries(
-            units.map((unit) => [unit, { [`$${unit}`]: '$timestamp' }])
+            units.map((unit) => [
+              unit,
+              { [`$${timeUnitOperators[unit] || unit}`]: '$timestamp' },
+            ])
           ),
           total: {
             $sum: '$amount.value',
@@ -217,4 +211,4 @@ const mongoQueries: QueryContract = {
     return aggregate(pipeline);
   },
 };
-export default mongoQueries;
+export default new QueryHandler(mongoQueries);
