@@ -1,30 +1,11 @@
 import { Receipt as BaseReceipt } from '@dexpenses/core';
-import * as https from '../https';
-
-export interface BaseParams {
-  userId: string;
-}
-
-export interface TimeSpanParams extends BaseParams {
-  start?: string | Date;
-  end?: string | Date;
-}
-
-export interface LatLng {
-  lat: number;
-  lng: number;
-}
-
-export interface Bounds {
-  southWest: LatLng;
-  northEast: LatLng;
-}
+import TimeSpanParams from './params/TimeSpanParams';
+import BoundsParams from './params/BoundsParams';
+import TimePeriodParams from './params/TimePeriodParams';
 
 export interface Receipt extends BaseReceipt {
   tags?: string[];
 }
-
-export type TimePeriod = 'hour' | 'day' | 'month' | 'year';
 
 export interface Kpi<T> {
   value: T;
@@ -34,8 +15,10 @@ export type GroupByResult<K, V> = Array<{ key: K; value: V }>;
 
 export interface QueryContract {
   aggregateTotal(params: TimeSpanParams): Promise<Kpi<number>>;
-  aggregateAverageTotal(params: TimeSpanParams & Bounds): Promise<Kpi<number>>;
-  findByBoundingBox(params: TimeSpanParams & Bounds): Promise<Receipt[]>;
+  aggregateAverageTotal(
+    params: TimeSpanParams & BoundsParams
+  ): Promise<Kpi<number>>;
+  findByBoundingBox(params: TimeSpanParams & BoundsParams): Promise<Receipt[]>;
   groupByTags(params: TimeSpanParams): Promise<GroupByResult<string, number>>;
   groupByPaymentMethod(
     params: TimeSpanParams
@@ -46,15 +29,6 @@ export interface QueryContract {
    * @returns array of starting date of a time period along with the corresponding aggregated total
    */
   aggregateTotalOverTimePeriod(
-    params: Required<TimeSpanParams> & { period: TimePeriod }
+    params: Required<TimeSpanParams> & TimePeriodParams
   ): Promise<GroupByResult<Date, number>>;
-}
-
-export function createFunctions(prefix: string, queries: QueryContract) {
-  return Object.entries(queries)
-    .map(([name, fn]) => [(prefix || '') + name, https.onAuthenticatedCall(fn)])
-    .reduce((acc, [name, fn]) => {
-      acc[name as string] = fn;
-      return acc;
-    }, {});
 }

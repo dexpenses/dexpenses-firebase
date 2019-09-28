@@ -1,11 +1,8 @@
 import * as functions from 'firebase-functions';
 import { MongoClient, Collection } from 'mongodb';
-import {
-  QueryContract,
-  createFunctions,
-  TimeSpanParams,
-} from './QueryContract';
+import { QueryContract } from './QueryContract';
 import { DateTime } from 'luxon';
+import TimeSpanParams from './params/TimeSpanParams';
 
 // tslint:disable-next-line: max-union-size
 function parseDate(date: string | Date | undefined | null, defaultValue: Date) {
@@ -220,6 +217,4 @@ const mongoQueries: QueryContract = {
     return aggregate(pipeline);
   },
 };
-
-module.exports = createFunctions('', mongoQueries);
-export const dummy = {};
+export default mongoQueries;
