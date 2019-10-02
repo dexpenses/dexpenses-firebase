@@ -21,7 +21,7 @@ const numericPaymentPeriodMapping = {
   Yearly: 12,
 };
 
-export const recurringPaymentsToBigQuery = functions.firestore
+export const exportBigQueryRecurringPayments = functions.firestore
   .document('recurringPaymentsByUser/{userId}/recurringPayments/{paymentId}')
   .onWrite(async (snap, context) => {
     const userId = context.params.userId;

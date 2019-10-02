@@ -16,7 +16,7 @@ exports[`BigQueryExport (offline) - receipts should create insert 1`] = `
         "payment_method": undefined,
         "receipt_id": "test-receipt.jpg",
         "tags": Array [],
-        "timestamp": null,
+        "timestamp": undefined,
         "user_id": "testUserId",
       },
     ],

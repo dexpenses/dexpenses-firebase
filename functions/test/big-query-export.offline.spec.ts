@@ -1,6 +1,6 @@
 import * as fbTest from 'firebase-functions-test';
 import * as admin from 'firebase-admin';
-import dataset from '../src/big-query-export/dataset';
+import dataset from '../src/export/big-query/dataset';
 import * as mockDate from 'jest-date-mock';
 
 const test = fbTest();
@@ -9,7 +9,7 @@ mockDate.advanceTo('2019-01-01T00:00:00.000Z');
 
 jest.spyOn(admin, 'initializeApp');
 
-jest.mock('../src/big-query-export/dataset', () => ({
+jest.mock('../src/export/big-query/dataset', () => ({
   default: {
     table: jest.fn().mockReturnValue({
       insert: jest.fn(),
@@ -23,7 +23,9 @@ beforeEach(() => {
 
 describe('BigQueryExport (offline) - receipts', () => {
   it('should create insert', async () => {
-    const receiptsToBigQuery = test.wrap(require('../src').receiptsToBigQuery);
+    const receiptsToBigQuery = test.wrap(
+      require('../src').exportBigQueryReceipts
+    );
 
     const refPath = 'receiptsByUser/testUserId/receipts/test-recept.jpg';
     const before = test.firestore.makeDocumentSnapshot({}, refPath);
@@ -53,7 +55,7 @@ describe('BigQueryExport (offline) - receipts', () => {
 describe('BigQueryExport (offline) - recurringPayments', () => {
   it('should create insert', async () => {
     const recurringPaymentsToBigQuery = test.wrap(
-      require('../src').recurringPaymentsToBigQuery
+      require('../src').exportBigQueryRecurringPayments
     );
 
     const refPath =
