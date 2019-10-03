@@ -1,0 +1,60 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.13.5
+ignore: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  SNYK-JS-HTTPSPROXYAGENT-469131:
+    - '@google-cloud/storage > gcs-resumable-upload > google-auth-library > gtoken > gaxios > https-proxy-agent':
+        patched: '2019-10-03T21:07:29.708Z'
+    - '@google-cloud/storage > gaxios > https-proxy-agent':
+        patched: '2019-10-03T21:07:29.708Z'
+    - '@google-cloud/storage > @google-cloud/common > teeny-request > https-proxy-agent':
+        patched: '2019-10-03T21:07:29.708Z'
+    - firebase-admin > @google-cloud/storage > gaxios > https-proxy-agent:
+        patched: '2019-10-03T21:07:29.708Z'
+    - '@google-cloud/pubsub > google-auth-library > gaxios > https-proxy-agent':
+        patched: '2019-10-03T21:07:29.708Z'
+    - firebase-admin > @google-cloud/storage > gcs-resumable-upload > gaxios > https-proxy-agent:
+        patched: '2019-10-03T21:07:29.708Z'
+    - firebase-admin > @google-cloud/storage > @google-cloud/common > teeny-request > https-proxy-agent:
+        patched: '2019-10-03T21:07:29.708Z'
+    - '@google-cloud/storage > @google-cloud/common > google-auth-library > gaxios > https-proxy-agent':
+        patched: '2019-10-03T21:07:29.708Z'
+    - '@google-cloud/vision > google-gax > google-auth-library > gaxios > https-proxy-agent':
+        patched: '2019-10-03T21:07:29.708Z'
+    - '@google-cloud/pubsub > google-auth-library > gcp-metadata > gaxios > https-proxy-agent':
+        patched: '2019-10-03T21:07:29.708Z'
+    - '@google-cloud/storage > gcs-resumable-upload > google-auth-library > gaxios > https-proxy-agent':
+        patched: '2019-10-03T21:07:29.708Z'
+    - '@google-cloud/pubsub > google-auth-library > gtoken > gaxios > https-proxy-agent':
+        patched: '2019-10-03T21:07:29.708Z'
+    - '@google-cloud/storage > gcs-resumable-upload > google-auth-library > gcp-metadata > gaxios > https-proxy-agent':
+        patched: '2019-10-03T21:07:29.708Z'
+    - '@google-cloud/storage > gcs-resumable-upload > gaxios > https-proxy-agent':
+        patched: '2019-10-03T21:07:29.708Z'
+    - '@google-cloud/bigquery > @google-cloud/common > google-auth-library > gcp-metadata > gaxios > https-proxy-agent':
+        patched: '2019-10-03T21:07:29.708Z'
+    - '@google-cloud/pubsub > google-gax > google-auth-library > gcp-metadata > gaxios > https-proxy-agent':
+        patched: '2019-10-03T21:07:29.708Z'
+    - '@google-cloud/storage > @google-cloud/common > google-auth-library > gtoken > gaxios > https-proxy-agent':
+        patched: '2019-10-03T21:07:29.708Z'
+    - firebase-admin > @google-cloud/storage > @google-cloud/common > google-auth-library > gaxios > https-proxy-agent:
+        patched: '2019-10-03T21:07:29.708Z'
+    - firebase-admin > @google-cloud/firestore > google-gax > google-auth-library > gaxios > https-proxy-agent:
+        patched: '2019-10-03T21:07:29.708Z'
+    - '@google-cloud/vision > google-gax > google-auth-library > gtoken > gaxios > https-proxy-agent':
+        patched: '2019-10-03T21:07:29.708Z'
+    - firebase-admin > @google-cloud/storage > gcs-resumable-upload > google-auth-library > gaxios > https-proxy-agent:
+        patched: '2019-10-03T21:07:29.708Z'
+    - firebase-admin > @google-cloud/firestore > google-gax > google-auth-library > gtoken > gaxios > https-proxy-agent:
+        patched: '2019-10-03T21:07:29.708Z'
+    - firebase-admin > @google-cloud/storage > @google-cloud/common > google-auth-library > gtoken > gaxios > https-proxy-agent:
+        patched: '2019-10-03T21:07:29.708Z'
+    - firebase-admin > @google-cloud/storage > gcs-resumable-upload > google-auth-library > gcp-metadata > gaxios > https-proxy-agent:
+        patched: '2019-10-03T21:07:29.708Z'
+    - firebase-admin > @google-cloud/firestore > google-gax > google-auth-library > gcp-metadata > gaxios > https-proxy-agent:
+        patched: '2019-10-03T21:07:29.708Z'
+    - firebase-admin > @google-cloud/storage > @google-cloud/common > google-auth-library > gcp-metadata > gaxios > https-proxy-agent:
+        patched: '2019-10-03T21:07:29.708Z'
+    - firebase-admin > @google-cloud/storage > gcs-resumable-upload > google-auth-library > gtoken > gaxios > https-proxy-agent:
+        patched: '2019-10-03T21:07:29.708Z'
