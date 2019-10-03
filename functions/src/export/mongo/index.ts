@@ -1,27 +1,12 @@
 import * as functions from 'firebase-functions';
-import Receipt, { Mapper, mapTimestamp } from '../Receipt';
-import { Amount, PaymentMethod } from '@dexpenses/core';
-import { MongoClient, Collection } from 'mongodb';
 import { Point } from 'geojson';
+import { Amount, PaymentMethod } from '@dexpenses/core';
+import Receipt, { Mapper, mapTimestamp } from '../Receipt';
 import { ReceiptRecord } from '../../model';
+import mongo from '../../mongo';
+import { ReceiptResultState } from '@dexpenses/extract';
 
-async function exec(
-  handler: (collection: Collection, client: MongoClient) => Promise<any>
-) {
-  const client = await MongoClient.connect(functions.config().mongo.uri, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  });
-  try {
-    return handler(client.db('dexpenses').collection('receipts'), client);
-  } catch (e) {
-    console.error(e);
-  } finally {
-    await client.close();
-  }
-}
-
-interface MongoReceipt {
+export interface MongoReceipt {
   _id: { user: string; receipt: string };
   amount?: Amount | null;
   paymentMethod?: PaymentMethod | null;
@@ -29,19 +14,20 @@ interface MongoReceipt {
   header?: string[] | null;
   tags?: string[] | null;
   location?: Point | null;
+  state: ReceiptResultState;
 }
 const mongoReceiptMapper: Mapper<MongoReceipt> = {
-  toExportType(receipt: Receipt): MongoReceipt {
-    const {
-      receiptId,
-      userId,
-      amount,
-      header,
-      timestamp,
-      paymentMethod,
-      tags,
-      location,
-    } = receipt;
+  toExportType({
+    receiptId,
+    userId,
+    amount,
+    header,
+    timestamp,
+    paymentMethod,
+    tags,
+    location,
+    state,
+  }: Receipt): MongoReceipt {
     return {
       _id: {
         user: userId,
@@ -52,6 +38,7 @@ const mongoReceiptMapper: Mapper<MongoReceipt> = {
       timestamp: mapTimestamp(timestamp),
       paymentMethod,
       tags,
+      state,
       location: location && {
         type: 'Point',
         coordinates: [location.lng, location.lat],
@@ -59,16 +46,16 @@ const mongoReceiptMapper: Mapper<MongoReceipt> = {
     };
   },
 
-  fromExportType(exported: MongoReceipt): Receipt {
-    const {
-      _id,
-      amount,
-      header,
-      location,
-      paymentMethod,
-      tags,
-      timestamp,
-    } = exported;
+  fromExportType({
+    _id,
+    amount,
+    header,
+    location,
+    paymentMethod,
+    tags,
+    timestamp,
+    state,
+  }: MongoReceipt): Receipt {
     return {
       userId: _id.user,
       receiptId: _id.receipt,
@@ -76,6 +63,7 @@ const mongoReceiptMapper: Mapper<MongoReceipt> = {
       header,
       paymentMethod,
       tags,
+      state,
       timestamp,
       location: location && {
         lng: location.coordinates[0],
@@ -91,7 +79,7 @@ export const exportMongoReceipts = functions.firestore
     const userId = context.params.userId;
     const receiptId = context.params.receiptId;
     if (!change.after.exists) {
-      return exec((col) =>
+      return mongo.receipts((col) =>
         col.deleteOne({
           _id: {
             user: userId,
@@ -100,18 +88,12 @@ export const exportMongoReceipts = functions.firestore
         })
       );
     }
-    const { result, tags } = change.after.data()! as ReceiptRecord;
-    if (result.state !== 'ready') {
-      // todo delete if changed to un-ready
-      return;
-    }
-    const data = mongoReceiptMapper.toExportType({
-      userId,
-      receiptId,
-      tags,
-      ...result.data,
-    });
-    return exec((col) =>
+    const receipt = change.after.data()! as ReceiptRecord;
+    const data = mongoReceiptMapper.toExportType(
+      Receipt.of(userId, receiptId, receipt)
+    );
+
+    return mongo.receipts((col) =>
       col.updateOne({ _id: data._id }, data, { upsert: true })
     );
   });

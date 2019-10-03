@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Export receipts to BigQuery (offline) should create insert 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      Object {
+        "amount": 1,
+        "bq_inserted_at": 2019-01-01T00:00:00.000Z,
+        "bq_op": "I",
+        "currency": "EUR",
+        "header": Array [
+          "header",
+        ],
+        "location": Geography {
+          "value": "POINT(2 1)",
+        },
+        "payment_method": "CASH",
+        "receipt_id": "test-receipt.jpg",
+        "state": "ready",
+        "tags": Array [
+          "tag",
+        ],
+        "timestamp": 2019-01-01T00:00:00.000Z,
+        "user_id": "testUserId",
+      },
+    ],
+  ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": undefined,
+    },
+  ],
+}
+`;
