@@ -10,6 +10,11 @@
     "type": "STRING"
   },
   {
+    "mode": "REQUIRED",
+    "name": "state",
+    "type": "STRING"
+  },
+  {
     "mode": "REPEATED",
     "name": "tags",
     "type": "STRING"
