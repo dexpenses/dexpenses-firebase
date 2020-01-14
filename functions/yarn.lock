@@ -189,10 +189,10 @@
   dependencies:
     tslib "1.10.0"
 
-"@google-cloud/bigquery@^4.1.8":
-  version "4.1.8"
-  resolved "https://registry.yarnpkg.com/@google-cloud/bigquery/-/bigquery-4.1.8.tgz#a2ff3096e00b6d56e0e75ee14603663a41376800"
-  integrity sha512-O6IJlAY4yr35LAz69b238naC2YIjUpiaW2aU4N9OisSQPsBs11YqjkHbgOvxWGbLLPRVCYZZ8ZIpoHjVu4m8gQ==
+"@google-cloud/bigquery@^4.6.1":
+  version "4.6.1"
+  resolved "https://registry.yarnpkg.com/@google-cloud/bigquery/-/bigquery-4.6.1.tgz#d87ec4d3f391283b88562cb514c14324ea0f2b41"
+  integrity sha512-g04i1TntLNSdq4BZuYp/V3OrVHIIZdpoTlPAubUAHbKagPI66SjRXnxg/Qg5FtTF/Eu9p5SniQc8wveYfJITDQ==
   dependencies:
     "@google-cloud/common" "^2.0.0"
     "@google-cloud/paginator" "^2.0.0"
