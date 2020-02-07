@@ -697,10 +697,10 @@
     "@types/express-serve-static-core" "*"
     "@types/serve-static" "*"
 
-"@types/google__maps@^0.5.5":
-  version "0.5.6"
-  resolved "https://registry.yarnpkg.com/@types/google__maps/-/google__maps-0.5.6.tgz#c81f6429ae5e9ee7d97fa9cf4a45726b30ad1847"
-  integrity sha512-dk3Ci51uJG5EbhpamQWlHCX+EGKgoPQ0y+ikqpPmwj5oOTMoH0/O+jpdVoxC0HR302Zp7ZGm3nDGd8qeRZAcTg==
+"@types/google__maps@^0.5.12":
+  version "0.5.12"
+  resolved "https://registry.yarnpkg.com/@types/google__maps/-/google__maps-0.5.12.tgz#a2d9de06c51f41173566dad656c3c037e5a49a0f"
+  integrity sha512-v+smradrsbGca3Y3EraMpaGEbiBAE4afwJmVMS9n9pZ//FToy3gC7uWS6geYa1/4ulrmntg3ZwI5XK7DbqO1nw==
 
 "@types/istanbul-lib-coverage@*", "@types/istanbul-lib-coverage@^2.0.0":
   version "2.0.1"
