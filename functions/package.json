@@ -8,7 +8,9 @@
     "shell": "yarn build && firebase functions:shell",
     "start": "yarn shell",
     "test": "jest",
-    "test:coverage": "jest --silent --coverage --collect-coverage-from=src/**/* --collect-coverage-from=!**/__snapshots__/**"
+    "test:coverage": "jest --silent --coverage --collect-coverage-from=src/**/* --collect-coverage-from=!**/__snapshots__/**",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "main": "lib/index.js",
   "engines": {
@@ -28,7 +30,8 @@
     "core-js": "^3.1.4",
     "firebase-admin": "^8.3.0",
     "firebase-functions": "^3.2.0",
-    "luxon": "^1.17.2"
+    "luxon": "^1.17.2",
+    "snyk": "^1.316.2"
   },
   "devDependencies": {
     "@types/algoliasearch": "^3.30.16",
@@ -49,5 +52,6 @@
     "tslint-sonarts": "^1.9.0",
     "typescript": "^3.5.3"
   },
-  "private": true
+  "private": true,
+  "snyk": true
 }
